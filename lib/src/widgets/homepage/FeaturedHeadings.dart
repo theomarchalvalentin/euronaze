@@ -59,18 +59,22 @@ class FeaturedHeadingCentered extends StatelessWidget {
           left: screenSize.width / 15,
           right: screenSize.width / 15,
         ),
-        child: Flexible(
-          child: Text(
-            headingText,
-            style: GoogleFonts.varela(
-                textStyle: const TextStyle(
-              fontSize: 30,
-              fontWeight: FontWeight.w200,
-              fontStyle: FontStyle.normal,
-              color: Color(0xFF263b5e),
-            )),
-            textAlign: TextAlign.center,
-          ),
+        child: Row(
+          children: [
+            Flexible(
+              child: Text(
+                headingText,
+                style: GoogleFonts.varela(
+                    textStyle: const TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.w200,
+                  fontStyle: FontStyle.normal,
+                  color: Color(0xFF263b5e),
+                )),
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ],
         ));
   }
 }
