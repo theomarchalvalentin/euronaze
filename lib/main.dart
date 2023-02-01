@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
         debugShowCheckedModeBanner: false,
-        home: const User(),
+        home: const HomePage(),
         routes: {
           ProductScreenDetails.routeName: (_) => const ProductScreenDetails(),
         });

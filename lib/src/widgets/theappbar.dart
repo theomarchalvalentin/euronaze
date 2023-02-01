@@ -10,13 +10,15 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   @override
   AppBar build(BuildContext context) {
     return AppBar(
-      backgroundColor: Color.fromARGB(255, 3, 140, 129),
+      backgroundColor: const Color.fromARGB(255, 3, 140, 129),
       elevation: 0.0,
       toolbarHeight: 80,
       automaticallyImplyLeading: false,
       leadingWidth: 200,
       leading: InkWell(
-        onTap: () {},
+        onTap: () {
+          Navigator.maybePop(context);
+        },
         child: Row(children: [
           const SizedBox(width: 20),
           Image.asset(
@@ -31,7 +33,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
                     letterSpacing: 1,
                     fontWeight: FontWeight.normal,
                     color: Colors.white),
-              ))
+              )),
         ]),
       ),
       actions: <Widget>[
