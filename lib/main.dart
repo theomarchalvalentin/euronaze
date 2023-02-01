@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'src/pages/homepage.dart';
+import 'package:projet_dac/src/pages/user.dart';
+//import 'src/pages/homepage.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       debugShowCheckedModeBanner: false,
-      home: HomePage(),
+      home: User(),
     );
   }
 }
