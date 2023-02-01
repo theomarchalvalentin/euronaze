@@ -34,7 +34,7 @@ class CarouselSlider extends StatelessWidget {
             await controller.moveTo?.call(index),
           },
           child: GestureDetector(
-            onDoubleTap: () => Navigator.of(context).pushNamed(
+            onTap: () => Navigator.of(context).pushNamed(
                 ProductScreenDetails.routeName,
                 arguments: products[index]),
             child: Column(
