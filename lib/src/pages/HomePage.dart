@@ -11,6 +11,7 @@ import '../widgets/homepage/HomeSearchBar.dart';
 import 'package:flutter/material.dart';
 import 'package:projet_dac/src/widgets/homepage/FeaturedHeadings.dart';
 import 'package:projet_dac/src/widgets/homepage/FeaturedTiles.dart';
+import 'package:projet_dac/src/widgets/theappbar.dart';
 
 import 'package:footer/footer.dart';
 import 'package:footer/footer_view.dart';
@@ -55,6 +56,8 @@ class _HomePageState extends State<HomePage> {
         : 1;
 
     return Scaffold(
+      appBar: CustomAppBar(),
+      //extendBodyBehindAppBar: true,
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Stack(children: [
