@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'src/pages/HomePage.dart';
 import 'src/pages/product_details_screen.dart';
-import 'package:projet_dac/src/pages/user.dart';
+//import 'package:projet_dac/src/pages/user.dart';
 //import 'src/pages/homepage.dart';
 
 void main() {

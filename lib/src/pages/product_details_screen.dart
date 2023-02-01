@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
 import 'package:projet_dac/src/widgets/homepage/charthome.dart';
+import 'package:projet_dac/src/widgets/theappbar.dart';
 
 class ProductScreenDetails extends StatelessWidget {
   static const routeName = '/product-details-screen';
@@ -91,10 +92,7 @@ class ProductScreenDetails extends StatelessWidget {
     return Scaffold(
       extendBodyBehindAppBar: true,
       drawerScrimColor: const Color((0xff038C81)),
-      appBar: AppBar(
-        title: const Text('Buy'),
-        backgroundColor: const Color(0xff00776B),
-      ),
+      appBar: CustomAppBar(),
       body: ListView(
         children: <Widget>[
           Container(
