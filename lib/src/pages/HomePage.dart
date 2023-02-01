@@ -1,10 +1,9 @@
 import 'dart:html';
 import 'package:getwidget/components/search_bar/gf_search_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:projet_dac/src/widgets/homepage/HomePageCarousel.dart';
+import 'package:projet_dac/src/widgets/HomePageCarousel.dart';
 import 'package:projet_dac/src/widgets/homepage/charthome.dart';
-import 'package:projet_dac/src/widgets/homepage/datamodel.dart';
-import 'package:projet_dac/src/widgets/homepage/trending.dart';
+import 'package:projet_dac/datamodel.dart';
 
 import '../widgets/homepage/GreetingText.dart';
 import '../widgets/homepage/HomeSearchBar.dart';
@@ -198,20 +197,19 @@ class _HomePageState extends State<HomePage> {
                   headingText: '🔥 Ce mois-ci, les investisseurs préfèrent : ',
                   screenSize: screenSize),
               CarouselSlider(
-                assetsImages: bullAssetsImages,
-                assetsNames: bullAssetsNames,
+                products: dummyProducts,
               ),
               FeaturedHeading(
                   headingText: '🧸 C\'est le moment d\'acheter :',
                   screenSize: screenSize),
               CarouselSlider(
-                  assetsImages: bearAssetsImages, assetsNames: bearAssetsNames),
+                products: dummyProducts,
+              ),
               FeaturedHeading(
                   headingText: '😍 Ces catégories sont populaires :',
                   screenSize: screenSize),
               CarouselSlider(
-                assetsImages: CategoriesImg,
-                assetsNames: CategoriesNames,
+                products: dummyProducts,
               ),
               const SizedBox(height: 30),
               Footer(

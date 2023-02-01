@@ -1,13 +1,55 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/src/widgets/container.dart';
+import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter/widgets.dart';
+
 class Product {
   final int productId;
   final String productName;
-  final String productDescription;
-  final String productData;
+  final productDescription = "Lorem ipsum dolor sit amet etc.";
   final int categoryId;
+  final String productImg;
+  final productDataLink = "http://www.google.com/";
 
-  const Product(this.categoryId, this.productData, this.productDescription,
-      this.productId, this.productName);
+  const Product(
+      this.categoryId, this.productId, this.productName, this.productImg);
 }
+
+const bullAssetsImages = <String>[
+  'assets/images/teslajpg.jpg',
+  'assets/images/Dogecoin_logo.jpg',
+  'assets/images/isharespng.png',
+  'assets/images/euronaze.png',
+];
+
+final bullAssetsNames = <String>[
+  'Tesla',
+  'Dogecoin',
+  'iShares',
+  'Euronaze',
+];
+
+final bearAssetsImages = <String>[
+  'assets/images/ftx.jpg',
+  'assets/images/creditsuisse.png',
+  'assets/images/pfizer.png',
+  'assets/images/renault.jpg',
+];
+
+final bearAssetsNames = <String>[
+  'FTX Token',
+  'Crédit Suisse',
+  'Pfizer',
+  'Renault',
+];
+
+final dummyProducts = <Product>[
+  Product(1, 1, bearAssetsNames[0], bearAssetsImages[0]),
+  Product(1, 2, bearAssetsNames[1], bearAssetsImages[1]),
+  Product(1, 3, bearAssetsNames[2], bearAssetsImages[2]),
+  Product(1, 4, bearAssetsNames[3], bearAssetsImages[3]),
+];
 
 class Category {
   final int categoryId;

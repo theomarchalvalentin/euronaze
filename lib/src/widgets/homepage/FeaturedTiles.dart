@@ -127,31 +127,3 @@ class FeaturedTiles extends StatelessWidget {
     }
   }
 }
-
-final List<String> bullAssetsImages = [
-  'assets/images/teslajpg.jpg',
-  'assets/images/Dogecoin_logo.jpg',
-  'assets/images/isharespng.png',
-  'assets/images/euronaze.png',
-];
-
-final List<String> bullAssetsNames = [
-  'Tesla',
-  'Dogecoin',
-  'iShares',
-  'Euronaze',
-];
-
-final List<String> bearAssetsImages = [
-  'assets/images/ftx.jpg',
-  'assets/images/creditsuisse.png',
-  'assets/images/pfizer.png',
-  'assets/images/renault.jpg',
-];
-
-final List<String> bearAssetsNames = [
-  'FTX Token',
-  'Crédit Suisse',
-  'Pfizer',
-  'Renault',
-];

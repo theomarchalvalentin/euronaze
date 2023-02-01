@@ -24,6 +24,7 @@ dependencies:
   footer: ^0.0.4
   fan_carousel_image_slider: any
   widget_slider: ^0.1.0
+  sizer: ^2.0.15
   
 
 dev_dependencies:
