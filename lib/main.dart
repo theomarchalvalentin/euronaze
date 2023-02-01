@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:projet_dac/datamodel.dart';
+import 'package:projet_dac/src/widgets/searchbar.dart';
 import 'src/pages/HomePage.dart';
 import 'src/pages/product_details_screen.dart';
 import 'package:projet_dac/src/pages/user.dart';
@@ -22,6 +24,7 @@ class MyApp extends StatelessWidget {
         home: const HomePage(),
         routes: {
           ProductScreenDetails.routeName: (_) => const ProductScreenDetails(),
+          SearchPage.routeName: (_) => SearchPage(),
         });
   }
 }

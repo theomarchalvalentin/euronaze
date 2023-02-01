@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:projet_dac/src/widgets/searchbar.dart';
 
 class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   @override
@@ -61,7 +62,9 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
             Icons.search_outlined,
             color: Colors.white,
           ),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.of(context).pushNamed(SearchPage.routeName);
+          },
         ),
         const SizedBox(width: 20),
         IconButton(
