@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:getwidget/getwidget.dart';
 
 const Color textcolor = Color.fromARGB(255, 4, 138, 129);
 const Color boxcolor = Color.fromARGB(52, 8, 246, 246);
@@ -17,7 +16,7 @@ class HomeSearchBar extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
           border: Border.all(color: textcolor),
-          borderRadius: BorderRadius.all(Radius.circular(15.0))),
+          borderRadius: const BorderRadius.all(Radius.circular(15.0))),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(15.0),
         child: SizedBox(
@@ -28,8 +27,8 @@ class HomeSearchBar extends StatelessWidget {
               Container(
                 width: 5 / 6 * screenSize.width / 3,
                 color: Colors.white,
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
+                child: const Padding(
+                  padding: EdgeInsets.all(10.0),
                   child: Text(
                     'GOOGL, Tesla, pétrole, ...',
                     style: TextStyle(
@@ -40,10 +39,7 @@ class HomeSearchBar extends StatelessWidget {
                   ),
                 ),
               ),
-              Expanded(
-                  child: Container(
-                child: const Icon(Icons.search, color: textcolor),
-              )),
+              const Expanded(child: Icon(Icons.search, color: textcolor)),
             ],
           ),
         ),

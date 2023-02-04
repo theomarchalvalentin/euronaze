@@ -1,14 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:projet_dac/src/pages/product_details_screen.dart';
-import 'package:projet_dac/src/widgets/homepage/HomeSearchBar.dart';
-import 'package:projet_dac/datamodel.dart';
-import 'package:scaled_list/scaled_list.dart';
-import 'package:fan_carousel_image_slider/fan_carousel_image_slider.dart';
+import 'package:projet_dac/src/models/datamodel.dart';
 import 'package:widget_slider/widget_slider.dart';
 
 class CarouselSlider extends StatelessWidget {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:projet_dac/datamodel.dart';
+import 'package:projet_dac/src/models/datamodel.dart';
 
 import '../pages/product_details_screen.dart';
 
@@ -12,11 +12,11 @@ class SearchPage extends StatefulWidget {
   });
 
   @override
-  _SearchPageState createState() => _SearchPageState();
+  State<StatefulWidget> createState() => _SearchPageState();
 }
 
 class _SearchPageState extends State<SearchPage> {
-  TextEditingController _searchController = TextEditingController();
+  final TextEditingController _searchController = TextEditingController();
   List<Product> _filteredProducts = [];
 
   @override
@@ -70,9 +70,9 @@ class _SearchPageState extends State<SearchPage> {
           controller: _searchController,
           decoration: InputDecoration(
             hintText: 'Search products',
-            hintStyle: TextStyle(fontSize: 20.0, color: Colors.white),
+            hintStyle: const TextStyle(fontSize: 20.0, color: Colors.white),
             suffixIcon: IconButton(
-              icon: Icon(Icons.clear),
+              icon: const Icon(Icons.clear),
               onPressed: () => _searchController.clear(),
             ),
           ),
@@ -97,7 +97,7 @@ class _SearchPageState extends State<SearchPage> {
 class ProductCard extends StatelessWidget {
   final Product product;
 
-  ProductCard({required this.product});
+  const ProductCard({super.key, required this.product});
 
   @override
   Widget build(BuildContext context) {
@@ -123,14 +123,14 @@ class ProductCard extends StatelessWidget {
                   children: [
                     Text(
                       product.productName,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     Text(
                       "\$${product.price}",
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 14,
                         color: Colors.grey,
                       ),

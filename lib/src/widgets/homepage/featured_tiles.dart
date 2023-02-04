@@ -23,7 +23,7 @@ class FeaturedTiles extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              SizedBox(width: 100),
+              const SizedBox(width: 100),
               ...Iterable<int>.generate(assetsNames.length).map(
                 (int pageIndex) => Row(
                   children: [
@@ -59,7 +59,7 @@ class FeaturedTiles extends StatelessWidget {
                         ),
                       ],
                     ),
-                    SizedBox(width: 100),
+                    const SizedBox(width: 100),
                   ],
                 ),
               ),

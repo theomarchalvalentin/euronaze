@@ -1,12 +1,8 @@
-import 'dart:html';
-import 'package:flutter/rendering.dart';
 import 'package:footer/footer.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:projet_dac/datamodel.dart';
+import 'package:projet_dac/src/models/datamodel.dart';
 
-import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
 
 import 'package:projet_dac/src/widgets/homepage/charthome.dart';
 import 'package:projet_dac/src/widgets/theappbar.dart';
@@ -16,8 +12,6 @@ class ProductScreenDetails extends StatelessWidget {
   const ProductScreenDetails({super.key});
   @override
   Widget build(BuildContext context) {
-    final sizeOfScreen = MediaQuery.of(context).size;
-
     Product product = ModalRoute.of(context)!.settings.arguments as Product;
     // return Scaffold(
     //     extendBodyBehindAppBar: true,
@@ -95,7 +89,7 @@ class ProductScreenDetails extends StatelessWidget {
       appBar: CustomAppBar(),
       body: ListView(
         children: <Widget>[
-          Container(
+          SizedBox(
             height: 300,
             child: Image.asset(
               product.productImg,
@@ -135,11 +129,11 @@ class ProductScreenDetails extends StatelessWidget {
                             color: Colors.grey,
                           ),
                         ),
-                        SizedBox(height: 80),
+                        const SizedBox(height: 80),
                         const Divider(
                           color: Color(0xFF263b5e),
                         ),
-                        SizedBox(height: 80),
+                        const SizedBox(height: 80),
                         Row(
                           children: [
                             Flexible(
@@ -183,7 +177,7 @@ class ProductScreenDetails extends StatelessWidget {
                                                     color: Color(0xFF263b5e),
                                                   ))),
                                             ),
-                                            LineChartSample2(),
+                                            const LineChartSample2(),
                                           ],
                                         ),
                                       ),
@@ -192,7 +186,7 @@ class ProductScreenDetails extends StatelessWidget {
                             ),
                           ],
                         ),
-                        Container(
+                        SizedBox(
                           width: double.infinity,
                           height: 150,
                           child: TextButton(

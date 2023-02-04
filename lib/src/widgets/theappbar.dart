@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:projet_dac/src/widgets/searchbar.dart';
 
 class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   @override
@@ -18,7 +17,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
       leadingWidth: 200,
       leading: InkWell(
         onTap: () {
-          Navigator.maybePop(context);
+          Navigator.of(context).pushNamed('/home');
         },
         child: Row(children: [
           const SizedBox(width: 20),
@@ -44,7 +43,9 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
             Icons.manage_accounts_outlined,
             color: Colors.white,
           ),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.of(context).pushNamed('/user');
+          },
         ),
         const SizedBox(width: 20),
         IconButton(
@@ -63,7 +64,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
             color: Colors.white,
           ),
           onPressed: () {
-            Navigator.of(context).pushNamed(SearchPage.routeName);
+            Navigator.of(context).pushNamed('/search');
           },
         ),
         const SizedBox(width: 20),
@@ -73,7 +74,20 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
             Icons.shopping_cart_outlined,
             color: Colors.white,
           ),
-          onPressed: () {},
+          onPressed: () {
+            //delete token
+          },
+        ),
+        const SizedBox(width: 20),
+        IconButton(
+          iconSize: 45,
+          icon: const Icon(
+            Icons.logout_outlined,
+            color: Colors.white,
+          ),
+          onPressed: () {
+            Navigator.of(context).pushNamed('/login');
+          },
         ),
         const SizedBox(width: 20),
       ],

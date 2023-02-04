@@ -1,6 +1,5 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:projet_dac/src/widgets/homepage/HomeSearchBar.dart';
 
 class LineChartSample2 extends StatefulWidget {
   const LineChartSample2({super.key});
@@ -11,10 +10,10 @@ class LineChartSample2 extends StatefulWidget {
 
 class _LineChartSample2State extends State<LineChartSample2> {
   List<Color> gradientColors = [
-    Color(0xFF00776B),
-    Color(0xFF038C81),
-    Color(0xFF269D8A),
-    Color(0xFF00A451),
+    const Color(0xFF00776B),
+    const Color(0xFF038C81),
+    const Color(0xFF269D8A),
+    const Color(0xFF00A451),
   ];
 
   bool showAvg = false;

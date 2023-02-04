@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:projet_dac/datamodel.dart';
-import 'package:projet_dac/src/widgets/searchbar.dart';
-import 'src/pages/HomePage.dart';
-import 'src/pages/product_details_screen.dart';
 import 'package:projet_dac/src/pages/user.dart';
+import 'package:projet_dac/src/widgets/searchbar.dart';
+import 'package:projet_dac/src/pages/home_page.dart';
+import 'src/pages/product_details_screen.dart';
+import 'package:projet_dac/src/pages/login.dart';
 //import 'src/pages/homepage.dart';
 
 void main() {
@@ -21,8 +21,11 @@ class MyApp extends StatelessWidget {
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
         debugShowCheckedModeBanner: false,
-        home: const HomePage(),
+        home: const LoginPage(),
         routes: {
+          LoginPage.routeName: (_) => const LoginPage(),
+          HomePage.routeName: (_) => const HomePage(),
+          UserPage.routeName: (_) => const UserPage(),
           ProductScreenDetails.routeName: (_) => const ProductScreenDetails(),
           SearchPage.routeName: (_) => SearchPage(),
         });

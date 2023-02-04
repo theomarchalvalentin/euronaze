@@ -12,8 +12,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_localizations:
-    sdk: flutter
   chewie: ^1.4.0
   video_player: ^2.5.1
   carousel_slider: ^4.2.1
@@ -25,7 +23,8 @@ dependencies:
   fan_carousel_image_slider: any
   widget_slider: ^0.1.0
   sizer: ^2.0.15
-  
+  shared_preferences: ^2.0.17
+  http: any
 
 dev_dependencies:
   flutter_test:

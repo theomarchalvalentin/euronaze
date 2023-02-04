@@ -1,9 +1,3 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/widgets.dart';
-
 class Product {
   final int productId;
   final String productName;
@@ -67,10 +61,10 @@ const String stocksCategoryDescription =
     "Stocks are like a rollercoaster ride, the highs can be exhilarating, but the lows can make you want to throw up. But if you're willing to stomach the ups and downs, you might just strike it rich.";
 const String stocksImgPath = "assets/images/stockscar.jpg";
 
-const String FXCategoryDescription =
+const String fxCategoryDescription =
     "FX, or Foreign Exchange, is like the game of musical chairs with currencies, where the value of one currency rises as another falls, and traders try to navigate the shifting exchange rates to make a profit, like a high stakes game of currency roulette. ";
 
-const String FXImgPath = "assets/images/fxcar.jpg";
+const String fxImgPath = "assets/images/fxcar.jpg";
 
 const String fixedIncomeCategoryDescription =
     "Fixed Income is like a trusty savings account, providing a stable stream of income in the form of bonds or other debt instruments, offering stability in an unpredictable investment world, like a life raft in stormy financial seas.";
@@ -80,13 +74,13 @@ const String indexesCategoryDescription =
     "Indexes are like the scorecard of the stock market, they keep track of the performance of a group of stocks, giving you a snapshot of the market's overall health and direction, like a GPS for your investment journey.";
 const String indexesImgPath = "assets/images/etf.jpg";
 
-const List<String> CategoriesNames = [
+const List<String> categoriesNames = [
   'Stocks',
   'FX',
   'Fixed Income',
   'Indexes'
 ];
-const List<String> CategoriesImg = [
+const List<String> categoriesImg = [
   "assets/images/stockscar.jpg",
   "assets/images/fxcar.jpg",
   "assets/images/bondscar.jpeg",
@@ -95,7 +89,7 @@ const List<String> CategoriesImg = [
 
 const List<Category> listCategories = [
   Category(1, 'Stocks', stocksCategoryDescription, stocksImgPath),
-  Category(2, 'FX', FXCategoryDescription, FXImgPath),
+  Category(2, 'FX', fxCategoryDescription, fxImgPath),
   Category(
       3, 'Fixed Income', fixedIncomeCategoryDescription, fixedIncomeImgPath),
   Category(4, 'Indexes', indexesCategoryDescription, indexesImgPath),

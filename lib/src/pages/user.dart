@@ -1,18 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:footer/footer.dart';
 import '../widgets/theappbar.dart';
+
+import 'package:projet_dac/src/widgets/custom_footer.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 
-import '../widgets/homepage/GreetingText.dart';
+class UserPage extends StatefulWidget {
+  static const routeName = '/user';
+  const UserPage({super.key});
 
-class User extends StatelessWidget {
-  const User({super.key});
+  @override
+  State<StatefulWidget> createState() => _UserPageState();
+}
+
+class _UserPageState extends State<UserPage> {
+  TextEditingController emailController = TextEditingController();
+  TextEditingController firstNameController = TextEditingController();
+  TextEditingController lastNameController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
 
     return Scaffold(
         appBar: CustomAppBar(),
@@ -52,7 +61,7 @@ class User extends StatelessWidget {
                 SizedBox(
                     //height: 400,
                     child: Container(
-                  color: Color.fromARGB(255, 194, 204, 204),
+                  color: const Color.fromARGB(255, 194, 204, 204),
                   child: Row(
                     children: [
                       SizedBox(width: width * 0.05),
@@ -65,43 +74,55 @@ class User extends StatelessWidget {
                               color: Color.fromARGB(255, 217, 239, 240),
                               borderRadius:
                                   BorderRadius.all(Radius.circular(20))),
-                          child: Column(
-                            children: <Widget>[
-                              const Align(
-                                alignment: Alignment.centerLeft,
-                                child: Text(
-                                  "Please, make sure your infomation are up to date :",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 24,
-                                      color: Color.fromARGB(255, 0, 119, 107)),
+                          child: Form(
+                            child: Column(
+                              children: <Widget>[
+                                const Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Text(
+                                    "Please, make sure your infomation are up to date :",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 24,
+                                        color:
+                                            Color.fromARGB(255, 0, 119, 107)),
+                                  ),
                                 ),
-                              ),
-                              SizedBox(height: 20),
-                              const TextField(
-                                decoration:
-                                    InputDecoration(labelText: 'Username'),
-                              ),
-                              const TextField(
-                                decoration: InputDecoration(labelText: 'Name'),
-                              ),
-                              const TextField(
-                                decoration:
-                                    InputDecoration(labelText: 'Password'),
-                                obscureText: true,
-                              ),
-                              const SizedBox(
-                                height: 15,
-                              ),
-                              ElevatedButton(
-                                onPressed: () {},
-                                child: Text('Save'),
-                                style: ElevatedButton.styleFrom(
-                                    textStyle: const TextStyle(fontSize: 20),
-                                    backgroundColor:
-                                        Color.fromARGB(255, 0, 119, 107)),
-                              ),
-                            ],
+                                const SizedBox(height: 20),
+                                TextFormField(
+                                  controller: emailController,
+                                  decoration:
+                                      const InputDecoration(labelText: 'Email'),
+                                ),
+                                TextFormField(
+                                  controller: firstNameController,
+                                  decoration: const InputDecoration(
+                                      labelText: 'First Name'),
+                                ),
+                                TextFormField(
+                                  controller: lastNameController,
+                                  decoration: const InputDecoration(
+                                      labelText: 'Last Name'),
+                                ),
+                                TextFormField(
+                                  controller: passwordController,
+                                  decoration: const InputDecoration(
+                                      labelText: 'Password'),
+                                  obscureText: true,
+                                ),
+                                const SizedBox(
+                                  height: 15,
+                                ),
+                                ElevatedButton(
+                                  onPressed: () {},
+                                  style: ElevatedButton.styleFrom(
+                                      textStyle: const TextStyle(fontSize: 20),
+                                      backgroundColor: const Color.fromARGB(
+                                          255, 0, 119, 107)),
+                                  child: const Text('Save'),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
@@ -126,57 +147,7 @@ class User extends StatelessWidget {
                     ],
                   ),
                 )),
-                Footer(
-                    backgroundColor: const Color(0xffd9eff0),
-                    padding: const EdgeInsets.all(20.0),
-                    child: Column(
-                      children: [
-                        Text(
-                          'Projet développement d\'applications communicantes',
-                          style: GoogleFonts.varela(
-                              textStyle: const TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w200,
-                            fontStyle: FontStyle.normal,
-                            color: Color(0xFF263b5e),
-                          )),
-                          textAlign: TextAlign.center,
-                        ),
-                        Text(
-                          'ENSIMAG 3A IF I2MF',
-                          style: GoogleFonts.varela(
-                              textStyle: const TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w200,
-                            fontStyle: FontStyle.normal,
-                            color: Color(0xFF263b5e),
-                          )),
-                          textAlign: TextAlign.center,
-                        ),
-                        Text(
-                          'Promotion 2023',
-                          style: GoogleFonts.varela(
-                              textStyle: const TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w200,
-                            fontStyle: FontStyle.normal,
-                            color: Color(0xFF263b5e),
-                          )),
-                          textAlign: TextAlign.center,
-                        ),
-                        Text(
-                          'Tous droits réservés',
-                          style: GoogleFonts.varela(
-                              textStyle: const TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w200,
-                            fontStyle: FontStyle.normal,
-                            color: Color(0xFF263b5e),
-                          )),
-                          textAlign: TextAlign.center,
-                        )
-                      ],
-                    )),
+                const CustomFooter(),
               ],
             ),
           ),

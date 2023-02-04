@@ -1,19 +1,15 @@
-import 'dart:html';
-import 'package:getwidget/components/search_bar/gf_search_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:projet_dac/src/widgets/HomePageCarousel.dart';
+import 'package:projet_dac/src/widgets/custom_footer.dart';
+import 'package:projet_dac/src/widgets/homepage/homepage_carousel.dart';
 import 'package:projet_dac/src/widgets/homepage/charthome.dart';
-import 'package:projet_dac/datamodel.dart';
+import 'package:projet_dac/src/models/datamodel.dart';
 
-import '../widgets/homepage/GreetingText.dart';
-import '../widgets/homepage/HomeSearchBar.dart';
+import '../widgets/homepage/greeting_text.dart';
+import '../widgets/homepage/home_search_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:projet_dac/src/widgets/homepage/FeaturedHeadings.dart';
-import 'package:projet_dac/src/widgets/homepage/FeaturedTiles.dart';
-import 'package:projet_dac/src/widgets/theappbar.dart';
+import 'package:projet_dac/src/widgets/homepage/featured_headings.dart';
 
-import 'package:footer/footer.dart';
-import 'package:footer/footer_view.dart';
+import 'package:projet_dac/src/widgets/theappbar.dart';
 
 const List list = [
   "Flutter",
@@ -25,20 +21,16 @@ const List list = [
 /// The Widget that configures your application.
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
-
+  static const routeName = '/home';
   @override
-  _HomePageState createState() => _HomePageState();
+  State<StatefulWidget> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
   final ScrollController _scrollController = ScrollController();
-  double _scrollPosition = 0;
-  double _opacity = 0;
 
   _scrollListener() {
-    setState(() {
-      _scrollPosition = _scrollController.position.pixels;
-    });
+    setState(() {});
   }
 
   @override
@@ -50,9 +42,6 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
-    _opacity = _scrollPosition < screenSize.height * 0.40
-        ? _scrollPosition / (screenSize.height * 0.40)
-        : 1;
 
     return Scaffold(
       appBar: CustomAppBar(),
@@ -215,57 +204,7 @@ class _HomePageState extends State<HomePage> {
                 products: dummyProducts,
               ),
               const SizedBox(height: 30),
-              Footer(
-                  backgroundColor: const Color(0xffd9eff0),
-                  padding: const EdgeInsets.all(20.0),
-                  child: Column(
-                    children: [
-                      Text(
-                        'Projet développement d\'applications communicantes',
-                        style: GoogleFonts.varela(
-                            textStyle: const TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w200,
-                          fontStyle: FontStyle.normal,
-                          color: Color(0xFF263b5e),
-                        )),
-                        textAlign: TextAlign.center,
-                      ),
-                      Text(
-                        'ENSIMAG 3A IF I2MF',
-                        style: GoogleFonts.varela(
-                            textStyle: const TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w200,
-                          fontStyle: FontStyle.normal,
-                          color: Color(0xFF263b5e),
-                        )),
-                        textAlign: TextAlign.center,
-                      ),
-                      Text(
-                        'Promotion 2023',
-                        style: GoogleFonts.varela(
-                            textStyle: const TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w200,
-                          fontStyle: FontStyle.normal,
-                          color: Color(0xFF263b5e),
-                        )),
-                        textAlign: TextAlign.center,
-                      ),
-                      Text(
-                        'Tous droits réservés',
-                        style: GoogleFonts.varela(
-                            textStyle: const TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w200,
-                          fontStyle: FontStyle.normal,
-                          color: Color(0xFF263b5e),
-                        )),
-                        textAlign: TextAlign.center,
-                      )
-                    ],
-                  )),
+              const CustomFooter(),
             ],
           ),
         ]),
