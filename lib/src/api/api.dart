@@ -3,6 +3,8 @@ import 'package:projet_dac/src/api/user_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 
+class NoTokenExeption implements Exception {}
+
 class Api {
   static Future<String> login(String email, String password) async {
     final response = await post(
@@ -21,6 +23,11 @@ class Api {
     } else {
       throw Exception('fail');
     }
+  }
+
+  static Future<void> logout() async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.remove("token");
   }
 
   static Future<String> register(
@@ -47,13 +54,54 @@ class Api {
     }
   }
 
-  Future<UserInfo> getUserInfo() async {
-    final response = await get(Uri.parse('http://localhost:3000/userinfo'));
+  static Future<UserInfo> getUserInfo() async {
+    final prefs = await SharedPreferences.getInstance();
 
-    if (response.statusCode == 200) {
-      return UserInfo.fromJson(jsonDecode(response.body));
+    String? token = prefs.getString("token");
+    if (token != null) {
+      final response = await get(
+        Uri.parse('http://localhost:3000/userinfo'),
+        headers: <String, String>{"Authorization": "Bearer $token"},
+      );
+
+      if (response.statusCode == 200) {
+        return UserInfo.fromJson(jsonDecode(response.body));
+      } else {
+        throw Exception('fail');
+      }
     } else {
-      throw Exception('fail');
+      throw NoTokenExeption();
+    }
+  }
+
+  static Future<String> modifyUserInfo(
+      String firstName, String lastName, String email, String password) async {
+    final prefs = await SharedPreferences.getInstance();
+
+    String? token = prefs.getString("token");
+
+    if (token != null) {
+      final response = await post(
+        Uri.parse('http://localhost:3000/modifyuserinfo'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          "Authorization": "Bearer $token"
+        },
+        body: jsonEncode(<String, String>{
+          'email': email,
+          'password': password,
+          'firstName': firstName,
+          'lastName': lastName
+        }),
+      );
+
+      if (response.statusCode == 200) {
+        return 'ok';
+      } else {
+        throw Exception('fail');
+      }
+    } else {
+      throw NoTokenExeption();
     }
   }
 }

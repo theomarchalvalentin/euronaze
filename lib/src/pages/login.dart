@@ -144,6 +144,11 @@ class _LoginPageState extends State<LoginPage> {
                       }
                     } else {
                       try {
+                        result = await Api.register(
+                            firstNameController.text,
+                            lastNameController.text,
+                            emailController.text,
+                            passwordController.text);
                         if (context.mounted) {
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(

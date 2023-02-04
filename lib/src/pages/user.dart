@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:projet_dac/src/api/api.dart';
+import 'package:projet_dac/src/api/user_model.dart';
 import '../widgets/theappbar.dart';
 
 import 'package:projet_dac/src/widgets/custom_footer.dart';
 
 import 'package:google_fonts/google_fonts.dart';
+
+//cas ou plusieurs modifs
 
 class UserPage extends StatefulWidget {
   static const routeName = '/user';
@@ -14,10 +18,60 @@ class UserPage extends StatefulWidget {
 }
 
 class _UserPageState extends State<UserPage> {
+  final _formKey = GlobalKey<FormState>();
   TextEditingController emailController = TextEditingController();
   TextEditingController firstNameController = TextEditingController();
   TextEditingController lastNameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+
+  UserInfo? userInfo;
+
+  bool lock = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _getData();
+  }
+
+  _getData() async {
+    try {
+      userInfo = await Api.getUserInfo();
+      emailController.text = userInfo!.email;
+      firstNameController.text = userInfo!.firstName;
+      lastNameController.text = userInfo!.lastName;
+      passwordController.text = userInfo!.lastName;
+    } on NoTokenExeption {
+      setState(() {
+        lock = false;
+      });
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('No token found, please log again')),
+      );
+    } catch (e) {
+      setState(() {
+        lock = false;
+      });
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+            content: Text('Unable to fetch User Info please try again')),
+      );
+    }
+  }
+
+  bool _hasChanged() {
+    bool result = emailController.text != userInfo!.email ||
+        firstNameController.text != userInfo!.firstName ||
+        lastNameController.text != userInfo!.lastName ||
+        passwordController.text != userInfo!.lastName;
+
+    if (!result) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('You have not changed your informations')),
+      );
+    }
+    return result;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -75,6 +129,7 @@ class _UserPageState extends State<UserPage> {
                               borderRadius:
                                   BorderRadius.all(Radius.circular(20))),
                           child: Form(
+                            key: _formKey,
                             child: Column(
                               children: <Widget>[
                                 const Align(
@@ -90,31 +145,94 @@ class _UserPageState extends State<UserPage> {
                                 ),
                                 const SizedBox(height: 20),
                                 TextFormField(
+                                  enabled: lock,
                                   controller: emailController,
                                   decoration:
                                       const InputDecoration(labelText: 'Email'),
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Please enter some text';
+                                    }
+                                    return null;
+                                  },
                                 ),
                                 TextFormField(
+                                  enabled: lock,
                                   controller: firstNameController,
                                   decoration: const InputDecoration(
                                       labelText: 'First Name'),
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Please enter some text';
+                                    }
+                                    return null;
+                                  },
                                 ),
                                 TextFormField(
+                                  enabled: lock,
                                   controller: lastNameController,
                                   decoration: const InputDecoration(
                                       labelText: 'Last Name'),
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Please enter some text';
+                                    }
+                                    return null;
+                                  },
                                 ),
                                 TextFormField(
+                                  enabled: lock,
                                   controller: passwordController,
                                   decoration: const InputDecoration(
                                       labelText: 'Password'),
                                   obscureText: true,
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Please enter some text';
+                                    }
+                                    return null;
+                                  },
                                 ),
                                 const SizedBox(
                                   height: 15,
                                 ),
                                 ElevatedButton(
-                                  onPressed: () {},
+                                  onPressed: () async {
+                                    if (_formKey.currentState!.validate() &&
+                                        _hasChanged()) {
+                                      //String? result; result= await if necessary
+                                      try {
+                                        await Api.modifyUserInfo(
+                                            firstNameController.text,
+                                            lastNameController.text,
+                                            emailController.text,
+                                            passwordController.text);
+                                        if (context.mounted) {
+                                          _getData(); // mouai
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            const SnackBar(
+                                                content:
+                                                    Text('Successfully Saved')),
+                                          );
+                                        }
+                                      } on NoTokenExeption {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          const SnackBar(
+                                              content: Text(
+                                                  'No Token found, please log again')),
+                                        );
+                                      } catch (e) {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          const SnackBar(
+                                              content: Text(
+                                                  'Unabled to Saved, please make sure your informations are correct and try again')),
+                                        );
+                                      }
+                                    }
+                                  },
                                   style: ElevatedButton.styleFrom(
                                       textStyle: const TextStyle(fontSize: 20),
                                       backgroundColor: const Color.fromARGB(

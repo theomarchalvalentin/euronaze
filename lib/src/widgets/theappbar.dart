@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../api/api.dart';
+
 class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   @override
   final Size preferredSize;
@@ -14,7 +16,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
       elevation: 0.0,
       toolbarHeight: 80,
       automaticallyImplyLeading: false,
-      leadingWidth: 200,
+      leadingWidth: 250,
       leading: InkWell(
         onTap: () {
           Navigator.of(context).pushNamed('/home');
@@ -86,6 +88,13 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
             color: Colors.white,
           ),
           onPressed: () {
+            try {
+              Api.logout();
+            } catch (e) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('Error during Logout')),
+              );
+            }
             Navigator.of(context).pushNamed('/login');
           },
         ),
