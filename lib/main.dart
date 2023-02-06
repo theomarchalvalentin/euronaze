@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:projet_dac/src/pages/user.dart';
 //import 'package:projet_dac/src/widgets/searchbar.dart';
 import 'package:projet_dac/src/pages/home_page.dart';
@@ -17,19 +18,45 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        title: 'Flutter Web',
-        theme: ThemeData(
-          visualDensity: VisualDensity.adaptivePlatformDensity,
-        ),
-        debugShowCheckedModeBanner: false,
-        home: const LoginPage(),
-        routes: {
-          LoginPage.routeName: (_) => const LoginPage(),
-          HomePage.routeName: (_) => const HomePage(),
-          UserPage.routeName: (_) => const UserPage(),
-          ProductScreenDetails.routeName: (_) => const ProductScreenDetails(),
-          SearchPage.routeName: (_) => SearchPage(),
-        });
+    return MaterialApp.router(
+      title: 'Flutter Web',
+      theme: ThemeData(
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+      ),
+      debugShowCheckedModeBanner: false,
+      routerConfig: _router,
+    );
+    // routes: {
+    //   LoginPage.routeName: (_) => const LoginPage(),
+    //   HomePage.routeName: (_) => const HomePage(),
+    //   UserPage.routeName: (_) => const UserPage(),
+    //   ProductScreenDetails.routeName: (_) => const ProductScreenDetails(),
+    //   SearchPage.routeName: (_) => SearchPage(),
+    // });
   }
 }
+
+final _router = GoRouter(
+  routes: [
+    GoRoute(
+      path: '/',
+      builder: (context, state) => LoginPage(),
+    ),
+    GoRoute(
+      path: '/home',
+      builder: (context, state) => HomePage(),
+    ),
+    GoRoute(
+      path: '/user',
+      builder: (context, state) => UserPage(),
+    ),
+    GoRoute(
+      path: '/search',
+      builder: (context, state) => SearchPage(),
+    ),
+    GoRoute(
+        path: '/product/:productId',
+        builder: (context, state) =>
+            ProductScreenDetails(productId: state.params['productId'])),
+  ],
+);

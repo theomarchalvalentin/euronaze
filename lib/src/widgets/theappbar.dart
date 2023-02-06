@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
+import 'package:go_router/go_router.dart';
 import '../api/api.dart';
 
 class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
@@ -19,7 +19,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
       leadingWidth: 250,
       leading: InkWell(
         onTap: () {
-          Navigator.of(context).pushNamed('/home');
+          context.go('/home');
         },
         child: Row(children: [
           const SizedBox(width: 20),
@@ -46,7 +46,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
             color: Colors.white,
           ),
           onPressed: () {
-            Navigator.of(context).pushNamed('/user');
+            context.go('/user');
           },
         ),
         const SizedBox(width: 20),
@@ -66,7 +66,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
             color: Colors.white,
           ),
           onPressed: () {
-            Navigator.of(context).pushNamed('/search');
+            context.go('/search');
           },
         ),
         const SizedBox(width: 20),
@@ -95,7 +95,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
                 const SnackBar(content: Text('Error during Logout')),
               );
             }
-            Navigator.of(context).pushNamed('/login');
+            context.go('/login');
           },
         ),
         const SizedBox(width: 20),

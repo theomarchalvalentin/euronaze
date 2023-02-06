@@ -26,6 +26,7 @@ dependencies:
   shared_preferences: ^2.0.17
   http: any
   filter_list: any
+  go_router: any
 
 dev_dependencies:
   flutter_test:

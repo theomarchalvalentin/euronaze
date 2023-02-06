@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:projet_dac/src/api/api.dart';
+import 'package:go_router/go_router.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -132,7 +133,7 @@ class _LoginPageState extends State<LoginPage> {
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(content: Text('Login success')),
                             );
-                            Navigator.of(context).pushNamed('/home');
+                            context.go('/home');
                           }
                         }
                       } catch (e) {
@@ -154,7 +155,7 @@ class _LoginPageState extends State<LoginPage> {
                             const SnackBar(
                                 content: Text('Registration success')),
                           );
-                          Navigator.of(context).pushNamed('/home');
+                          context.go('/home');
                         }
                       } catch (e) {
                         ScaffoldMessenger.of(context).showSnackBar(

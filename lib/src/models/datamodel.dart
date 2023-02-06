@@ -41,10 +41,10 @@ final bearAssetsNames = <String>[
 ];
 
 final dummyProducts = <Product>[
-  Product(1, 1, bearAssetsNames[0], bearAssetsImages[0]),
-  Product(1, 2, bearAssetsNames[1], bearAssetsImages[1]),
-  Product(1, 3, bearAssetsNames[2], bearAssetsImages[2]),
-  Product(1, 4, bearAssetsNames[3], bearAssetsImages[3]),
+  Product(1, 0, bearAssetsNames[0], bearAssetsImages[0]),
+  Product(1, 1, bearAssetsNames[1], bearAssetsImages[1]),
+  Product(1, 2, bearAssetsNames[2], bearAssetsImages[2]),
+  Product(1, 3, bearAssetsNames[3], bearAssetsImages[3]),
 ];
 
 class Category {

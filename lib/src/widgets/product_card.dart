@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:projet_dac/src/models/datamodel.dart';
+import 'package:go_router/go_router.dart';
 
 class ProductCard extends StatelessWidget {
   final Product product;
@@ -8,9 +9,9 @@ class ProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    int id = product.productId;
     return GestureDetector(
-      onTap: () => Navigator.of(context)
-          .pushNamed('/product-details-screen', arguments: product),
+      onTap: () => context.go('/product/$id'),
       child: Card(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
