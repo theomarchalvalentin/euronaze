@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 
 const List<String> list = <String>['One', 'Two', 'Three', 'Four'];
 
-class DropdownButtonExample extends StatefulWidget {
-  const DropdownButtonExample({super.key, required List<String> list});
+class CustomDropdownButton extends StatefulWidget {
+  const CustomDropdownButton({super.key, required List<String> list});
 
   @override
-  State<DropdownButtonExample> createState() => _DropdownButtonExampleState();
+  State<CustomDropdownButton> createState() => _CustomDropdownButtonState();
 }
 
-class _DropdownButtonExampleState extends State<DropdownButtonExample> {
+class _CustomDropdownButtonState extends State<CustomDropdownButton> {
   String dropdownValue = list.first;
 
   @override

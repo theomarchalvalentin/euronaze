@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:projet_dac/src/pages/user.dart';
-import 'package:projet_dac/src/widgets/searchbar.dart';
+//import 'package:projet_dac/src/widgets/searchbar.dart';
 import 'package:projet_dac/src/pages/home_page.dart';
 import 'src/pages/product_details_screen.dart';
 import 'package:projet_dac/src/pages/login.dart';
 
 import 'package:projet_dac/src/pages/admin_add.dart';
+import 'package:projet_dac/src/pages/search_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
         debugShowCheckedModeBanner: false,
-        home: const AdminAdd(),
+        home: const LoginPage(),
         routes: {
           LoginPage.routeName: (_) => const LoginPage(),
           HomePage.routeName: (_) => const HomePage(),

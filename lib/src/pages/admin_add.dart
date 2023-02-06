@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../widgets/theappbar.dart';
-import '../widgets/filter_list.dart';
+import '../widgets/dropdown.dart';
 
 //cas ou plusieurs modifs
 
@@ -75,7 +75,7 @@ class _AdminAddState extends State<AdminAdd> {
                     return null;
                   },
                 ),
-                DropdownButtonExample(
+                CustomDropdownButton(
                   list: list,
                 ),
               ],
