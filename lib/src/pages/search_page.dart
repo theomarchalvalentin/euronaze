@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:projet_dac/src/models/datamodel.dart';
 import 'package:projet_dac/src/widgets/custom_footer.dart';
-import 'package:projet_dac/src/widgets/homepage/home_search_bar.dart';
 import 'package:projet_dac/src/widgets/theappbar.dart';
 import 'package:projet_dac/src/widgets/dropdown.dart';
 import 'package:projet_dac/src/widgets/product_card.dart';
@@ -112,8 +111,63 @@ class _SearchPageState extends State<SearchPage> {
                                     color: Color(0xFF263b5e),
                                   )),
                                 ),
-                                HomeSearchBar(
-                                    screenSize: MediaQuery.of(context).size),
+                                Container(
+                                  decoration: BoxDecoration(
+                                      border: Border.all(color: Colors.black),
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(15.0))),
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(15.0),
+                                    child: SizedBox(
+                                      width: MediaQuery.of(context).size.width /
+                                          3 *
+                                          1,
+                                      height: 50,
+                                      child: Row(
+                                        children: [
+                                          Container(
+                                            width: 0.98 *
+                                                MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                3,
+                                            color: Colors.white,
+                                            child: Padding(
+                                              padding: const EdgeInsets.only(
+                                                  right: 8.0,
+                                                  left: 8.0,
+                                                  top: 4.0),
+                                              child: TextField(
+                                                style: TextStyle(
+                                                    color: Colors.black),
+                                                cursorColor: Colors.black,
+                                                controller: _searchController,
+                                                decoration: InputDecoration(
+                                                  border: InputBorder.none,
+                                                  hintText:
+                                                      'Google, Tesla, ...',
+                                                  hintStyle: const TextStyle(
+                                                      fontSize: 15.0,
+                                                      color: Colors.black),
+                                                  suffixIcon: IconButton(
+                                                    highlightColor: null,
+                                                    icon:
+                                                        const Icon(Icons.clear),
+                                                    onPressed: () =>
+                                                        _searchController
+                                                            .clear(),
+                                                  ),
+                                                ),
+                                                onChanged: (value) =>
+                                                    _filterProducts(value),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
                                 const SizedBox(
                                   height: 25,
                                 ),
