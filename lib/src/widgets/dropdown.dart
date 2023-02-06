@@ -1,12 +1,5 @@
 import 'package:flutter/material.dart';
 
-const List<String> list = <String>[
-  'Oneoisabigoneaverybigone',
-  'Two',
-  'Three',
-  'Four'
-];
-
 class CustomDropdownButton extends StatefulWidget {
   const CustomDropdownButton({super.key, required this.list});
   final List<String> list;
@@ -36,7 +29,7 @@ class _CustomDropdownButtonState extends State<CustomDropdownButton> {
           dropdownValue = value!;
         });
       },
-      items: list.map<DropdownMenuItem<String>>((String value) {
+      items: widget.list.map<DropdownMenuItem<String>>((String value) {
         return DropdownMenuItem<String>(
           value: value,
           child: Text(value),
