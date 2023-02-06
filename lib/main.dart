@@ -5,6 +5,8 @@ import 'package:projet_dac/src/pages/home_page.dart';
 import 'src/pages/product_details_screen.dart';
 import 'package:projet_dac/src/pages/login.dart';
 
+import 'package:projet_dac/src/pages/admin_add.dart';
+
 void main() {
   runApp(const MyApp());
 }
