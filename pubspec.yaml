@@ -27,6 +27,7 @@ dependencies:
   http: any
   filter_list: any
   go_router: any
+  file_picker: any
 
 dev_dependencies:
   flutter_test:

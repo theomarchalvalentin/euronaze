@@ -142,7 +142,7 @@ class _SearchPageState extends State<SearchPage> {
                                                   left: 8.0,
                                                   top: 4.0),
                                               child: TextField(
-                                                style: TextStyle(
+                                                style: const TextStyle(
                                                     color: Colors.black),
                                                 cursorColor: Colors.black,
                                                 controller: _searchController,

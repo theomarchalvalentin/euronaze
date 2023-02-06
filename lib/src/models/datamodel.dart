@@ -87,6 +87,13 @@ const List<String> categoriesImg = [
   "assets/images/etf.jpg"
 ];
 
+final dummyCategories = <Category>[
+  Category(0, "FX", "Good", "myimg"),
+  Category(1, "Gold", "Good", "myimg"),
+  Category(2, "Stock", "Good", "myimg"),
+  Category(3, "Bonds", "Good", "myimg"),
+];
+
 const List<Map> listCategories = [
   {
     'categoryId': 1,
