@@ -6,6 +6,10 @@ import 'package:projet_dac/src/widgets/theappbar.dart';
 import 'package:projet_dac/src/widgets/dropdown.dart';
 import 'package:projet_dac/src/widgets/product_card.dart';
 
+List<String> listCat = listCategories
+    .map((category) => category['categoryName'].toString())
+    .toList();
+
 class SearchPage extends StatefulWidget {
   static const routeName = '/search';
   const SearchPage({
@@ -184,7 +188,7 @@ class _SearchPageState extends State<SearchPage> {
                                 const SizedBox(
                                   height: 15,
                                 ),
-                                CustomDropdownButton(list: categories)
+                                CustomDropdownButton(list: listCat)
                               ],
                             )),
                         const SizedBox(

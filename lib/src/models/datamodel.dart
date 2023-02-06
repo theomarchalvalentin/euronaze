@@ -87,10 +87,29 @@ const List<String> categoriesImg = [
   "assets/images/etf.jpg"
 ];
 
-const List<Category> listCategories = [
-  Category(1, 'Stocks', stocksCategoryDescription, stocksImgPath),
-  Category(2, 'FX', fxCategoryDescription, fxImgPath),
-  Category(
-      3, 'Fixed Income', fixedIncomeCategoryDescription, fixedIncomeImgPath),
-  Category(4, 'Indexes', indexesCategoryDescription, indexesImgPath),
+const List<Map> listCategories = [
+  {
+    'categoryId': 1,
+    'categoryName': 'Stocks',
+    'categoryDescription': stocksCategoryDescription,
+    'categoryImg': stocksImgPath
+  },
+  {
+    'categoryId': 2,
+    'categoryName': 'FX',
+    'categoryDescription': fxCategoryDescription,
+    'categoryImg': fxImgPath
+  },
+  {
+    'categoryId': 3,
+    'categoryName': 'Fixed Income',
+    'categoryDescription': fixedIncomeCategoryDescription,
+    'categoryImg': fixedIncomeImgPath
+  },
+  {
+    'categoryId': 4,
+    'categoryName': 'Indexes',
+    'categoryDescription': indexesCategoryDescription,
+    'categoryImg': indexesImgPath
+  },
 ];
