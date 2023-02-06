@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:projet_dac/src/models/datamodel.dart';
+import 'package:projet_dac/src/widgets/custom_footer.dart';
+import 'package:projet_dac/src/widgets/homepage/featured_headings.dart';
+import 'package:projet_dac/src/widgets/homepage/greeting_text.dart';
+import 'package:projet_dac/src/widgets/homepage/home_search_bar.dart';
+import 'package:projet_dac/src/widgets/theappbar.dart';
 
 import '../pages/product_details_screen.dart';
 
@@ -37,59 +42,134 @@ class _SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 3, 140, 129),
-        elevation: 0.0,
-        toolbarHeight: 80,
-        automaticallyImplyLeading: false,
-        leadingWidth: 200,
-        leading: InkWell(
-          onTap: () {
-            Navigator.maybePop(context);
-          },
-          child: Row(children: [
-            const SizedBox(width: 20),
-            Image.asset(
-              'assets/images/Euronext_logo.png',
-              height: 60,
-            ),
-            const SizedBox(width: 10),
-            Text("Euronaze",
-                style: GoogleFonts.bebasNeue(
-                  textStyle: const TextStyle(
-                      fontSize: 30,
-                      letterSpacing: 1,
-                      fontWeight: FontWeight.normal,
-                      color: Colors.white),
-                )),
-          ]),
-        ),
-        title: TextField(
-          style: const TextStyle(color: Colors.white),
-          cursorColor: Colors.white,
-          controller: _searchController,
-          decoration: InputDecoration(
-            hintText: 'Search products',
-            hintStyle: const TextStyle(fontSize: 20.0, color: Colors.white),
-            suffixIcon: IconButton(
-              icon: const Icon(Icons.clear),
-              onPressed: () => _searchController.clear(),
+      appBar: CustomAppBar(),
+      bottomSheet: SizedBox(height: 130, child: const CustomFooter()),
+      body: SingleChildScrollView(
+          child: SearchPageBody(filteredProducts: _filteredProducts)),
+    );
+  }
+}
+
+class SearchPageBody extends StatelessWidget {
+  const SearchPageBody({
+    super.key,
+    required List<Product> filteredProducts,
+  }) : _filteredProducts = filteredProducts;
+
+  final List<Product> _filteredProducts;
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      child: Stack(children: [
+        Padding(
+          padding: EdgeInsets.fromLTRB(
+              MediaQuery.of(context).size.width * 0.015,
+              MediaQuery.of(context).size.width * 0.015,
+              MediaQuery.of(context).size.width * 0.015,
+              MediaQuery.of(context).size.width * 0.015),
+          child: Container(
+            // constraints: BoxConstraints(
+            //     maxWidth: MediaQuery.of(context).size.width,
+            //     maxHeight: MediaQuery.of(context).size.height),
+            child: Wrap(
+              children: [
+                Align(
+                  child: Text(
+                    "Search Products",
+                    style: GoogleFonts.varela(
+                        textStyle: const TextStyle(
+                      fontSize: 50,
+                      fontWeight: FontWeight.w300,
+                      fontStyle: FontStyle.normal,
+                      color: Color(0xFF263b5e),
+                    )),
+                  ),
+                  alignment: Alignment.topLeft,
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Align(
+                  // ignore: sort_child_properties_last
+                  child: Text(
+                    " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus eu sollicitudin tortor, eget semper turpis. Curabitur eget velit in leo pellentesque finibus. Nunc ultrices, enim fermentum facilisis interdum, dui odio luctus sapien, eu volutpat elit nulla vitae odio. Duis dui urna, volutpat a posuere at, vulputate nec erat. Ut in massa efficitur lacus convallis sodales. Etiam neque orci, maximus ut lacus ac, auctor gravida risus. Morbi ultrices urna vel lacus tempor auctor. \nCurabitur porttitor porta enim a viverra. In ornare, tellus et aliquet blandit, enim velit commodo ante, id rutrum lorem elit et felis. Phasellus varius dignissim felis, a venenatis sapien convallis sit amet. Pellentesque suscipit nisi eget ipsum lacinia venenatis. Quisque volutpat nunc vitae est auctor posuere. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Cras elementum nunc diam, eget ultricies lorem ullamcorper nec. ",
+                    style: GoogleFonts.varela(
+                        textStyle: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w200,
+                      fontStyle: FontStyle.normal,
+                      color: Color(0xFF263b5e),
+                    )),
+                  ),
+                  alignment: Alignment.topLeft,
+                ),
+                SizedBox(
+                  height: 100,
+                ),
+                const Divider(
+                  color: Color(0xFF263b5e),
+                ),
+                SizedBox(
+                  height: 50,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                        width: MediaQuery.of(context).size.width * 0.33,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            HomeSearchBar(
+                                screenSize: MediaQuery.of(context).size),
+                            SizedBox(
+                              height: 25,
+                            ),
+                            Text(
+                              "Filter results : ",
+                              style: GoogleFonts.varela(
+                                  textStyle: const TextStyle(
+                                fontSize: 25,
+                                fontWeight: FontWeight.w300,
+                                fontStyle: FontStyle.normal,
+                                color: Color(0xFF263b5e),
+                              )),
+                            ),
+                            SizedBox(
+                              height: 15,
+                            ),
+                            FilterList()
+                          ],
+                        )),
+                    SizedBox(
+                      width: 200,
+                    ),
+                    Expanded(
+                      child: SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.65,
+                        child: ListView.builder(
+                          physics: const AlwaysScrollableScrollPhysics(),
+                          scrollDirection: Axis.vertical,
+                          shrinkWrap: true,
+                          itemCount: _filteredProducts.length,
+                          itemBuilder: (context, index) {
+                            return ProductCard(
+                              product: _filteredProducts[index],
+                            );
+                          },
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
             ),
           ),
-          onChanged: (value) => _filterProducts(value),
         ),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(15.0),
-        child: ListView.builder(
-          itemCount: _filteredProducts.length,
-          itemBuilder: (context, index) {
-            return ProductCard(
-              product: _filteredProducts[index],
-            );
-          },
-        ),
-      ),
+      ]),
     );
   }
 }
@@ -111,11 +191,8 @@ class ProductCard extends StatelessWidget {
             children: <Widget>[
               SizedBox(
                 height: 100,
-                child: FittedBox(
-                  fit: BoxFit.scaleDown,
-                  child: Image.network(
-                    product.productImg,
-                  ),
+                child: Image.network(
+                  product.productImg,
                 ),
               ),
               Expanded(
@@ -142,6 +219,45 @@ class ProductCard extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class FilterBlock extends StatelessWidget {
+  final String text;
+
+  const FilterBlock({Key? key, required this.text});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.all(8),
+      padding: EdgeInsets.all(8),
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.black, width: 1),
+        borderRadius: BorderRadius.all(Radius.circular(10)),
+      ),
+      child: Text(
+        text,
+        style: TextStyle(
+          color: Colors.black,
+        ),
+      ),
+    );
+  }
+}
+
+class FilterList extends StatelessWidget {
+  final List<String> filters = ['Crypto', 'FX', 'Stocks', 'Automotive'];
+
+  FilterList({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Wrap(
+      spacing: 8,
+      runSpacing: 8,
+      children: filters.map((filter) => FilterBlock(text: filter)).toList(),
     );
   }
 }
