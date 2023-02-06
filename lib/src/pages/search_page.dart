@@ -102,13 +102,23 @@ class _SearchPageState extends State<SearchPage> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
+                                Text(
+                                  "Search by name :",
+                                  style: GoogleFonts.varela(
+                                      textStyle: const TextStyle(
+                                    fontSize: 25,
+                                    fontWeight: FontWeight.w300,
+                                    fontStyle: FontStyle.normal,
+                                    color: Color(0xFF263b5e),
+                                  )),
+                                ),
                                 HomeSearchBar(
                                     screenSize: MediaQuery.of(context).size),
                                 const SizedBox(
                                   height: 25,
                                 ),
                                 Text(
-                                  "Filter results : ",
+                                  "Filter by category :",
                                   style: GoogleFonts.varela(
                                       textStyle: const TextStyle(
                                     fontSize: 25,

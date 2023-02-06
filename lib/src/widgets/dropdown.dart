@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 
-const List<String> list = <String>['One', 'Two', 'Three', 'Four'];
+const List<String> list = <String>[
+  'Oneoisabigoneaverybigone',
+  'Two',
+  'Three',
+  'Four'
+];
 
 class CustomDropdownButton extends StatefulWidget {
-  const CustomDropdownButton({super.key, required List<String> list});
+  const CustomDropdownButton({super.key, required this.list});
+  final List<String> list;
 
   @override
   State<CustomDropdownButton> createState() => _CustomDropdownButtonState();
@@ -18,10 +24,10 @@ class _CustomDropdownButtonState extends State<CustomDropdownButton> {
       value: dropdownValue,
       icon: const Icon(Icons.arrow_downward),
       elevation: 16,
-      style: const TextStyle(color: Colors.deepPurple),
+      style: const TextStyle(color: Color.fromARGB(255, 3, 140, 129)),
       underline: Container(
         height: 2,
-        color: Colors.deepPurpleAccent,
+        color: Color.fromARGB(255, 3, 140, 129),
       ),
       onChanged: (String? value) {
         // This is called when the user selects an item.

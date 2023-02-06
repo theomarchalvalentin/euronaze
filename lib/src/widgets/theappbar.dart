@@ -95,7 +95,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
                 const SnackBar(content: Text('Error during Logout')),
               );
             }
-            context.go('/login');
+            context.go('/');
           },
         ),
         const SizedBox(width: 20),
