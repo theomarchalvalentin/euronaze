@@ -82,7 +82,7 @@ class _UserPageState extends State<UserPage> {
         body: SingleChildScrollView(
           child: Container(
             //height: 1000,
-            constraints: const BoxConstraints(maxWidth: 2000),
+            constraints: BoxConstraints(maxWidth: width),
             child: Column(
               children: <Widget>[
                 Stack(
