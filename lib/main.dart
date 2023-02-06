@@ -40,19 +40,19 @@ final _router = GoRouter(
   routes: [
     GoRoute(
       path: '/',
-      builder: (context, state) => LoginPage(),
+      builder: (context, state) => const LoginPage(),
     ),
     GoRoute(
       path: '/home',
-      builder: (context, state) => HomePage(),
+      builder: (context, state) => const HomePage(),
     ),
     GoRoute(
       path: '/user',
-      builder: (context, state) => UserPage(),
+      builder: (context, state) => const UserPage(),
     ),
     GoRoute(
       path: '/search',
-      builder: (context, state) => SearchPage(),
+      builder: (context, state) => const SearchPage(),
     ),
     GoRoute(
         path: '/product/:productId',
