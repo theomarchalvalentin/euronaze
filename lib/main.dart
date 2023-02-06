@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
         debugShowCheckedModeBanner: false,
-        home: const LoginPage(),
+        home: const AdminAdd(),
         routes: {
           LoginPage.routeName: (_) => const LoginPage(),
           HomePage.routeName: (_) => const HomePage(),

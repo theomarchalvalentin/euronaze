@@ -25,6 +25,7 @@ dependencies:
   sizer: ^2.0.15
   shared_preferences: ^2.0.17
   http: any
+  filter_list: any
 
 dev_dependencies:
   flutter_test:
