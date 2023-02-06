@@ -40,7 +40,7 @@ final _router = GoRouter(
   routes: [
     GoRoute(
       path: '/',
-      builder: (context, state) => const AdminAdd(),
+      builder: (context, state) => const LoginPage(),
     ),
     GoRoute(
       path: '/home',
