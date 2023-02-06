@@ -16,7 +16,7 @@ class CustomDropdownButton extends StatefulWidget {
 }
 
 class _CustomDropdownButtonState extends State<CustomDropdownButton> {
-  String dropdownValue = list.first;
+  String? dropdownValue = null;
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +24,7 @@ class _CustomDropdownButtonState extends State<CustomDropdownButton> {
       value: dropdownValue,
       icon: const Icon(Icons.arrow_downward),
       elevation: 16,
+      hint: Text("Choose an category"),
       style: const TextStyle(color: Color.fromARGB(255, 3, 140, 129)),
       underline: Container(
         height: 2,
