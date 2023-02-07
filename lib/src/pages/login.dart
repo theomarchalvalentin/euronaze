@@ -128,14 +128,14 @@ class _LoginPageState extends State<LoginPage> {
                       try {
                         result = await Api.login(
                             emailController.text, passwordController.text);
-                        if (result == "user") {
+                        if (result == "USER") {
                           if (context.mounted) {
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(content: Text('Login success')),
                             );
                             context.go('/home');
                           }
-                        } else if (result == "admin") {
+                        } else if (result == "ADMIN") {
                           if (context.mounted) {
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(content: Text('Login success')),
@@ -143,16 +143,22 @@ class _LoginPageState extends State<LoginPage> {
                             context.go('/searchtomodify');
                           }
                         }
-                      } catch (e) {
+                      } on BadAuth {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
                               content: Text(
                                   'Login failed, please make sure your informations are correct and try again')),
                         );
+                      } catch (e) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                              content:
+                                  Text('Login failed, Internal Server Error')),
+                        );
                       }
                     } else {
                       try {
-                        result = await Api.register(
+                        await Api.register(
                             firstNameController.text,
                             lastNameController.text,
                             emailController.text,
@@ -160,10 +166,17 @@ class _LoginPageState extends State<LoginPage> {
                         if (context.mounted) {
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
-                                content: Text('Registration success')),
+                                content:
+                                    Text('Registration success, please login')),
                           );
-                          context.go('/home');
+                          _formChange();
                         }
+                      } on EmailExist {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                              content: Text(
+                                  'Registration failed, email already exist')),
+                        );
                       } catch (e) {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(

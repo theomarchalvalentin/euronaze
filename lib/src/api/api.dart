@@ -9,20 +9,27 @@ import 'dart:typed_data';
 
 class NoTokenExeption implements Exception {}
 
+class BadAuth implements Exception {}
+
+class EmailExist implements Exception {}
+
 class Api {
   static Future<String> login(String email, String password) async {
     final response = await post(
-      Uri.parse('http://localhost:3000/login'),
+      Uri.parse('http://localhost:8080/api/auth/signin'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
-      body: jsonEncode(<String, String>{'email': email, 'password': password}),
+      body:
+          jsonEncode(<String, String>{'username': email, 'password': password}),
     );
 
     if (response.statusCode == 200) {
       final prefs = await SharedPreferences.getInstance();
       prefs.setString("token", jsonDecode(response.body)['token']);
-      return jsonDecode(response.body)['type'];
+      return jsonDecode(response.body)['roles'][0];
+    } else if (response.statusCode == 403) {
+      throw BadAuth();
     } else {
       throw Exception('fail');
     }
@@ -33,10 +40,10 @@ class Api {
     prefs.remove("token");
   }
 
-  static Future<String> register(
+  static Future<void> register(
       String firstName, String lastName, String email, String password) async {
     final response = await post(
-      Uri.parse('http://localhost:3000/register'),
+      Uri.parse('http://localhost:8080/api/auth/signup'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -49,9 +56,9 @@ class Api {
     );
 
     if (response.statusCode == 200) {
-      final prefs = await SharedPreferences.getInstance();
-      prefs.setString("token", jsonDecode(response.body)['token']);
-      return "ok";
+      return;
+    } else if (response.statusCode == 400) {
+      throw EmailExist();
     } else {
       throw Exception('fail');
     }
@@ -63,7 +70,7 @@ class Api {
     String? token = prefs.getString("token");
     if (token != null) {
       final response = await get(
-        Uri.parse('http://localhost:3000/userinfo'),
+        Uri.parse('http://localhost:8080/api/userinfo'),
         headers: <String, String>{"Authorization": "Bearer $token"},
       );
 
@@ -85,7 +92,7 @@ class Api {
 
     if (token != null) {
       final response = await post(
-        Uri.parse('http://localhost:3000/modifyuserinfo'),
+        Uri.parse('http://localhost:8080/api/modifyuserinfo'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
           "Authorization": "Bearer $token"
@@ -129,7 +136,7 @@ class Api {
 
     if (token != null) {
       final response = await post(
-        Uri.parse('http://localhost:3000/modifyuserinfo'),
+        Uri.parse('http://localhost:8080/api/modifyuserinfo'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
           "Authorization": "Bearer $token"
