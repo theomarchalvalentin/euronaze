@@ -46,7 +46,7 @@ class AdminProductCard extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(width: 40),
+              const SizedBox(width: 40),
               IconButton(
                 onPressed: () {},
                 icon: const Icon(Icons.delete_forever_outlined),

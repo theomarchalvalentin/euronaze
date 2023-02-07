@@ -77,7 +77,7 @@ class _SearchPageState extends State<SearchPage> {
         child: Column(
           children: [
             Padding(
-              padding: EdgeInsets.fromLTRB(40.0, 40.0, 40.0, 0),
+              padding: const EdgeInsets.fromLTRB(40.0, 40.0, 40.0, 0),
               child: Column(
                 children: <Widget>[
                   SizedBox(
@@ -233,7 +233,7 @@ class _SearchPageState extends State<SearchPage> {
                 ],
               ),
             ),
-            CustomFooter(),
+            const CustomFooter(),
           ],
         ),
       ),

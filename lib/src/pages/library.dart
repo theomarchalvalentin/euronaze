@@ -232,7 +232,7 @@ class _LibraryPageState extends State<LibraryPage> {
                 ],
               ),
             ),
-            CustomFooter(),
+            const CustomFooter(),
           ],
         ),
       ),

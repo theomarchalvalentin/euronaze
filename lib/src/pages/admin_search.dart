@@ -3,9 +3,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:projet_dac/src/models/datamodel.dart';
 import 'package:projet_dac/src/widgets/custom_footer.dart';
 import 'package:projet_dac/src/widgets/theadminappbar.dart';
-import 'package:projet_dac/src/widgets/theappbar.dart';
-import 'package:projet_dac/src/widgets/dropdown.dart';
-import 'package:projet_dac/src/widgets/product_card.dart';
 
 import '../widgets/admin_product_card.dart';
 
@@ -237,7 +234,7 @@ class _AdminSearchState extends State<AdminSearch> {
                 ],
               ),
             ),
-            CustomFooter(),
+            const CustomFooter(),
           ],
         ),
       ),

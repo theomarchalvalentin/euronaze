@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:projet_dac/src/pages/admin_modify.dart';
-import 'package:projet_dac/src/models/datamodel.dart';
 import 'package:projet_dac/src/pages/CartPage.dart';
 import 'package:projet_dac/src/pages/admin_search.dart';
 import 'package:projet_dac/src/pages/library.dart';

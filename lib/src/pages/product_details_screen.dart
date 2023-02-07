@@ -126,7 +126,7 @@ class _ProductScreenDetailsState extends State<ProductScreenDetails> {
                             ),
                           ],
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 30,
                         ),
                         BuyButton(widget.isOwned, widget.isInBasket),
@@ -214,15 +214,15 @@ Widget BuyButton(bool isOwned, bool isInBasket) {
         ),
       );
     }
-    return Center(
-      child: const Text(
+    return const Center(
+      child: Text(
         'Vous possédez déjà ce produit',
         style: TextStyle(color: Colors.black, fontSize: 20.0),
       ),
     );
   }
-  return Center(
-      child: const Text(
+  return const Center(
+      child: Text(
     'Ce produit est déja dans votre panier',
     style: TextStyle(color: Colors.black, fontSize: 20.0),
   ));

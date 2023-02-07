@@ -3,12 +3,13 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:projet_dac/src/models/datamodel.dart';
 import 'package:projet_dac/src/widgets/custom_footer.dart';
 import 'package:projet_dac/src/widgets/theappbar.dart';
-import 'package:projet_dac/src/widgets/dropdown.dart';
 import 'package:projet_dac/src/widgets/product_card.dart';
 
 double listViewTotal(List<Product> products) {
   double total = 0.0;
-  products.forEach((element) => total += double.parse(element.price));
+  for (var element in products) {
+    total += double.parse(element.price);
+  }
   return total;
 }
 
@@ -282,7 +283,7 @@ class _CartPageState extends State<CartPage> {
                 ],
               ),
             ),
-            CustomFooter(),
+            const CustomFooter(),
           ],
         ),
       ),

@@ -46,7 +46,7 @@ class ProductCard extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 40,
               )
             ],
@@ -101,7 +101,7 @@ class OwnedProductCard extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(width: 40),
+              const SizedBox(width: 40),
               IconButton(
                 onPressed: () {},
                 icon: const Icon(Icons.download_outlined),
@@ -158,14 +158,14 @@ class BasketProductCard extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 30,
               ),
               IconButton(
-                icon: Icon(Icons.cancel),
+                icon: const Icon(Icons.cancel),
                 onPressed: () => {},
               ),
-              SizedBox(
+              const SizedBox(
                 width: 10,
               ),
             ],
