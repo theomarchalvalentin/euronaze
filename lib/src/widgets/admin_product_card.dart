@@ -24,28 +24,32 @@ class AdminProductCard extends StatelessWidget {
                 ),
               ),
               Expanded(
-                child: Column(
-                  children: [
-                    Text(
-                      product.productName,
-                      style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
+                child: Align(
+                  alignment: Alignment.topRight,
+                  child: Column(
+                    children: [
+                      Text(
+                        product.productName,
+                        style: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    ),
-                    Text(
-                      "\$${product.price}",
-                      style: const TextStyle(
-                        fontSize: 14,
-                        color: Colors.grey,
-                      ),
-                    )
-                  ],
+                      Text(
+                        "\$${product.price}",
+                        style: const TextStyle(
+                          fontSize: 14,
+                          color: Colors.grey,
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
+              SizedBox(width: 40),
               IconButton(
                 onPressed: () {},
-                icon: const Icon(Icons.delete_outlined),
+                icon: const Icon(Icons.delete_forever_outlined),
               ),
             ],
           ),
