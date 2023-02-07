@@ -140,7 +140,7 @@ class _LoginPageState extends State<LoginPage> {
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(content: Text('Login success')),
                             );
-                            context.go('/addproduct');
+                            context.go('/searchtomodify');
                           }
                         }
                       } catch (e) {

@@ -181,7 +181,7 @@ class _AdminModifyState extends State<AdminModify> {
                       child: const SizedBox(
                           height: 40,
                           width: 40,
-                          child: Center(child: Text('Add'))),
+                          child: Center(child: Text('Save'))),
                     )
                   ],
                 ),

@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:projet_dac/src/pages/admin_modify.dart';
 import 'package:projet_dac/src/models/datamodel.dart';
 import 'package:projet_dac/src/pages/CartPage.dart';
+import 'package:projet_dac/src/pages/admin_search.dart';
 import 'package:projet_dac/src/pages/library.dart';
 import 'package:projet_dac/src/pages/user.dart';
 //import 'package:projet_dac/src/widgets/searchbar.dart';
@@ -64,6 +65,10 @@ final _router = GoRouter(
         path: '/product/:productId',
         builder: (context, state) =>
             ProductScreenDetails(productId: state.params['productId']!)),
+    GoRoute(
+      path: '/searchtomodify',
+      builder: (context, state) => const AdminSearch(),
+    ),
     GoRoute(
       path: '/addproduct',
       builder: (context, state) => const AdminAdd(),

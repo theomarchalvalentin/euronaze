@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:projet_dac/src/models/datamodel.dart';
 import 'package:projet_dac/src/widgets/custom_footer.dart';
+import 'package:projet_dac/src/widgets/theadminappbar.dart';
 import 'package:projet_dac/src/widgets/theappbar.dart';
 import 'package:projet_dac/src/widgets/dropdown.dart';
 import 'package:projet_dac/src/widgets/product_card.dart';
+
+import '../widgets/admin_product_card.dart';
 
 List<String> listCat = listCategories
     .map((category) => category['categoryName'].toString())
@@ -70,7 +73,7 @@ class _AdminSearchState extends State<AdminSearch> {
   Widget build(BuildContext context) {
     _buildDropdownItems();
     return Scaffold(
-      appBar: CustomAppBar(),
+      appBar: AdminAppBar(),
       bottomSheet: SizedBox(height: 120, child: const CustomFooter()),
       body: SingleChildScrollView(
         physics: const AlwaysScrollableScrollPhysics(),
@@ -215,7 +218,7 @@ class _AdminSearchState extends State<AdminSearch> {
                               shrinkWrap: true,
                               itemCount: _filteredProducts.length,
                               itemBuilder: (context, index) {
-                                return ProductCard(
+                                return AdminProductCard(
                                     product: _filteredProducts[index]);
                               },
                             ),

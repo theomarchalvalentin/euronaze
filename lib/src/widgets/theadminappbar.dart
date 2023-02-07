@@ -19,7 +19,7 @@ class AdminAppBar extends StatelessWidget with PreferredSizeWidget {
       leadingWidth: 250,
       leading: InkWell(
         onTap: () {
-          context.go('/adminadd');
+          context.go('/searchtomodify');
         },
         child: Row(children: [
           const SizedBox(width: 20),
@@ -47,17 +47,6 @@ class AdminAppBar extends StatelessWidget with PreferredSizeWidget {
           ),
           onPressed: () {
             context.go('/addproduct');
-          },
-        ),
-        const SizedBox(width: 20),
-        IconButton(
-          iconSize: 45,
-          icon: const Icon(
-            Icons.edit_outlined,
-            color: Colors.white,
-          ),
-          onPressed: () {
-            context.go('/modifyproduct/1');
           },
         ),
         const SizedBox(width: 20),
