@@ -27,13 +27,6 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       routerConfig: _router,
     );
-    // routes: {
-    //   LoginPage.routeName: (_) => const LoginPage(),
-    //   HomePage.routeName: (_) => const HomePage(),
-    //   UserPage.routeName: (_) => const UserPage(),
-    //   ProductScreenDetails.routeName: (_) => const ProductScreenDetails(),
-    //   SearchPage.routeName: (_) => SearchPage(),
-    // });
   }
 }
 
