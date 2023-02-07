@@ -27,6 +27,7 @@ dependencies:
   http: any
   filter_list: any
   go_router: any
+  flutter_cart: any
 
 dev_dependencies:
   flutter_test:

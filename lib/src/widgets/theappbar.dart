@@ -79,7 +79,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
             color: Colors.white,
           ),
           onPressed: () {
-            //delete token
+            context.go('/cart');
           },
         ),
         const SizedBox(width: 20),
