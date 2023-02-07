@@ -81,15 +81,18 @@ class _HomePage2State extends State<HomePage2> {
                                 children: [
                                   Align(
                                     alignment: Alignment.topLeft,
-                                    child: Text(
-                                      'Market Data,\nmade simple.',
-                                      style: GoogleFonts.varela(
-                                          textStyle: const TextStyle(
-                                        fontSize: 40,
-                                        fontWeight: FontWeight.w500,
-                                        fontStyle: FontStyle.normal,
-                                        color: Color(0xFF263b5e),
-                                      )),
+                                    child: FittedBox(
+                                      fit: BoxFit.scaleDown,
+                                      child: Text(
+                                        'Market Data,\nmade simple.',
+                                        style: GoogleFonts.varela(
+                                            textStyle: const TextStyle(
+                                          fontSize: 40,
+                                          fontWeight: FontWeight.w500,
+                                          fontStyle: FontStyle.normal,
+                                          color: Color(0xFF263b5e),
+                                        )),
+                                      ),
                                     ),
                                   ),
                                   SizedBox(
@@ -97,15 +100,18 @@ class _HomePage2State extends State<HomePage2> {
                                   ),
                                   Align(
                                     alignment: Alignment.topLeft,
-                                    child: Text(
-                                      'We provide you with a curated list of all the best market data and indicators to help you kickstart your business.',
-                                      style: GoogleFonts.varela(
-                                          textStyle: const TextStyle(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.w200,
-                                        fontStyle: FontStyle.normal,
-                                        color: Color(0xFF263b5e),
-                                      )),
+                                    child: FittedBox(
+                                      fit: BoxFit.cover,
+                                      child: Text(
+                                        'We provide you with a curated list of all\nthe best market data and indicators\nto help you kickstart your business.',
+                                        style: GoogleFonts.varela(
+                                            textStyle: const TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w200,
+                                          fontStyle: FontStyle.normal,
+                                          color: Color(0xFF263b5e),
+                                        )),
+                                      ),
                                     ),
                                   ),
                                   SizedBox(
@@ -125,11 +131,14 @@ class _HomePage2State extends State<HomePage2> {
                                         ),
                                         padding: const EdgeInsets.symmetric(
                                             vertical: 10, horizontal: 10),
-                                        child: const Text(
-                                          '  🚀 Découvrir nos produits  ',
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 20.0),
+                                        child: FittedBox(
+                                          fit: BoxFit.scaleDown,
+                                          child: const Text(
+                                            '  🚀 Découvrir nos produits  ',
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 20.0),
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -157,15 +166,18 @@ class _HomePage2State extends State<HomePage2> {
                       elevation: 0,
                       color: Colors.transparent,
                       borderRadius: const BorderRadius.all(Radius.circular(20)),
-                      child: Text(
-                        '😍 This week\'s highlights: ',
-                        style: GoogleFonts.varela(
-                            textStyle: const TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w300,
-                          fontStyle: FontStyle.normal,
-                          color: Color(0xFF263b5e),
-                        )),
+                      child: FittedBox(
+                        fit: BoxFit.cover,
+                        child: Text(
+                          '😍 This week\'s highlights: ',
+                          style: GoogleFonts.varela(
+                              textStyle: const TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w300,
+                            fontStyle: FontStyle.normal,
+                            color: Color(0xFF263b5e),
+                          )),
+                        ),
                       ),
                     ),
                     CarouselSlider(
