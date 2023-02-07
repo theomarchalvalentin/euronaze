@@ -76,7 +76,7 @@ class _UserPageState extends State<UserPage> {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-
+    double height = MediaQuery.of(context).size.height;
     return Scaffold(
         appBar: CustomAppBar(),
         body: SingleChildScrollView(
@@ -91,6 +91,7 @@ class _UserPageState extends State<UserPage> {
                       'assets/images/trader_large.png',
                       fit: BoxFit.cover,
                       width: width,
+                      height: height * 0.445,
                     ),
                     FittedBox(
                       fit: BoxFit.scaleDown,
@@ -122,7 +123,7 @@ class _UserPageState extends State<UserPage> {
                       Padding(
                         padding: const EdgeInsets.all(16.0),
                         child: Container(
-                          width: width * 0.25,
+                          width: width * 0.3,
                           padding: const EdgeInsets.all(16.0),
                           decoration: const BoxDecoration(
                               color: Color.fromARGB(255, 217, 239, 240),
@@ -261,7 +262,7 @@ class _UserPageState extends State<UserPage> {
                             textAlign: TextAlign.center,
                           ),
                         ),
-                      )
+                      ),
                     ],
                   ),
                 )),
