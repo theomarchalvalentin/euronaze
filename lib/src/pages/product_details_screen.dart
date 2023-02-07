@@ -10,7 +10,7 @@ import 'package:projet_dac/src/widgets/theappbar.dart';
 class ProductScreenDetails extends StatefulWidget {
   static const routeName = '/product';
   const ProductScreenDetails({super.key, required this.productId});
-  final String? productId;
+  final String productId;
 
   @override
   State<ProductScreenDetails> createState() => _ProductScreenDetailsState();
@@ -20,7 +20,7 @@ class _ProductScreenDetailsState extends State<ProductScreenDetails> {
   @override
   Widget build(BuildContext context) {
     //Product product = ModalRoute.of(context)!.settings.arguments as Product;
-    Product product = dummyProducts[int.parse(widget.productId!)];
+    Product product = dummyProducts[int.parse(widget.productId)];
     return Scaffold(
       extendBodyBehindAppBar: true,
       drawerScrimColor: const Color((0xff038C81)),

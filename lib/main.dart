@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:projet_dac/src/pages/admin_modify.dart';
 import 'package:projet_dac/src/pages/user.dart';
 //import 'package:projet_dac/src/widgets/searchbar.dart';
 import 'package:projet_dac/src/pages/home_page.dart';
@@ -40,7 +41,7 @@ final _router = GoRouter(
   routes: [
     GoRoute(
       path: '/',
-      builder: (context, state) => const AdminAdd(),
+      builder: (context, state) => const LoginPage(),
     ),
     GoRoute(
       path: '/home',
@@ -57,6 +58,14 @@ final _router = GoRouter(
     GoRoute(
         path: '/product/:productId',
         builder: (context, state) =>
-            ProductScreenDetails(productId: state.params['productId'])),
+            ProductScreenDetails(productId: state.params['productId']!)),
+    GoRoute(
+      path: '/addproduct',
+      builder: (context, state) => const AdminAdd(),
+    ),
+    GoRoute(
+        path: '/modifyproduct/:productId',
+        builder: (context, state) =>
+            AdminModify(productId: state.params['productId']!)),
   ],
 );

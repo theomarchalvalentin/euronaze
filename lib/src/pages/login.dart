@@ -135,6 +135,13 @@ class _LoginPageState extends State<LoginPage> {
                             );
                             context.go('/home');
                           }
+                        } else if (result == "admin") {
+                          if (context.mounted) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text('Login success')),
+                            );
+                            context.go('/addproduct');
+                          }
                         }
                       } catch (e) {
                         ScaffoldMessenger.of(context).showSnackBar(

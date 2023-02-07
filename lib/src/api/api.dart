@@ -16,8 +16,7 @@ class Api {
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
-      body:
-          jsonEncode(<String, String>{'username': email, 'password': password}),
+      body: jsonEncode(<String, String>{'email': email, 'password': password}),
     );
 
     if (response.statusCode == 200) {

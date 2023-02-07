@@ -4,15 +4,16 @@ import '../widgets/theadminappbar.dart';
 
 //cas ou plusieurs modifs
 
-class AdminAdd extends StatefulWidget {
+class AdminModify extends StatefulWidget {
   static const routeName = '/admin_add';
-  const AdminAdd({super.key});
+  const AdminModify({super.key, required this.productId});
+  final String productId;
 
   @override
-  State<StatefulWidget> createState() => _AdminAddState();
+  State<StatefulWidget> createState() => _AdminModifyState();
 }
 
-class _AdminAddState extends State<AdminAdd> {
+class _AdminModifyState extends State<AdminModify> {
   final _formKey = GlobalKey<FormState>();
   String fileName = "None";
 
@@ -27,6 +28,7 @@ class _AdminAddState extends State<AdminAdd> {
 
   @override
   Widget build(BuildContext context) {
+    Product product = dummyProducts[int.parse(widget.productId)];
     // ignore: unused_local_variable
     double width = MediaQuery.of(context).size.width;
     // ignore: unused_local_variable
@@ -59,7 +61,7 @@ class _AdminAddState extends State<AdminAdd> {
                 child: Column(
                   children: <Widget>[
                     const Text(
-                      "Add a new product :",
+                      "Modify a product :",
                       style: TextStyle(
                         color: Color.fromARGB(255, 70, 70, 71),
                         fontWeight: FontWeight.bold,
