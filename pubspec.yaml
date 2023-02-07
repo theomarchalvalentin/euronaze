@@ -28,6 +28,8 @@ dependencies:
   filter_list: any
   go_router: any
   flutter_cart: any
+  lottie: ^2.2.0
+  blurrycontainer: 1.0.2
 
 dev_dependencies:
   flutter_test:
