@@ -56,7 +56,9 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
             Icons.download_outlined,
             color: Colors.white,
           ),
-          onPressed: () {},
+          onPressed: () {
+            context.go('/library');
+          },
         ),
         const SizedBox(width: 20),
         IconButton(
@@ -77,7 +79,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
             color: Colors.white,
           ),
           onPressed: () {
-            //delete token
+            context.go('/cart');
           },
         ),
         const SizedBox(width: 20),

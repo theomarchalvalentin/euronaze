@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+String selectedCategory = "0";
+
 class CustomDropdownButton extends StatefulWidget {
   const CustomDropdownButton({super.key, required this.list});
   final List<String> list;
@@ -27,6 +29,7 @@ class _CustomDropdownButtonState extends State<CustomDropdownButton> {
         // This is called when the user selects an item.
         setState(() {
           dropdownValue = value!;
+          selectedCategory = value;
         });
       },
       items: widget.list.map<DropdownMenuItem<String>>((String value) {

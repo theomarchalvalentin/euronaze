@@ -3,7 +3,7 @@ class Product {
   final String productName;
   final productDescription =
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
-  final int categoryId;
+  final String categoryId;
   final String productImg;
   final productDataLink = "http://www.google.com/";
   final price = "100";
@@ -41,14 +41,98 @@ final bearAssetsNames = <String>[
 ];
 
 final dummyProducts = <Product>[
-  Product(1, 0, bearAssetsNames[0], bearAssetsImages[0]),
-  Product(1, 1, bearAssetsNames[1], bearAssetsImages[1]),
-  Product(1, 2, bearAssetsNames[2], bearAssetsImages[2]),
-  Product(1, 3, bearAssetsNames[3], bearAssetsImages[3]),
+  Product('2', 2, bearAssetsNames[2], bearAssetsImages[2]),
+  Product('2', 3, bearAssetsNames[3], bearAssetsImages[3]),
+  Product('3', 4, bullAssetsNames[0], bullAssetsImages[0]),
+  Product('1', 5, bullAssetsNames[1], bullAssetsImages[1]),
+  Product('4', 6, bullAssetsNames[2], bullAssetsImages[2]),
+  Product('4', 7, bullAssetsNames[3], bullAssetsImages[3]),
+  Product('1', 0, bearAssetsNames[0], bearAssetsImages[0]),
+  Product('1', 1, bearAssetsNames[1], bearAssetsImages[1]),
+  Product('2', 2, bearAssetsNames[2], bearAssetsImages[2]),
+  Product('2', 3, bearAssetsNames[3], bearAssetsImages[3]),
+  Product('3', 4, bullAssetsNames[0], bullAssetsImages[0]),
+  Product('1', 5, bullAssetsNames[1], bullAssetsImages[1]),
+  Product('4', 6, bullAssetsNames[2], bullAssetsImages[2]),
+  Product('4', 7, bullAssetsNames[3], bullAssetsImages[3]),
+  Product('1', 0, bearAssetsNames[0], bearAssetsImages[0]),
+  Product('1', 1, bearAssetsNames[1], bearAssetsImages[1]),
+  Product('2', 2, bearAssetsNames[2], bearAssetsImages[2]),
+  Product('2', 3, bearAssetsNames[3], bearAssetsImages[3]),
+  Product('3', 4, bullAssetsNames[0], bullAssetsImages[0]),
+  Product('1', 5, bullAssetsNames[1], bullAssetsImages[1]),
+  Product('4', 6, bullAssetsNames[2], bullAssetsImages[2]),
+  Product('4', 7, bullAssetsNames[3], bullAssetsImages[3]),
+  Product('1', 0, bearAssetsNames[0], bearAssetsImages[0]),
+  Product('1', 1, bearAssetsNames[1], bearAssetsImages[1]),
+  Product('2', 2, bearAssetsNames[2], bearAssetsImages[2]),
+  Product('2', 3, bearAssetsNames[3], bearAssetsImages[3]),
+  Product('3', 4, bullAssetsNames[0], bullAssetsImages[0]),
+  Product('1', 5, bullAssetsNames[1], bullAssetsImages[1]),
+  Product('4', 6, bullAssetsNames[2], bullAssetsImages[2]),
+  Product('4', 7, bullAssetsNames[3], bullAssetsImages[3]),
+  Product('1', 0, bearAssetsNames[0], bearAssetsImages[0]),
+  Product('1', 1, bearAssetsNames[1], bearAssetsImages[1]),
+  Product('2', 2, bearAssetsNames[2], bearAssetsImages[2]),
+  Product('2', 3, bearAssetsNames[3], bearAssetsImages[3]),
+  Product('3', 4, bullAssetsNames[0], bullAssetsImages[0]),
+  Product('1', 5, bullAssetsNames[1], bullAssetsImages[1]),
+  Product('4', 6, bullAssetsNames[2], bullAssetsImages[2]),
+  Product('4', 7, bullAssetsNames[3], bullAssetsImages[3]),
+  Product('1', 0, bearAssetsNames[0], bearAssetsImages[0]),
+  Product('1', 1, bearAssetsNames[1], bearAssetsImages[1]),
+  Product('2', 2, bearAssetsNames[2], bearAssetsImages[2]),
+  Product('2', 3, bearAssetsNames[3], bearAssetsImages[3]),
+  Product('3', 4, bullAssetsNames[0], bullAssetsImages[0]),
+  Product('1', 5, bullAssetsNames[1], bullAssetsImages[1]),
+  Product('4', 6, bullAssetsNames[2], bullAssetsImages[2]),
+  Product('4', 7, bullAssetsNames[3], bullAssetsImages[3]),
+  Product('1', 0, bearAssetsNames[0], bearAssetsImages[0]),
+  Product('1', 1, bearAssetsNames[1], bearAssetsImages[1]),
+  Product('2', 2, bearAssetsNames[2], bearAssetsImages[2]),
+  Product('2', 3, bearAssetsNames[3], bearAssetsImages[3]),
+  Product('3', 4, bullAssetsNames[0], bullAssetsImages[0]),
+  Product('1', 5, bullAssetsNames[1], bullAssetsImages[1]),
+  Product('4', 6, bullAssetsNames[2], bullAssetsImages[2]),
+  Product('4', 7, bullAssetsNames[3], bullAssetsImages[3]),
+  Product('1', 0, bearAssetsNames[0], bearAssetsImages[0]),
+  Product('1', 1, bearAssetsNames[1], bearAssetsImages[1]),
+  Product('2', 2, bearAssetsNames[2], bearAssetsImages[2]),
+  Product('2', 3, bearAssetsNames[3], bearAssetsImages[3]),
+  Product('3', 4, bullAssetsNames[0], bullAssetsImages[0]),
+  Product('1', 5, bullAssetsNames[1], bullAssetsImages[1]),
+  Product('4', 6, bullAssetsNames[2], bullAssetsImages[2]),
+  Product('4', 7, bullAssetsNames[3], bullAssetsImages[3]),
+  Product('1', 0, bearAssetsNames[0], bearAssetsImages[0]),
+  Product('1', 1, bearAssetsNames[1], bearAssetsImages[1]),
+  Product('2', 2, bearAssetsNames[2], bearAssetsImages[2]),
+  Product('2', 3, bearAssetsNames[3], bearAssetsImages[3]),
+  Product('3', 4, bullAssetsNames[0], bullAssetsImages[0]),
+  Product('1', 5, bullAssetsNames[1], bullAssetsImages[1]),
+  Product('3', 4, bullAssetsNames[0], bullAssetsImages[0]),
+  Product('1', 5, bullAssetsNames[1], bullAssetsImages[1]),
+  Product('4', 6, bullAssetsNames[2], bullAssetsImages[2]),
+  Product('4', 7, bullAssetsNames[3], bullAssetsImages[3]),
+  Product('1', 0, bearAssetsNames[0], bearAssetsImages[0]),
+  Product('1', 1, bearAssetsNames[1], bearAssetsImages[1]),
+  Product('2', 2, bearAssetsNames[2], bearAssetsImages[2]),
+  Product('2', 3, bearAssetsNames[3], bearAssetsImages[3]),
+  Product('3', 4, bullAssetsNames[0], bullAssetsImages[0]),
+  Product('1', 5, bullAssetsNames[1], bullAssetsImages[1]),
+  Product('4', 6, bullAssetsNames[2], bullAssetsImages[2]),
+  Product('4', 7, bullAssetsNames[3], bullAssetsImages[3]),
+  Product('1', 0, bearAssetsNames[0], bearAssetsImages[0]),
+  Product('1', 1, bearAssetsNames[1], bearAssetsImages[1]),
+  Product('2', 2, bearAssetsNames[2], bearAssetsImages[2]),
+  Product('2', 3, bearAssetsNames[3], bearAssetsImages[3]),
+  Product('3', 4, bullAssetsNames[0], bullAssetsImages[0]),
+  Product('1', 5, bullAssetsNames[1], bullAssetsImages[1]),
+  Product('4', 6, bullAssetsNames[2], bullAssetsImages[2]),
+  Product('4', 7, bullAssetsNames[3], bullAssetsImages[3]),
 ];
 
 class Category {
-  final int categoryId;
+  final String categoryId;
   final String categoryName;
   final String imgPath;
   final String categoryDescription;
@@ -96,25 +180,25 @@ final dummyCategories = <Category>[
 
 const List<Map> listCategories = [
   {
-    'categoryId': 1,
+    'categoryId': '1',
     'categoryName': 'Stocks',
     'categoryDescription': stocksCategoryDescription,
     'categoryImg': stocksImgPath
   },
   {
-    'categoryId': 2,
+    'categoryId': '2',
     'categoryName': 'FX',
     'categoryDescription': fxCategoryDescription,
     'categoryImg': fxImgPath
   },
   {
-    'categoryId': 3,
+    'categoryId': '3',
     'categoryName': 'Fixed Income',
     'categoryDescription': fixedIncomeCategoryDescription,
     'categoryImg': fixedIncomeImgPath
   },
   {
-    'categoryId': 4,
+    'categoryId': '4',
     'categoryName': 'Indexes',
     'categoryDescription': indexesCategoryDescription,
     'categoryImg': indexesImgPath

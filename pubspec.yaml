@@ -28,6 +28,7 @@ dependencies:
   filter_list: any
   go_router: any
   file_picker: any
+  flutter_cart: any
 
 dev_dependencies:
   flutter_test:

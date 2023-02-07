@@ -10,17 +10,17 @@ List<String> listCat = listCategories
     .map((category) => category['categoryName'].toString())
     .toList();
 
-class SearchPage extends StatefulWidget {
-  static const routeName = '/search';
-  const SearchPage({
+class LibraryPage extends StatefulWidget {
+  static const routeName = '/libray';
+  const LibraryPage({
     super.key,
   });
 
   @override
-  State<StatefulWidget> createState() => _SearchPageState();
+  State<StatefulWidget> createState() => _LibraryPageState();
 }
 
-class _SearchPageState extends State<SearchPage> {
+class _LibraryPageState extends State<LibraryPage> {
   final TextEditingController _searchController = TextEditingController();
   List<Product> _filteredProducts = [];
   final List<Product> products = dummyProducts;
@@ -92,9 +92,8 @@ class _SearchPageState extends State<SearchPage> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               RichText(
-                                textAlign: TextAlign.start,
                                 text: TextSpan(
-                                  text: 'Recherche ',
+                                  text: 'Théo, ',
                                   style: GoogleFonts.varela(
                                       textStyle: const TextStyle(
                                     fontSize: 35,
@@ -104,7 +103,7 @@ class _SearchPageState extends State<SearchPage> {
                                   )),
                                   children: [
                                     TextSpan(
-                                      text: 'de produits: ',
+                                      text: 'vous possédez ces produits: ',
                                       style: GoogleFonts.varela(
                                           textStyle: const TextStyle(
                                         fontSize: 30,
@@ -133,7 +132,7 @@ class _SearchPageState extends State<SearchPage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Rechercher par nom:',
+                                  'Rechercher par nom dans votre bibliothèque: ',
                                   style: GoogleFonts.varela(
                                       textStyle: const TextStyle(
                                     fontSize: 20,
@@ -215,7 +214,7 @@ class _SearchPageState extends State<SearchPage> {
                               shrinkWrap: true,
                               itemCount: _filteredProducts.length,
                               itemBuilder: (context, index) {
-                                return ProductCard(
+                                return OwnedProductCard(
                                     product: _filteredProducts[index]);
                               },
                             ),

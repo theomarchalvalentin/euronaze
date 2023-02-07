@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:projet_dac/src/pages/admin_modify.dart';
+import 'package:projet_dac/src/models/datamodel.dart';
+import 'package:projet_dac/src/pages/CartPage.dart';
+import 'package:projet_dac/src/pages/library.dart';
 import 'package:projet_dac/src/pages/user.dart';
 //import 'package:projet_dac/src/widgets/searchbar.dart';
 import 'package:projet_dac/src/pages/home_page.dart';
@@ -46,8 +49,17 @@ final _router = GoRouter(
     ),
     GoRoute(
       path: '/search',
-      builder: (context, state) => const SearchPage(),
+      builder: (context, state) => SearchPage(),
     ),
+    GoRoute(
+      path: '/library',
+      builder: (context, state) => LibraryPage(),
+    ),
+    GoRoute(
+      path: '/cart',
+      builder: (context, state) => CartPage(),
+    ),
+    //
     GoRoute(
         path: '/product/:productId',
         builder: (context, state) =>
