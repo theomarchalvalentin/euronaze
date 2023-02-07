@@ -11,6 +11,8 @@ class ProductScreenDetails extends StatefulWidget {
   static const routeName = '/product';
   const ProductScreenDetails({super.key, required this.productId});
   final String? productId;
+  final bool isOwned = false;
+  final bool isInBasket = false;
 
   @override
   State<ProductScreenDetails> createState() => _ProductScreenDetailsState();
@@ -67,7 +69,7 @@ class _ProductScreenDetailsState extends State<ProductScreenDetails> {
                             color: Colors.grey,
                           ),
                         ),
-                        const SizedBox(height: 80),
+                        const SizedBox(height: 30),
                         const Divider(
                           color: Color(0xFF263b5e),
                         ),
@@ -125,25 +127,9 @@ class _ProductScreenDetailsState extends State<ProductScreenDetails> {
                           ],
                         ),
                         SizedBox(
-                          width: double.infinity,
-                          height: 150,
-                          child: TextButton(
-                            onPressed: () {},
-                            child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: Colors.grey.shade100,
-                              ),
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 5, horizontal: 10),
-                              child: const Text(
-                                '🛒 Add to cart',
-                                style: TextStyle(
-                                    color: Colors.black, fontSize: 20.0),
-                              ),
-                            ),
-                          ),
-                        )
+                          height: 30,
+                        ),
+                        BuyButton(widget.isOwned, widget.isInBasket),
                       ],
                     ),
                   ),
@@ -206,4 +192,38 @@ class _ProductScreenDetailsState extends State<ProductScreenDetails> {
       ),
     );
   }
+}
+
+Widget BuyButton(bool isOwned, bool isInBasket) {
+  if (!isInBasket) {
+    if (!isOwned) {
+      return Center(
+        child: TextButton(
+          onPressed: () {},
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: Colors.grey.shade100,
+            ),
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+            child: const Text(
+              '🛒 Add to cart',
+              style: TextStyle(color: Colors.black, fontSize: 20.0),
+            ),
+          ),
+        ),
+      );
+    }
+    return Center(
+      child: const Text(
+        'Vous possédez déjà ce produit',
+        style: TextStyle(color: Colors.black, fontSize: 20.0),
+      ),
+    );
+  }
+  return Center(
+      child: const Text(
+    'Ce produit est déja dans votre panier',
+    style: TextStyle(color: Colors.black, fontSize: 20.0),
+  ));
 }

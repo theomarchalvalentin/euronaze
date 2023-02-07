@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:projet_dac/src/models/datamodel.dart';
@@ -7,6 +5,12 @@ import 'package:projet_dac/src/widgets/custom_footer.dart';
 import 'package:projet_dac/src/widgets/theappbar.dart';
 import 'package:projet_dac/src/widgets/dropdown.dart';
 import 'package:projet_dac/src/widgets/product_card.dart';
+
+double listViewTotal(List<Product> products) {
+  double total = 0.0;
+  products.forEach((element) => total += double.parse(element.price));
+  return total;
+}
 
 List<String> listCat = listCategories
     .map((category) => category['categoryName'].toString())
@@ -105,7 +109,7 @@ class _CartPageState extends State<CartPage> {
                                   )),
                                   children: [
                                     TextSpan(
-                                      text: 'vous possédez ces produits: ',
+                                      text: 'voici votre panier: ',
                                       style: GoogleFonts.varela(
                                           textStyle: const TextStyle(
                                         fontSize: 30,
@@ -134,7 +138,7 @@ class _CartPageState extends State<CartPage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Rechercher par nom dans votre bibliothèque: ',
+                                  'Rechercher par nom dans le panier: ',
                                   style: GoogleFonts.varela(
                                       textStyle: const TextStyle(
                                     fontSize: 20,
@@ -199,18 +203,22 @@ class _CartPageState extends State<CartPage> {
                             ),
                           ),
                         ),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.19,
+                        ),
                         Card(
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(20)),
                             child: Padding(
                                 padding: const EdgeInsets.all(20.0),
-                                child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        'Total : {}\$',
+                                child: SizedBox(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.33,
+                                  child: Column(children: [
+                                    Positioned(
+                                      right: 5,
+                                      child: Text(
+                                        'Total : ${listViewTotal(_filteredProducts)}\$',
                                         style: GoogleFonts.varela(
                                             textStyle: const TextStyle(
                                           fontSize: 20,
@@ -219,7 +227,12 @@ class _CartPageState extends State<CartPage> {
                                           color: Color(0xFF263b5e),
                                         )),
                                       ),
-                                      TextButton(
+                                    ),
+                                    SizedBox(
+                                      height: 24,
+                                    ),
+                                    Center(
+                                      child: TextButton(
                                         onPressed: () {},
                                         child: Container(
                                           decoration: BoxDecoration(
@@ -237,7 +250,9 @@ class _CartPageState extends State<CartPage> {
                                           ),
                                         ),
                                       ),
-                                    ]))),
+                                    ),
+                                  ]),
+                                ))),
                       ],
                     ),
                     SizedBox(
@@ -272,8 +287,4 @@ class _CartPageState extends State<CartPage> {
       ),
     );
   }
-}
-
-double listViewTotal(List<Product> products) {
-  return 0.0;
 }

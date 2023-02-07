@@ -24,24 +24,30 @@ class ProductCard extends StatelessWidget {
                 ),
               ),
               Expanded(
-                child: Column(
-                  children: [
-                    Text(
-                      product.productName,
-                      style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
+                child: Align(
+                  alignment: Alignment.topRight,
+                  child: Column(
+                    children: [
+                      Text(
+                        product.productName,
+                        style: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    ),
-                    Text(
-                      "\$${product.price}",
-                      style: const TextStyle(
-                        fontSize: 14,
-                        color: Colors.grey,
-                      ),
-                    )
-                  ],
+                      Text(
+                        "\$${product.price}",
+                        style: const TextStyle(
+                          fontSize: 14,
+                          color: Colors.grey,
+                        ),
+                      )
+                    ],
+                  ),
                 ),
+              ),
+              SizedBox(
+                width: 40,
               )
             ],
           ),
@@ -73,25 +79,29 @@ class OwnedProductCard extends StatelessWidget {
                 ),
               ),
               Expanded(
-                child: Column(
-                  children: [
-                    Text(
-                      product.productName,
-                      style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
+                child: Align(
+                  alignment: Alignment.topRight,
+                  child: Column(
+                    children: [
+                      Text(
+                        product.productName,
+                        style: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    ),
-                    Text(
-                      "\$${product.price}",
-                      style: const TextStyle(
-                        fontSize: 14,
-                        color: Colors.grey,
-                      ),
-                    )
-                  ],
+                      Text(
+                        "\$${product.price}",
+                        style: const TextStyle(
+                          fontSize: 14,
+                          color: Colors.grey,
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
+              SizedBox(width: 40),
               IconButton(
                 onPressed: () {},
                 icon: Icon(Icons.download_outlined),
@@ -147,6 +157,16 @@ class BasketProductCard extends StatelessWidget {
                     ],
                   ),
                 ),
+              ),
+              SizedBox(
+                width: 30,
+              ),
+              IconButton(
+                icon: Icon(Icons.cancel),
+                onPressed: () => {},
+              ),
+              SizedBox(
+                width: 10,
               ),
             ],
           ),
