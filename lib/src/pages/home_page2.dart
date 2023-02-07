@@ -58,7 +58,7 @@ class _HomePage2State extends State<HomePage2> {
               children: [
                 SizedBox(
                   width: screenSize.width,
-                  height: screenSize.height,
+                  height: screenSize.height + 30,
                   child: Image.asset(
                     'assets/images/background.jpg',
                     fit: BoxFit.cover,
@@ -93,7 +93,7 @@ class _HomePage2State extends State<HomePage2> {
                                     ),
                                   ),
                                   SizedBox(
-                                    height: 50,
+                                    height: screenSize.height * 0.01,
                                   ),
                                   Align(
                                     alignment: Alignment.topLeft,

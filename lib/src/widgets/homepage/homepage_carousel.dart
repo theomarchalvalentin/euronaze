@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:projet_dac/src/pages/product_details_screen.dart';
 import 'package:projet_dac/src/models/datamodel.dart';
@@ -29,9 +30,8 @@ class CarouselSlider extends StatelessWidget {
             await controller.moveTo?.call(index),
           },
           child: GestureDetector(
-            onDoubleTap: () => Navigator.of(context).pushNamed(
-                ProductScreenDetails.routeName,
-                arguments: products[index]),
+            onDoubleTap: () =>
+                context.go('/product/${products[index].productId}'),
             child: Column(
               children: [
                 Container(
