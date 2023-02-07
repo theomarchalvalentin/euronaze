@@ -64,17 +64,6 @@ class AdminAppBar extends StatelessWidget with PreferredSizeWidget {
         IconButton(
           iconSize: 45,
           icon: const Icon(
-            Icons.create_new_folder_outlined,
-            color: Colors.white,
-          ),
-          onPressed: () {
-            context.go('/search');
-          },
-        ),
-        const SizedBox(width: 20),
-        IconButton(
-          iconSize: 45,
-          icon: const Icon(
             Icons.logout_outlined,
             color: Colors.white,
           ),
