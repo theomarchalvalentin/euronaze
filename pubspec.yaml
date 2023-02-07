@@ -29,6 +29,8 @@ dependencies:
   go_router: any
   file_picker: any
   flutter_cart: any
+  lottie: ^2.2.0
+  blurrycontainer: 1.0.2
 
 dev_dependencies:
   flutter_test:

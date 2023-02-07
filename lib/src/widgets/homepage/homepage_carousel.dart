@@ -17,6 +17,7 @@ class CarouselSlider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return WidgetSlider(
+      proximity: 0.2,
       fixedSize: 300,
       controller: controller,
       infiniteScroll: true,
@@ -34,7 +35,7 @@ class CarouselSlider extends StatelessWidget {
             child: Column(
               children: [
                 Container(
-                  width: 600,
+                  width: 300,
                   height: 200,
                   margin: const EdgeInsets.all(5),
                   decoration: BoxDecoration(
