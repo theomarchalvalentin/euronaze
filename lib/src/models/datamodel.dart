@@ -45,6 +45,10 @@ final dummyProducts = <Product>[
   Product('1', 1, bearAssetsNames[1], bearAssetsImages[1]),
   Product('2', 2, bearAssetsNames[2], bearAssetsImages[2]),
   Product('2', 3, bearAssetsNames[3], bearAssetsImages[3]),
+  Product('3', 4, bullAssetsNames[0], bullAssetsImages[0]),
+  Product('1', 5, bullAssetsNames[1], bullAssetsImages[1]),
+  Product('4', 6, bullAssetsNames[2], bullAssetsImages[2]),
+  Product('4', 7, bullAssetsNames[3], bullAssetsImages[3]),
 ];
 
 class Category {
