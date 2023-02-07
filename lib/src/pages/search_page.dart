@@ -84,11 +84,11 @@ class _SearchPageState extends State<SearchPage> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
-                    'Product search :  ',
+                    'Recherche de produits:  ',
                     style: GoogleFonts.varela(
                         textStyle: const TextStyle(
                       fontSize: 30,
-                      fontWeight: FontWeight.w500,
+                      fontWeight: FontWeight.w600,
                       fontStyle: FontStyle.normal,
                       color: Color(0xFF263b5e),
                     )),
