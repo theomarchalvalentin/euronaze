@@ -3,7 +3,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:projet_dac/src/models/datamodel.dart';
 import 'package:projet_dac/src/widgets/custom_footer.dart';
 import 'package:projet_dac/src/widgets/theappbar.dart';
-import 'package:projet_dac/src/widgets/dropdown.dart';
 import 'package:projet_dac/src/widgets/product_card.dart';
 
 List<String> listCat = listCategories
@@ -53,15 +52,15 @@ class _SearchPageState extends State<SearchPage> {
 
   void _buildDropdownItems() {
     _dropdownItems = [
-      DropdownMenuItem(
-        child: Text('All'),
+      const DropdownMenuItem(
         value: '0',
+        child: Text('All'),
       ),
     ];
     _dropdownItems.addAll(listCategories.map((category) {
       return DropdownMenuItem(
-        child: Text(category['categoryName']),
         value: category['categoryId'],
+        child: Text(category['categoryName']),
       );
     }));
   }
@@ -71,15 +70,15 @@ class _SearchPageState extends State<SearchPage> {
     _buildDropdownItems();
     return Scaffold(
       appBar: CustomAppBar(),
-      bottomSheet: Container(height: 120, child: CustomFooter()),
+      bottomSheet: const SizedBox(height: 120, child: CustomFooter()),
       body: SingleChildScrollView(
-        physics: AlwaysScrollableScrollPhysics(),
+        physics: const AlwaysScrollableScrollPhysics(),
         scrollDirection: Axis.vertical,
         child: Padding(
           padding: const EdgeInsets.all(40.0),
           child: Column(
             children: <Widget>[
-              Container(
+              SizedBox(
                 height: MediaQuery.of(context).size.height * 0.7,
                 child: Row(
                   children: [
@@ -116,10 +115,10 @@ class _SearchPageState extends State<SearchPage> {
                                   ],
                                 ),
                               ),
-                              Divider(
+                              const Divider(
                                 color: Colors.black,
                               ),
-                              SizedBox(height: 30),
+                              const SizedBox(height: 30),
                             ],
                           ),
                         ),
@@ -142,7 +141,7 @@ class _SearchPageState extends State<SearchPage> {
                                     color: Color(0xFF263b5e),
                                   )),
                                 ),
-                                SizedBox(height: 20),
+                                const SizedBox(height: 20),
                                 Center(
                                   child: Container(
                                     decoration: BoxDecoration(
@@ -155,7 +154,7 @@ class _SearchPageState extends State<SearchPage> {
                                         0.33,
                                     child: TextField(
                                       controller: _searchController,
-                                      decoration: InputDecoration(
+                                      decoration: const InputDecoration(
                                         border: InputBorder.none,
                                         iconColor: null,
                                         focusColor: null,
@@ -169,7 +168,7 @@ class _SearchPageState extends State<SearchPage> {
                                     ),
                                   ),
                                 ),
-                                SizedBox(height: 50),
+                                const SizedBox(height: 50),
                                 Text(
                                   'Filtrer par catégorie: ',
                                   style: GoogleFonts.varela(
@@ -180,9 +179,9 @@ class _SearchPageState extends State<SearchPage> {
                                     color: Color(0xFF263b5e),
                                   )),
                                 ),
-                                SizedBox(height: 20),
+                                const SizedBox(height: 20),
                                 Container(
-                                  margin: EdgeInsets.only(left: 16),
+                                  margin: const EdgeInsets.only(left: 16),
                                   child: DropdownButton(
                                     value: selectedCategory,
                                     items: _dropdownItems,

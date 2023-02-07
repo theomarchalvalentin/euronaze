@@ -3,23 +3,24 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:projet_dac/src/models/datamodel.dart';
 import 'package:projet_dac/src/widgets/custom_footer.dart';
 import 'package:projet_dac/src/widgets/theappbar.dart';
+import 'package:projet_dac/src/widgets/dropdown.dart';
 import 'package:projet_dac/src/widgets/product_card.dart';
 
 List<String> listCat = listCategories
     .map((category) => category['categoryName'].toString())
     .toList();
 
-class LibraryPage extends StatefulWidget {
-  static const routeName = '/libray';
-  const LibraryPage({
+class AdminSearch extends StatefulWidget {
+  static const routeName = '/search';
+  const AdminSearch({
     super.key,
   });
 
   @override
-  State<StatefulWidget> createState() => _LibraryPageState();
+  State<StatefulWidget> createState() => _AdminSearchState();
 }
 
-class _LibraryPageState extends State<LibraryPage> {
+class _AdminSearchState extends State<AdminSearch> {
   final TextEditingController _searchController = TextEditingController();
   List<Product> _filteredProducts = [];
   final List<Product> products = dummyProducts;
@@ -70,7 +71,7 @@ class _LibraryPageState extends State<LibraryPage> {
     _buildDropdownItems();
     return Scaffold(
       appBar: CustomAppBar(),
-      bottomSheet: const SizedBox(height: 120, child: CustomFooter()),
+      bottomSheet: SizedBox(height: 120, child: const CustomFooter()),
       body: SingleChildScrollView(
         physics: const AlwaysScrollableScrollPhysics(),
         scrollDirection: Axis.vertical,
@@ -91,8 +92,9 @@ class _LibraryPageState extends State<LibraryPage> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               RichText(
+                                textAlign: TextAlign.start,
                                 text: TextSpan(
-                                  text: 'Théo, ',
+                                  text: 'Recherche ',
                                   style: GoogleFonts.varela(
                                       textStyle: const TextStyle(
                                     fontSize: 35,
@@ -102,7 +104,7 @@ class _LibraryPageState extends State<LibraryPage> {
                                   )),
                                   children: [
                                     TextSpan(
-                                      text: 'vous possédez ces produits: ',
+                                      text: 'de produits: ',
                                       style: GoogleFonts.varela(
                                           textStyle: const TextStyle(
                                         fontSize: 30,
@@ -131,7 +133,7 @@ class _LibraryPageState extends State<LibraryPage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Rechercher par nom dans votre bibliothèque: ',
+                                  'Rechercher par nom:',
                                   style: GoogleFonts.varela(
                                       textStyle: const TextStyle(
                                     fontSize: 20,
@@ -213,7 +215,7 @@ class _LibraryPageState extends State<LibraryPage> {
                               shrinkWrap: true,
                               itemCount: _filteredProducts.length,
                               itemBuilder: (context, index) {
-                                return OwnedProductCard(
+                                return ProductCard(
                                     product: _filteredProducts[index]);
                               },
                             ),

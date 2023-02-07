@@ -49,15 +49,15 @@ final _router = GoRouter(
     ),
     GoRoute(
       path: '/search',
-      builder: (context, state) => SearchPage(),
+      builder: (context, state) => const SearchPage(),
     ),
     GoRoute(
       path: '/library',
-      builder: (context, state) => LibraryPage(),
+      builder: (context, state) => const LibraryPage(),
     ),
     GoRoute(
       path: '/cart',
-      builder: (context, state) => CartPage(),
+      builder: (context, state) => const CartPage(),
     ),
     //
     GoRoute(

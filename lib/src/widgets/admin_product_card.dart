@@ -11,7 +11,7 @@ class ProductCard extends StatelessWidget {
   Widget build(BuildContext context) {
     int id = product.productId;
     return GestureDetector(
-      onTap: () => context.go('/product/$id'),
+      onTap: () => context.go('/modifyproduct/$id'),
       child: Card(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
