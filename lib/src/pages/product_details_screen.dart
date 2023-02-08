@@ -161,7 +161,25 @@ class _ProductScreenDetailsState extends State<ProductScreenDetails> {
                                               ),
                                             ),
                                             TextButton(
-                                              onPressed: () {},
+                                              onPressed: () async {
+                                                try {
+                                                  await Api.addCart(
+                                                      product.productId);
+                                                  ScaffoldMessenger.of(context)
+                                                      .showSnackBar(
+                                                    const SnackBar(
+                                                        content: Text(
+                                                            'Added Successfully to Cart')),
+                                                  );
+                                                } catch (e) {
+                                                  ScaffoldMessenger.of(context)
+                                                      .showSnackBar(
+                                                    const SnackBar(
+                                                        content: Text(
+                                                            'Unabled to Add to Cart')),
+                                                  );
+                                                }
+                                              },
                                               child: Container(
                                                 decoration: BoxDecoration(
                                                   borderRadius:
