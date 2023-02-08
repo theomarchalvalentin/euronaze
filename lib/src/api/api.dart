@@ -38,7 +38,16 @@ class Api {
 
   static Future<void> logout() async {
     final prefs = await SharedPreferences.getInstance();
-    prefs.remove("token");
+    String? token = prefs.getString("token");
+    final response = await post(
+        Uri.parse('http://localhost:8080/api/auth/signout'),
+        headers: <String, String>{"Authorization": "Bearer $token"});
+    if (response.statusCode == 200) {
+      final prefs = await SharedPreferences.getInstance();
+      prefs.remove("token");
+    } else {
+      throw Exception('fail');
+    }
   }
 
   static Future<void> register(
@@ -71,7 +80,7 @@ class Api {
     String? token = prefs.getString("token");
     if (token != null) {
       final response = await get(
-        Uri.parse('http://localhost:8080/api/userinfo'),
+        Uri.parse('http://localhost:8080/api/user/InfoUser'),
         headers: <String, String>{"Authorization": "Bearer $token"},
       );
 
@@ -85,15 +94,15 @@ class Api {
     }
   }
 
-  static Future<String> modifyUserInfo(
+  static Future<void> modifyUserInfo(
       String firstName, String lastName, String email, String password) async {
     final prefs = await SharedPreferences.getInstance();
 
     String? token = prefs.getString("token");
 
     if (token != null) {
-      final response = await post(
-        Uri.parse('http://localhost:8080/api/modifyuserinfo'),
+      final response = await put(
+        Uri.parse('http://localhost:8080/api/user/ModifyInfoUser'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
           "Authorization": "Bearer $token"
@@ -107,7 +116,27 @@ class Api {
       );
 
       if (response.statusCode == 200) {
-        return 'ok';
+        return;
+      } else {
+        throw Exception('fail');
+      }
+    } else {
+      throw NoTokenExeption();
+    }
+  }
+
+  static Future<void> deleteUserInfo() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    String? token = prefs.getString("token");
+    if (token != null) {
+      final response = await delete(
+        Uri.parse('http://localhost:8080/api/user/DeleteUser'),
+        headers: <String, String>{"Authorization": "Bearer $token"},
+      );
+
+      if (response.statusCode == 200) {
+        return;
       } else {
         throw Exception('fail');
       }

@@ -36,7 +36,7 @@ class _SearchPageState extends State<SearchPage> {
   void _filterProducts(String query) {
     setState(() {
       _filteredProducts = products.where((product) {
-        if (selectedCategory == '0') {
+        if (selectedCategory == 0) {
           return product.productName
               .toLowerCase()
               .contains(query.toLowerCase());
