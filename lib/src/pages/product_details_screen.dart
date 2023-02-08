@@ -10,7 +10,6 @@ import 'package:mrx_charts/mrx_charts.dart';
 import 'package:projet_dac/src/pages/login.dart';
 
 import 'package:projet_dac/src/widgets/homepage/charthome.dart';
-import 'package:projet_dac/src/widgets/mockdata.dart';
 import 'package:projet_dac/src/widgets/theappbar.dart';
 
 import '../api/api.dart';
