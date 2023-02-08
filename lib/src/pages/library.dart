@@ -26,7 +26,7 @@ class _LibraryPageState extends State<LibraryPage> {
   final TextEditingController _searchController = TextEditingController();
   List<Product> _filteredProducts = [];
   late List<Product> products;
-  String selectedCategory = '0';
+  int selectedCategory = 0;
 
   @override
   void initState() {
@@ -62,7 +62,7 @@ class _LibraryPageState extends State<LibraryPage> {
   void _filterProducts(String query) {
     setState(() {
       _filteredProducts = products.where((product) {
-        if (selectedCategory == '0') {
+        if (selectedCategory == 0) {
           return product.productName
               .toLowerCase()
               .contains(query.toLowerCase());
@@ -76,12 +76,12 @@ class _LibraryPageState extends State<LibraryPage> {
     });
   }
 
-  List<DropdownMenuItem<String>> _dropdownItems = [];
+  List<DropdownMenuItem<int>> _dropdownItems = [];
 
   void _buildDropdownItems() {
     _dropdownItems = [
       const DropdownMenuItem(
-        value: '0',
+        value: 0,
         child: Text('All'),
       ),
     ];
@@ -217,7 +217,7 @@ class _LibraryPageState extends State<LibraryPage> {
                                         items: _dropdownItems,
                                         onChanged: (value) {
                                           setState(() {
-                                            selectedCategory = value!;
+                                            selectedCategory = value! as int;
                                             _filterProducts(
                                                 _searchController.text);
                                           });

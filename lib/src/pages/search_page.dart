@@ -25,7 +25,7 @@ class _SearchPageState extends State<SearchPage> {
   final TextEditingController _searchController = TextEditingController();
   List<Product> _filteredProducts = [];
   final List<Product> products = <Product>[];
-  String selectedCategory = '0';
+  int selectedCategory = 0;
 
   @override
   void initState() {
@@ -192,7 +192,7 @@ class _SearchPageState extends State<SearchPage> {
                                         items: _dropdownItems,
                                         onChanged: (value) {
                                           setState(() {
-                                            selectedCategory = value!;
+                                            selectedCategory = value! as int;
                                             _filterProducts(
                                                 _searchController.text);
                                           });
