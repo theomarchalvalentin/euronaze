@@ -8,6 +8,7 @@ import 'package:projet_dac/src/widgets/theappbar.dart';
 
 import '../api/api.dart';
 import '../api/product_model.dart';
+import 'package:flutter_lorem/flutter_lorem.dart';
 
 class ProductScreenDetails extends StatefulWidget {
   static const routeName = '/product';
@@ -22,7 +23,13 @@ class ProductScreenDetails extends StatefulWidget {
 }
 
 class _ProductScreenDetailsState extends State<ProductScreenDetails> {
-  late Product product;
+  late Product product = Product(
+      0,
+      "productName",
+      lorem(paragraphs: 4, words: 200),
+      0,
+      "assets/images/productnotfound.png",
+      0);
 
   @override
   void initState() {
