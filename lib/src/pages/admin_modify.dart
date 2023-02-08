@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:projet_dac/src/api/product_model.dart';
 import '../api/api.dart';
 import '../api/category_model.dart';
 import '../widgets/theadminappbar.dart';
+
+import 'package:file_picker/file_picker.dart';
+import 'dart:convert';
+import 'dart:io';
+import 'dart:typed_data';
 
 //cas ou plusieurs modifs
 
@@ -15,7 +21,7 @@ class AdminModify extends StatefulWidget {
 
 class _AdminModifyState extends State<AdminModify> {
   final _formKey = GlobalKey<FormState>();
-  String fileName = "None";
+  String fileName = "Current";
 
   TextEditingController nameController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
@@ -23,6 +29,10 @@ class _AdminModifyState extends State<AdminModify> {
   TextEditingController priceController = TextEditingController();
 
   int? selectedCategory;
+
+  Product? product;
+
+  String? fileUpload;
 
   @override
   void initState() {
@@ -32,14 +42,14 @@ class _AdminModifyState extends State<AdminModify> {
 
   _getProduct() async {
     try {
-      var product = await Api.getProduct(widget.productId);
+      product = await Api.getProduct(widget.productId);
       setState(() {
-        nameController.text = product.productName;
-        descriptionController.text = product.productDescription;
-        imageController.text = product.productImg;
-        priceController.text = product.price.toStringAsPrecision(2);
-        selectedCategory = product.categoryId;
-        fileName = "Current";
+        nameController.text = product!.productName;
+        descriptionController.text = product!.productDescription;
+        imageController.text = product!.productImg;
+        priceController.text = product!.price.toStringAsPrecision(2);
+        selectedCategory = product!.categoryId;
+        //fileName = "Current";
 
         // lock = false;
       });
@@ -92,121 +102,188 @@ class _AdminModifyState extends State<AdminModify> {
                 decoration: const BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(20)),
                     color: Color.fromARGB(227, 197, 240, 244)),
-                child: Column(
-                  children: <Widget>[
-                    const Text(
-                      "Modify a product :",
-                      style: TextStyle(
-                        color: Color.fromARGB(255, 70, 70, 71),
-                        fontWeight: FontWeight.bold,
-                        fontSize: 24,
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    children: <Widget>[
+                      const Text(
+                        "Modify a product :",
+                        style: TextStyle(
+                          color: Color.fromARGB(255, 70, 70, 71),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 24,
+                        ),
                       ),
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    TextFormField(
-                      controller: nameController,
-                      decoration: const InputDecoration(
-                        labelText: 'Product name',
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      TextFormField(
+                        controller: nameController,
+                        decoration: const InputDecoration(
+                          labelText: 'Product name',
 
-                        //hintStyle: Color.fromARGB(255, 3, 140, 129),
-                      ),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter some text';
-                        }
-                        return null;
-                      },
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    TextFormField(
-                      maxLines: 5,
-                      controller: descriptionController,
-                      decoration: const InputDecoration(
-                          border: OutlineInputBorder(),
-                          alignLabelWithHint: true,
-                          labelText: 'Product Description'),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter some text';
-                        }
-                        return null;
-                      },
-                    ),
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: DropdownButton(
-                        hint: const Text("Choose a category"),
-                        value: selectedCategory,
-                        items: _dropdownItems,
-                        onChanged: (value) {
-                          setState(() {
-                            selectedCategory = value;
-                          });
+                          //hintStyle: Color.fromARGB(255, 3, 140, 129),
+                        ),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter some text';
+                          }
+                          return null;
                         },
                       ),
-                    ),
-                    TextFormField(
-                      controller: imageController,
-                      decoration: const InputDecoration(
-                        labelText: 'Image link',
+                      const SizedBox(
+                        height: 15,
                       ),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter some text';
-                        }
-                        return null;
-                      },
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    Row(
-                      children: [
-                        Text(
-                          "CSV selected: $fileName",
-                          style: const TextStyle(
-                            fontSize: 16,
-                          ),
+                      TextFormField(
+                        maxLines: 5,
+                        controller: descriptionController,
+                        decoration: const InputDecoration(
+                            border: OutlineInputBorder(),
+                            alignLabelWithHint: true,
+                            labelText: 'Product Description'),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter some text';
+                          }
+                          return null;
+                        },
+                      ),
+                      Align(
+                        alignment: Alignment.topLeft,
+                        child: DropdownButtonFormField(
+                          validator: (value) =>
+                              value == null ? 'field required' : null,
+                          hint: const Text("Choose a category"),
+                          value: selectedCategory,
+                          items: _dropdownItems,
+                          onChanged: (value) {
+                            setState(() {
+                              selectedCategory = value;
+                            });
+                          },
                         ),
-                        IconButton(
-                            onPressed: () {},
-                            icon: const Icon(
-                              Icons.upload_file_outlined,
-                              color: Colors.blue,
-                            ))
-                      ],
-                    ),
-                    TextFormField(
-                      controller: priceController,
-                      decoration: const InputDecoration(
-                        labelText: 'Price',
                       ),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter some text';
-                        }
-                        return null;
-                      },
-                    ),
-                    const SizedBox(
-                      height: 30,
-                    ),
-                    ElevatedButton(
-                      onPressed: () {},
-                      child: const SizedBox(
-                          height: 40,
-                          width: 40,
-                          child: Center(child: Text('Save'))),
-                    )
-                  ],
+                      TextFormField(
+                        controller: imageController,
+                        decoration: const InputDecoration(
+                          labelText: 'Image link',
+                        ),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter some text';
+                          }
+                          return null;
+                        },
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      Row(
+                        children: [
+                          Text(
+                            "CSV selected: $fileName",
+                            style: const TextStyle(
+                              fontSize: 16,
+                            ),
+                          ),
+                          IconButton(
+                              onPressed: () async {
+                                await _selectFile();
+                              },
+                              icon: const Icon(
+                                Icons.upload_file_outlined,
+                                color: Colors.blue,
+                              ))
+                        ],
+                      ),
+                      TextFormField(
+                        controller: priceController,
+                        decoration: const InputDecoration(
+                          labelText: 'Price',
+                        ),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter some text';
+                          }
+                          return null;
+                        },
+                      ),
+                      const SizedBox(
+                        height: 30,
+                      ),
+                      ElevatedButton(
+                        onPressed: () async {
+                          if (_formKey.currentState!.validate() &&
+                              _hasChanged()) {
+                            //String? result; result= await if necessary
+                            try {
+                              await Api.putProduct(
+                                  product!.productId,
+                                  nameController.text,
+                                  descriptionController.text,
+                                  selectedCategory!,
+                                  imageController.text,
+                                  double.parse(priceController.text),
+                                  file: fileUpload);
+                              if (context.mounted) {
+                                // mouai
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                      content: Text('Successfully Modified')),
+                                );
+                              }
+                            } on NoTokenExeption {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                    content: Text(
+                                        'No Token found, please log again')),
+                              );
+                            } catch (e) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                    content: Text(
+                                        'Unabled to Modify, please make sure informations are correct and try again')),
+                              );
+                            }
+                          }
+                        },
+                        child: const SizedBox(
+                            height: 40,
+                            width: 40,
+                            child: Center(child: Text('Save'))),
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),
           ),
         ));
+  }
+
+  bool _hasChanged() {
+    bool result = nameController.text != product!.productName ||
+        descriptionController.text != product!.productDescription ||
+        selectedCategory != product!.categoryId ||
+        fileName != "Current" ||
+        priceController.text != product!.price.toStringAsPrecision(2);
+    if (!result) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('You have not changed informations')),
+      );
+    }
+    return result;
+  }
+
+  Future<void> _selectFile() async {
+    FilePickerResult? result = await FilePicker.platform
+        .pickFiles(allowedExtensions: ["csv"], type: FileType.custom);
+
+    if (result != null) {
+      Uint8List file = result.files.single.bytes!;
+      fileUpload = base64.encode(file);
+      fileName = result.files.single.name;
+    }
+    setState(() {});
   }
 }

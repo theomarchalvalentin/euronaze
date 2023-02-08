@@ -145,50 +145,6 @@ class Api {
     }
   }
 
-  static Future<String?> selectFile() async {
-    String? fileEncoded;
-    FilePickerResult? result =
-        await FilePicker.platform.pickFiles(allowedExtensions: ["csv"]);
-
-    if (result != null) {
-      Uint8List file = File(result.files.single.path!).readAsBytesSync();
-      fileEncoded = base64.encode(file);
-      String fileName = result.files.first.name;
-    }
-    return fileEncoded;
-  }
-
-  static Future<String> addProduct(
-      String firstName, String lastName, String email, String password) async {
-    final prefs = await SharedPreferences.getInstance();
-
-    String? token = prefs.getString("token");
-
-    if (token != null) {
-      final response = await post(
-        Uri.parse('http://localhost:8080/api/modifyuserinfo'),
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8',
-          "Authorization": "Bearer $token"
-        },
-        body: jsonEncode(<String, String>{
-          'email': email,
-          'password': password,
-          'firstName': firstName,
-          'lastName': lastName
-        }),
-      );
-
-      if (response.statusCode == 200) {
-        return 'ok';
-      } else {
-        throw Exception('fail');
-      }
-    } else {
-      throw NoTokenExeption();
-    }
-  }
-
   static Future<List<Product>> getLibrary() async {
     final prefs = await SharedPreferences.getInstance();
 
@@ -219,7 +175,7 @@ class Api {
     String? token = prefs.getString("token");
     if (token != null) {
       final response = await get(
-        Uri.parse('http://localhost:8080/api/basket'),
+        Uri.parse('http://localhost:8080/api/user/cart'),
         headers: <String, String>{"Authorization": "Bearer $token"},
       );
 
@@ -243,12 +199,191 @@ class Api {
     String? token = prefs.getString("token");
     if (token != null) {
       final response = await get(
-        Uri.parse('http://localhost:8080/api/produit/$id'),
+        Uri.parse('http://localhost:8080/api/service/produits/$id'),
         headers: <String, String>{"Authorization": "Bearer $token"},
       );
 
       if (response.statusCode == 200) {
         return Product.fromJson(jsonDecode(response.body));
+      } else {
+        throw Exception('fail');
+      }
+    } else {
+      throw NoTokenExeption();
+    }
+  }
+
+  static Future<void> addCart(int productId) async {
+    final prefs = await SharedPreferences.getInstance();
+
+    String? token = prefs.getString("token");
+    if (token != null) {
+      final response = await post(
+        Uri.parse('http://localhost:8080/api/user/cart/add/$productId'),
+        headers: <String, String>{"Authorization": "Bearer $token"},
+      );
+
+      if (response.statusCode == 200) {
+        return;
+      } else {
+        throw Exception('fail');
+      }
+    } else {
+      throw NoTokenExeption();
+    }
+  }
+
+  static Future<void> deleteCart(int productId) async {
+    final prefs = await SharedPreferences.getInstance();
+
+    String? token = prefs.getString("token");
+    if (token != null) {
+      final response = await delete(
+        Uri.parse('http://localhost:8080/api/user/cart/Delete/$productId'),
+        headers: <String, String>{"Authorization": "Bearer $token"},
+      );
+
+      if (response.statusCode == 200) {
+        return;
+      } else {
+        throw Exception('fail');
+      }
+    } else {
+      throw NoTokenExeption();
+    }
+  }
+
+  static Future<void> deleteAllCart() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    String? token = prefs.getString("token");
+    if (token != null) {
+      final response = await delete(
+        Uri.parse('http://localhost:8080/api/user/cart/DeleteAll'),
+        headers: <String, String>{"Authorization": "Bearer $token"},
+      );
+
+      if (response.statusCode == 200) {
+        return;
+      } else {
+        throw Exception('fail');
+      }
+    } else {
+      throw NoTokenExeption();
+    }
+  }
+
+  static Future<void> putProduct(
+      int productId,
+      String productName,
+      String productDescription,
+      int categoryId,
+      String productImg,
+      double price,
+      {String? file}) async {
+    final prefs = await SharedPreferences.getInstance();
+
+    String? token = prefs.getString("token");
+    if (token != null) {
+      final response = await put(
+          Uri.parse('http://localhost:8080/api/service/produits/$productId'),
+          headers: <String, String>{"Authorization": "Bearer $token"},
+          body: jsonEncode(<String, dynamic>{
+            'id': productId,
+            'nom': productName,
+            'description': productDescription,
+            'category': categoryId,
+            'image': productImg,
+            'prix': price,
+            'data': file
+          }));
+
+      if (response.statusCode == 200) {
+        return;
+      } else {
+        throw Exception('fail');
+      }
+    } else {
+      throw NoTokenExeption();
+    }
+  }
+
+  static Future<void> postProduct(
+      int productId,
+      String productName,
+      String productDescription,
+      int categoryId,
+      String productImg,
+      double price,
+      String file) async {
+    final prefs = await SharedPreferences.getInstance();
+
+    String? token = prefs.getString("token");
+    if (token != null) {
+      final response = await post(
+          Uri.parse(
+              'http://localhost:8080/api/service/produits/upload/$productId'),
+          headers: <String, String>{"Authorization": "Bearer $token"},
+          body: jsonEncode(<String, dynamic>{
+            'id': productId,
+            'nom': productName,
+            'description': productDescription,
+            'category': categoryId,
+            'image': productImg,
+            'prix': price,
+            'data': file
+          }));
+
+      if (response.statusCode == 200) {
+        return;
+      } else {
+        throw Exception('fail');
+      }
+    } else {
+      throw NoTokenExeption();
+    }
+  }
+
+  static Future<void> deleteProduct(int productId) async {
+    final prefs = await SharedPreferences.getInstance();
+
+    String? token = prefs.getString("token");
+    if (token != null) {
+      final response = await delete(
+        Uri.parse('http://localhost:8080/api/service/produits/$productId'),
+        headers: <String, String>{"Authorization": "Bearer $token"},
+      );
+
+      if (response.statusCode == 200) {
+        return;
+      } else {
+        throw Exception('fail');
+      }
+    } else {
+      throw NoTokenExeption();
+    }
+  }
+
+  static Future<List<Product>> searchProduct(
+      int categoryId, String lookingWord) async {
+    final prefs = await SharedPreferences.getInstance();
+
+    String? token = prefs.getString("token");
+    if (token != null) {
+      final response = await post(
+          Uri.parse('http://localhost:8080/api/service/produits/filtred'),
+          headers: <String, String>{"Authorization": "Bearer $token"},
+          body: jsonEncode(<String, dynamic>{
+            'id': categoryId,
+            'lookingWord': lookingWord,
+          }));
+
+      if (response.statusCode == 200) {
+        Iterable l = json.decode(response.body);
+
+        List<Product> result =
+            List<Product>.from(l.map((model) => Product.fromJson(model)));
+        return result;
       } else {
         throw Exception('fail');
       }
