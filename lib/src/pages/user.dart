@@ -149,7 +149,7 @@ class _UserPageState extends State<UserPage> {
                                 ),
                                 const SizedBox(height: 20),
                                 TextFormField(
-                                  enabled: lock,
+                                  enabled: false,
                                   controller: emailController,
                                   decoration:
                                       const InputDecoration(labelText: 'Email'),
