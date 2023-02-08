@@ -231,6 +231,26 @@ class Api {
     }
   }
 
+  static Future<void> checkCart() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    String? token = prefs.getString("token");
+    if (token != null) {
+      final response = await post(
+        Uri.parse('http://localhost:8080/api/user/cart/check'),
+        headers: <String, String>{"Authorization": "Bearer $token"},
+      );
+
+      if (response.statusCode == 200) {
+        return;
+      } else {
+        throw Exception('fail');
+      }
+    } else {
+      throw NoTokenExeption();
+    }
+  }
+
   static Future<void> deleteCart(int productId) async {
     final prefs = await SharedPreferences.getInstance();
 

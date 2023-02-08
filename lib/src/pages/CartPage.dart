@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:projet_dac/src/widgets/custom_footer.dart';
 import 'package:projet_dac/src/widgets/theappbar.dart';
@@ -38,25 +39,18 @@ class _CartPageState extends State<CartPage> {
     _getBasket();
   }
 
-  _getBasket() async {
+  Future<void> _getBasket() async {
     try {
       var results = await Api.getBasket();
       setState(() {
-        // lock = false;
         products = results;
         _filteredProducts = results;
       });
     } on NoTokenExeption {
-      setState(() {
-        // lock = false;
-      });
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('No token found, please log again')),
       );
     } catch (e) {
-      setState(() {
-        // lock = false;
-      });
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Unable to fetch Basket')),
       );
@@ -272,7 +266,29 @@ class _CartPageState extends State<CartPage> {
                                         ),
                                         Center(
                                           child: TextButton(
-                                            onPressed: () {},
+                                            onPressed: products.isEmpty
+                                                ? null
+                                                : () async {
+                                                    try {
+                                                      await Api.checkCart();
+                                                      ScaffoldMessenger.of(
+                                                              context)
+                                                          .showSnackBar(
+                                                        const SnackBar(
+                                                            content: Text(
+                                                                'Transaction Successful')),
+                                                      );
+                                                    } catch (e) {
+                                                      ScaffoldMessenger.of(
+                                                              context)
+                                                          .showSnackBar(
+                                                        const SnackBar(
+                                                            content: Text(
+                                                                'Error during transaction')),
+                                                      );
+                                                    }
+                                                    await _getBasket();
+                                                  },
                                             child: Container(
                                               decoration: BoxDecoration(
                                                 borderRadius:
@@ -294,6 +310,60 @@ class _CartPageState extends State<CartPage> {
                                         ),
                                       ]),
                                     ))),
+                            Card(
+                                color: Colors.white,
+                                elevation: 0,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20)),
+                                child: Padding(
+                                    padding: const EdgeInsets.all(20.0),
+                                    child: SizedBox(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.33,
+                                      child: Center(
+                                        child: TextButton(
+                                          onPressed: products.isEmpty
+                                              ? null
+                                              : () async {
+                                                  try {
+                                                    await Api.deleteAllCart();
+                                                    ScaffoldMessenger.of(
+                                                            context)
+                                                        .showSnackBar(
+                                                      const SnackBar(
+                                                          content: Text(
+                                                              'Deletion Successful')),
+                                                    );
+                                                  } catch (e) {
+                                                    ScaffoldMessenger.of(
+                                                            context)
+                                                        .showSnackBar(
+                                                      const SnackBar(
+                                                          content: Text(
+                                                              'Error during Deletion')),
+                                                    );
+                                                  }
+                                                  await _getBasket();
+                                                },
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              color: const Color.fromARGB(
+                                                  255, 255, 32, 32),
+                                            ),
+                                            padding: const EdgeInsets.symmetric(
+                                                vertical: 5, horizontal: 10),
+                                            child: const Text(
+                                              'Delete Cart',
+                                              style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 20.0),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    )))
                           ],
                         ),
                         SizedBox(
@@ -313,7 +383,8 @@ class _CartPageState extends State<CartPage> {
                                   itemCount: _filteredProducts.length,
                                   itemBuilder: (context, index) {
                                     return BasketProductCard(
-                                        product: _filteredProducts[index]);
+                                        product: _filteredProducts[index],
+                                        callback: _getBasket);
                                   },
                                 ),
                               ),
@@ -328,6 +399,105 @@ class _CartPageState extends State<CartPage> {
             ),
             const CustomFooter(),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class BasketProductCard extends StatelessWidget {
+  final Product product;
+  final Future<void> Function() callback;
+
+  const BasketProductCard(
+      {super.key, required this.product, required this.callback});
+
+  @override
+  Widget build(BuildContext context) {
+    int id = product.productId;
+    return GestureDetector(
+      onTap: () => context.go('/product/$id'),
+      child: Card(
+        color: Colors.white,
+        elevation: 0,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            children: <Widget>[
+              ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Image.network(
+                  fit: BoxFit.cover,
+                  height: 100,
+                  width: 100,
+                  product.productImg,
+                ),
+              ),
+              const Spacer(),
+              CategoryTag(product.categoryId),
+              const Spacer(),
+              Expanded(
+                child: Align(
+                  alignment: Alignment.topRight,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      FittedBox(
+                        child: Text(
+                          product.productName,
+                          style: GoogleFonts.varela(
+                              textStyle: const TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w700,
+                            fontStyle: FontStyle.normal,
+                            color: Color(0xFF263b5e),
+                          )),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      FittedBox(
+                        child: Text(
+                          "\$${product.price}",
+                          style: const TextStyle(
+                            fontSize: 14,
+                            color: Colors.grey,
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(
+                width: 30,
+              ),
+              IconButton(
+                icon: const Icon(Icons.cancel),
+                onPressed: () async {
+                  try {
+                    await Api.deleteCart(product.productId);
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                          content:
+                              Text('Deletion of the product is a Success')),
+                    );
+                  } catch (e) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                          content: Text('Deletion of the product is a Fail')),
+                    );
+                  }
+                  callback();
+                },
+              ),
+              const SizedBox(
+                width: 10,
+              ),
+            ],
+          ),
         ),
       ),
     );

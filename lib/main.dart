@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      title: 'Flutter Web',
+      title: 'Euronaze',
       theme: ThemeData(
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
