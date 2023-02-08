@@ -160,7 +160,7 @@ class Api {
     }
   }
 
-  static Future<UserInfo> getLibrary() async {
+  static Future<List<Product>> getLibrary() async {
     final prefs = await SharedPreferences.getInstance();
 
     String? token = prefs.getString("token");
@@ -171,7 +171,11 @@ class Api {
       );
 
       if (response.statusCode == 200) {
-        return UserInfo.fromJson(jsonDecode(response.body));
+        Iterable l = json.decode(response.body);
+
+        List<Product> result =
+            List<Product>.from(l.map((model) => Product.fromJson(model)));
+        return result;
       } else {
         throw Exception('fail');
       }
