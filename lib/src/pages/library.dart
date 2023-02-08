@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lottie/lottie.dart';
 import 'package:projet_dac/src/widgets/custom_footer.dart';
 import 'package:projet_dac/src/widgets/theappbar.dart';
 import 'package:projet_dac/src/widgets/product_card.dart';
@@ -110,6 +111,8 @@ class _LibraryPageState extends State<LibraryPage> {
   Widget build(BuildContext context) {
     // _buildDropdownItems();
     return Scaffold(
+      backgroundColor: Colors.grey.shade100,
+
       appBar: CustomAppBar(),
       //bottomSheet: const SizedBox(height: 120, child: CustomFooter()),
       body: SingleChildScrollView(
@@ -128,34 +131,58 @@ class _LibraryPageState extends State<LibraryPage> {
                         Column(
                           children: [
                             Align(
-                              alignment: Alignment.topLeft,
+                              alignment: Alignment.topRight,
                               child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
-                                  RichText(
-                                    text: TextSpan(
-                                      text: 'Théo, ',
-                                      style: GoogleFonts.varela(
-                                          textStyle: const TextStyle(
-                                        fontSize: 35,
-                                        fontWeight: FontWeight.w600,
-                                        fontStyle: FontStyle.normal,
-                                        color: Color(0xFF263b5e),
-                                      )),
-                                      children: [
-                                        TextSpan(
-                                          text: 'vous possédez ces produits: ',
-                                          style: GoogleFonts.varela(
-                                              textStyle: const TextStyle(
-                                            fontSize: 30,
-                                            fontWeight: FontWeight.w500,
-                                            fontStyle: FontStyle.normal,
-                                            color: Color(0xFF263b5e),
-                                          )),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      SizedBox(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.17,
+                                          child: Lottie.asset(
+                                              'assets/images/lottielib.json')),
+                                      SizedBox(
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.04,
+                                      ),
+                                      Align(
+                                        alignment: Alignment.topRight,
+                                        child: RichText(
+                                          text: TextSpan(
+                                            text: 'Théo,\n',
+                                            style: GoogleFonts.varela(
+                                                textStyle: const TextStyle(
+                                              fontSize: 40,
+                                              fontWeight: FontWeight.w600,
+                                              fontStyle: FontStyle.normal,
+                                              color: Color(0xFF263b5e),
+                                            )),
+                                            children: [
+                                              TextSpan(
+                                                text:
+                                                    'vous possédez \nces produits: ',
+                                                style: GoogleFonts.varela(
+                                                    textStyle: const TextStyle(
+                                                  fontSize: 35,
+                                                  fontWeight: FontWeight.w500,
+                                                  fontStyle: FontStyle.normal,
+                                                  color: Color(0xFF263b5e),
+                                                )),
+                                              ),
+                                            ],
+                                          ),
                                         ),
-                                      ],
-                                    ),
+                                      ),
+                                    ],
                                   ),
                                   const Divider(
                                     color: Colors.black,
@@ -165,6 +192,8 @@ class _LibraryPageState extends State<LibraryPage> {
                               ),
                             ),
                             Card(
+                              elevation: 0,
+                              color: Colors.white,
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(20)),
                               child: Padding(

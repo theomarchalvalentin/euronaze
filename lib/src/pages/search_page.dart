@@ -37,6 +37,7 @@ class _SearchPageState extends State<SearchPage> {
     setState(() {
       _filteredProducts = products.where((product) {
         if (selectedCategory == 0) {
+        if (selectedCategory == 0) {
           return product.productName
               .toLowerCase()
               .contains(query.toLowerCase());
@@ -84,6 +85,8 @@ class _SearchPageState extends State<SearchPage> {
   Widget build(BuildContext context) {
     // _buildDropdownItems();
     return Scaffold(
+      backgroundColor: Colors.grey.shade100,
+
       appBar: CustomAppBar(),
       //bottomSheet: const SizedBox(height: 120, child: CustomFooter()),
       body: SingleChildScrollView(

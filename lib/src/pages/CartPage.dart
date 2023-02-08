@@ -114,6 +114,8 @@ class _CartPageState extends State<CartPage> {
   Widget build(BuildContext context) {
     //_buildDropdownItems();
     return Scaffold(
+      backgroundColor: Colors.grey.shade100,
+
       appBar: CustomAppBar(),
       //bottomSheet: const SizedBox(height: 120, child: CustomFooter()),
       body: SingleChildScrollView(
@@ -169,6 +171,8 @@ class _CartPageState extends State<CartPage> {
                               ),
                             ),
                             Card(
+                              color: Colors.white,
+                              elevation: 0,
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(20)),
                               child: Padding(
@@ -246,6 +250,8 @@ class _CartPageState extends State<CartPage> {
                               ),
                             ),
                             Card(
+                                color: Colors.white,
+                                elevation: 0,
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(20)),
                                 child: Padding(
