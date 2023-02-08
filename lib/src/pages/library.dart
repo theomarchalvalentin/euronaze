@@ -24,14 +24,13 @@ class LibraryPage extends StatefulWidget {
 class _LibraryPageState extends State<LibraryPage> {
   final TextEditingController _searchController = TextEditingController();
   List<Product> _filteredProducts = [];
-  List<Product>? products;
+  late List<Product> products;
   String selectedCategory = '0';
 
   @override
   void initState() {
     super.initState();
-    _filteredProducts = products;
-    _getLibrary();
+    _filteredProducts = _getLibrary();
   }
 
   _getLibrary() async {
