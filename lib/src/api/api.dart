@@ -1,5 +1,6 @@
 import 'package:http/http.dart';
 import 'package:projet_dac/src/api/user_model.dart';
+import 'package:projet_dac/src/api/product_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 import 'package:file_picker/file_picker.dart';
@@ -151,6 +152,26 @@ class Api {
 
       if (response.statusCode == 200) {
         return 'ok';
+      } else {
+        throw Exception('fail');
+      }
+    } else {
+      throw NoTokenExeption();
+    }
+  }
+
+  static Future<UserInfo> getLibrary() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    String? token = prefs.getString("token");
+    if (token != null) {
+      final response = await get(
+        Uri.parse('http://localhost:8080/api/library'),
+        headers: <String, String>{"Authorization": "Bearer $token"},
+      );
+
+      if (response.statusCode == 200) {
+        return UserInfo.fromJson(jsonDecode(response.body));
       } else {
         throw Exception('fail');
       }
