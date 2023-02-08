@@ -56,7 +56,7 @@ class _ProductScreenDetailsState extends State<ProductScreenDetails> {
         // lock = false;
       });
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Unable to fetch Library')),
+        const SnackBar(content: Text('Unable to fetch Product')),
       );
     }
   }
@@ -72,9 +72,9 @@ class _ProductScreenDetailsState extends State<ProductScreenDetails> {
         children: <Widget>[
           SizedBox(
             height: 300,
-            child: Image.asset(
+            child: Image.network(
               product.productImg,
-              fit: BoxFit.cover,
+              fit: BoxFit.scaleDown,
             ),
           ),
           Padding(
