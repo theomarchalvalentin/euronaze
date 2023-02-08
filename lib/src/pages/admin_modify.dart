@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:projet_dac/src/models/datamodel.dart';
+import 'package:projet_dac/src/api/product_model.dart';
+import '../api/api.dart';
+import '../api/category_model.dart';
 import '../widgets/theadminappbar.dart';
+
+import 'package:file_picker/file_picker.dart';
+import 'dart:typed_data';
 
 //cas ou plusieurs modifs
 
 class AdminModify extends StatefulWidget {
-  static const routeName = '/admin_add';
   const AdminModify({super.key, required this.productId});
-  final String productId;
+  final int productId;
 
   @override
   State<StatefulWidget> createState() => _AdminModifyState();
@@ -15,25 +19,63 @@ class AdminModify extends StatefulWidget {
 
 class _AdminModifyState extends State<AdminModify> {
   final _formKey = GlobalKey<FormState>();
-  String fileName = "None";
+  String? fileName;
 
   TextEditingController nameController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
   TextEditingController imageController = TextEditingController();
   TextEditingController priceController = TextEditingController();
 
-  List<Category> list = dummyCategories;
+  int? selectedCategory;
 
-  Category? selected;
+  Product? product;
+
+  Uint8List? fileUpload;
+
+  @override
+  void initState() {
+    super.initState();
+    _getProduct();
+  }
+
+  _getProduct() async {
+    try {
+      product = await Api.getProduct(widget.productId);
+      setState(() {
+        nameController.text = product!.productName;
+        descriptionController.text = product!.productDescription;
+        imageController.text = product!.productImg;
+        priceController.text = product!.price.toStringAsPrecision(2);
+        selectedCategory = product!.categoryId;
+        fileName = "Current";
+
+        // lock = false;
+      });
+    } on NoTokenExeption {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('No token found, please log again')),
+      );
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Unable to fetch Product')),
+      );
+    }
+  }
+
+  final List<DropdownMenuItem<int>> _dropdownItems =
+      listCategories.map((category) {
+    return DropdownMenuItem<int>(
+      value: category['categoryId'],
+      child: Text(category['categoryName']),
+    );
+  }).toList();
 
   @override
   Widget build(BuildContext context) {
-    Product product = dummyProducts[int.parse(widget.productId)];
     // ignore: unused_local_variable
     double width = MediaQuery.of(context).size.width;
     // ignore: unused_local_variable
     double height = MediaQuery.of(context).size.height - 80;
-
     return Scaffold(
         appBar: AdminAppBar(),
         body: SingleChildScrollView(
@@ -58,136 +100,188 @@ class _AdminModifyState extends State<AdminModify> {
                 decoration: const BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(20)),
                     color: Color.fromARGB(227, 197, 240, 244)),
-                child: Column(
-                  children: <Widget>[
-                    const Text(
-                      "Modify a product :",
-                      style: TextStyle(
-                        color: Color.fromARGB(255, 70, 70, 71),
-                        fontWeight: FontWeight.bold,
-                        fontSize: 24,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    TextFormField(
-                      controller: nameController,
-                      decoration: const InputDecoration(
-                        labelText: 'Product name',
-
-                        //hintStyle: Color.fromARGB(255, 3, 140, 129),
-                      ),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter some text';
-                        }
-                        return null;
-                      },
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    TextFormField(
-                      maxLines: 5,
-                      controller: descriptionController,
-                      decoration: const InputDecoration(
-                          border: OutlineInputBorder(),
-                          alignLabelWithHint: true,
-                          labelText: 'Product Description'),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter some text';
-                        }
-                        return null;
-                      },
-                    ),
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: DropdownButton<Category>(
-                        value: selected,
-                        icon: const Icon(Icons.arrow_downward),
-                        elevation: 16,
-                        hint: const Text("Choose a category"),
-
-                        //style: const TextStyle(color: Color.fromARGB(255, 3, 140, 129)),
-                        underline: Container(
-                          height: 1,
-                          color: const Color.fromARGB(255, 156, 156, 156),
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    children: <Widget>[
+                      const Text(
+                        "Modify a product :",
+                        style: TextStyle(
+                          color: Color.fromARGB(255, 70, 70, 71),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 24,
                         ),
-                        onChanged: (Category? value) {
-                          // This is called when the user selects an item.
-                          setState(() {
-                            selected = value!;
-                          });
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      TextFormField(
+                        controller: nameController,
+                        decoration: const InputDecoration(
+                          labelText: 'Product name',
+
+                          //hintStyle: Color.fromARGB(255, 3, 140, 129),
+                        ),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter some text';
+                          }
+                          return null;
                         },
-                        items: list
-                            .map<DropdownMenuItem<Category>>((Category value) {
-                          return DropdownMenuItem<Category>(
-                            value: value,
-                            child: Text(value.categoryName),
-                          );
-                        }).toList(),
                       ),
-                    ),
-                    TextFormField(
-                      controller: imageController,
-                      decoration: const InputDecoration(
-                        labelText: 'Image link',
+                      const SizedBox(
+                        height: 15,
                       ),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter some text';
-                        }
-                        return null;
-                      },
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    Row(
-                      children: [
-                        Text(
-                          "CSV selected: $fileName",
-                          style: const TextStyle(
-                            fontSize: 16,
-                          ),
+                      TextFormField(
+                        maxLines: 5,
+                        controller: descriptionController,
+                        decoration: const InputDecoration(
+                            border: OutlineInputBorder(),
+                            alignLabelWithHint: true,
+                            labelText: 'Product Description'),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter some text';
+                          }
+                          return null;
+                        },
+                      ),
+                      Align(
+                        alignment: Alignment.topLeft,
+                        child: DropdownButtonFormField(
+                          validator: (value) =>
+                              value == null ? 'field required' : null,
+                          hint: const Text("Choose a category"),
+                          value: selectedCategory,
+                          items: _dropdownItems,
+                          onChanged: (value) {
+                            setState(() {
+                              selectedCategory = value;
+                            });
+                          },
                         ),
-                        IconButton(
-                            onPressed: () {},
-                            icon: const Icon(
-                              Icons.upload_file_outlined,
-                              color: Colors.blue,
-                            ))
-                      ],
-                    ),
-                    TextFormField(
-                      controller: priceController,
-                      decoration: const InputDecoration(
-                        labelText: 'Price',
                       ),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter some text';
-                        }
-                        return null;
-                      },
-                    ),
-                    const SizedBox(
-                      height: 30,
-                    ),
-                    ElevatedButton(
-                      onPressed: () {},
-                      child: const SizedBox(
-                          height: 40,
-                          width: 40,
-                          child: Center(child: Text('Save'))),
-                    )
-                  ],
+                      TextFormField(
+                        controller: imageController,
+                        decoration: const InputDecoration(
+                          labelText: 'Image link',
+                        ),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter some text';
+                          }
+                          return null;
+                        },
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      Row(
+                        children: [
+                          Text(
+                            "CSV selected: $fileName",
+                            style: const TextStyle(
+                              fontSize: 16,
+                            ),
+                          ),
+                          IconButton(
+                              onPressed: () async {
+                                await _selectFile();
+                              },
+                              icon: const Icon(
+                                Icons.upload_file_outlined,
+                                color: Colors.blue,
+                              ))
+                        ],
+                      ),
+                      TextFormField(
+                        controller: priceController,
+                        decoration: const InputDecoration(
+                          labelText: 'Price',
+                        ),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter some text';
+                          }
+                          return null;
+                        },
+                      ),
+                      const SizedBox(
+                        height: 30,
+                      ),
+                      ElevatedButton(
+                        onPressed: () async {
+                          if (_formKey.currentState!.validate() &&
+                              _hasChanged()) {
+                            //String? result; result= await if necessary
+                            try {
+                              await Api.putProduct(
+                                  product!.productId,
+                                  nameController.text,
+                                  descriptionController.text,
+                                  selectedCategory!,
+                                  imageController.text,
+                                  double.parse(priceController.text),
+                                  file: fileUpload);
+                              await _getProduct();
+                              if (context.mounted) {
+                                // mouai
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                      content: Text('Successfully Modified')),
+                                );
+                              }
+                            } on NoTokenExeption {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                    content: Text(
+                                        'No Token found, please log again')),
+                              );
+                            } catch (e) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                    content: Text(
+                                        'Unabled to Modify, please make sure informations are correct and try again')),
+                              );
+                            }
+                          }
+                        },
+                        child: const SizedBox(
+                            height: 40,
+                            width: 40,
+                            child: Center(child: Text('Save'))),
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),
           ),
         ));
+  }
+
+  bool _hasChanged() {
+    bool result = nameController.text != product!.productName ||
+        descriptionController.text != product!.productDescription ||
+        selectedCategory != product!.categoryId ||
+        fileName != "Current" ||
+        priceController.text != product!.price.toStringAsPrecision(2);
+    if (!result) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('You have not changed informations')),
+      );
+    }
+    return result;
+  }
+
+  Future<void> _selectFile() async {
+    FilePickerResult? result = await FilePicker.platform
+        .pickFiles(allowedExtensions: ["csv"], type: FileType.custom);
+
+    if (result != null) {
+      fileUpload = result.files.single.bytes!;
+      fileName = result.files.single.name;
+    }
+    setState(() {});
   }
 }

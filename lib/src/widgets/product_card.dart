@@ -87,9 +87,9 @@ class OwnedProductCard extends StatelessWidget {
                   product.productImg,
                 ),
               ),
-              Spacer(),
+              const Spacer(),
               CategoryTag(product.categoryId),
-              Spacer(),
+              const Spacer(),
               Expanded(
                 child: Align(
                   alignment: Alignment.topRight,
@@ -165,9 +165,9 @@ class BasketProductCard extends StatelessWidget {
                   product.productImg,
                 ),
               ),
-              Spacer(),
+              const Spacer(),
               CategoryTag(product.categoryId),
-              Spacer(),
+              const Spacer(),
               Expanded(
                 child: Align(
                   alignment: Alignment.topRight,
@@ -221,27 +221,26 @@ class BasketProductCard extends StatelessWidget {
 }
 
 Widget CategoryTag(int categoryId) {
-  var textcolor = Colors.black;
-  var color = Color(0xFFFFFFFF).withOpacity(0.6);
+  var color = const Color(0xFFFFFFFF).withOpacity(0.6);
   var cat = 'None';
   switch (categoryId) {
     case 1:
       cat = 'Stocks';
-      color = Color(0xffffdfba).withOpacity(0.6);
+      color = const Color(0xffffdfba).withOpacity(0.6);
       break;
     case 2:
       cat = 'FX';
-      color = Color(0xffffffba).withOpacity(0.6);
+      color = const Color(0xffffffba).withOpacity(0.6);
 
       break;
     case 3:
       cat = 'Fixed Income';
-      color = Color(0xffbaffc9).withOpacity(0.6);
+      color = const Color(0xffbaffc9).withOpacity(0.6);
 
       break;
     case 4:
       cat = 'Indexes';
-      color = Color(0xffbae1ff).withOpacity(0.6);
+      color = const Color(0xffbae1ff).withOpacity(0.6);
 
       break;
   }

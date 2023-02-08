@@ -16,10 +16,6 @@ double listViewTotal(List<Product> products) {
   return total;
 }
 
-List<String> listCat = listCategories
-    .map((category) => category['categoryName'].toString())
-    .toList();
-
 class CartPage extends StatefulWidget {
   static const routeName = '/cart';
   const CartPage({
@@ -33,7 +29,7 @@ class CartPage extends StatefulWidget {
 class _CartPageState extends State<CartPage> {
   final TextEditingController _searchController = TextEditingController();
   List<Product> _filteredProducts = [];
-  late List<Product> products = [];
+  List<Product> products = [];
   int selectedCategory = 0;
 
   @override
@@ -84,26 +80,39 @@ class _CartPageState extends State<CartPage> {
     });
   }
 
-  List<DropdownMenuItem<int>> _dropdownItems = [];
+  final List<DropdownMenuItem<int>> _dropdownItems = [
+        const DropdownMenuItem(
+          value: 0,
+          child: Text('All'),
+        ),
+      ] +
+      listCategories.map((category) {
+        return DropdownMenuItem<int>(
+          value: category['categoryId'],
+          child: Text(category['categoryName']),
+        );
+      }).toList();
 
-  void _buildDropdownItems() {
-    _dropdownItems = [
-      const DropdownMenuItem(
-        value: 0,
-        child: Text('All'),
-      ),
-    ];
-    _dropdownItems.addAll(listCategories.map((category) {
-      return DropdownMenuItem(
-        value: category['categoryId'],
-        child: Text(category['categoryName']),
-      );
-    }));
-  }
+  // List<DropdownMenuItem<int>> _dropdownItems = [];
+
+  // void _buildDropdownItems() {
+  //   _dropdownItems = [
+  //     const DropdownMenuItem(
+  //       value: 0,
+  //       child: Text('All'),
+  //     ),
+  //   ];
+  //   _dropdownItems.addAll(listCategories.map((category) {
+  //     return DropdownMenuItem(
+  //       value: category['categoryId'],
+  //       child: Text(category['categoryName']),
+  //     );
+  //   }));
+  // }
 
   @override
   Widget build(BuildContext context) {
-    _buildDropdownItems();
+    //_buildDropdownItems();
     return Scaffold(
       backgroundColor: Colors.grey.shade100,
 
