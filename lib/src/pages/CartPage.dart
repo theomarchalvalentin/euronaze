@@ -33,7 +33,7 @@ class CartPage extends StatefulWidget {
 class _CartPageState extends State<CartPage> {
   final TextEditingController _searchController = TextEditingController();
   List<Product> _filteredProducts = [];
-  late List<Product> products;
+  late List<Product> products = [];
   int selectedCategory = 0;
 
   @override
@@ -162,6 +162,8 @@ class _CartPageState extends State<CartPage> {
                               ),
                             ),
                             Card(
+                              color: Colors.white,
+                              elevation: 0,
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(20)),
                               child: Padding(
@@ -239,6 +241,8 @@ class _CartPageState extends State<CartPage> {
                               ),
                             ),
                             Card(
+                                color: Colors.white,
+                                elevation: 0,
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(20)),
                                 child: Padding(

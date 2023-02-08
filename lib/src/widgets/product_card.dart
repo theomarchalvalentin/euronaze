@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../api/product_model.dart';
 
@@ -18,9 +19,10 @@ class ProductCard extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: Row(
             children: <Widget>[
-              SizedBox(
-                height: 100,
+              ClipRRect(
+                borderRadius: BorderRadius.circular(20),
                 child: Image.network(
+                  height: 100,
                   product.productImg,
                 ),
               ),
@@ -69,33 +71,54 @@ class OwnedProductCard extends StatelessWidget {
     return GestureDetector(
       onTap: () => context.go('/product/$id'),
       child: Card(
+        color: Colors.white,
+        elevation: 0,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Row(
             children: <Widget>[
-              SizedBox(
-                height: 100,
+              ClipRRect(
+                borderRadius: BorderRadius.circular(10),
                 child: Image.network(
+                  fit: BoxFit.cover,
+                  height: 100,
+                  width: 100,
                   product.productImg,
                 ),
               ),
+              Spacer(),
+              CategoryTag(product.categoryId),
+              Spacer(),
               Expanded(
                 child: Align(
                   alignment: Alignment.topRight,
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      Text(
-                        product.productName,
-                        style: const TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
+                      FittedBox(
+                        child: Text(
+                          product.productName,
+                          style: GoogleFonts.varela(
+                              textStyle: const TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w700,
+                            fontStyle: FontStyle.normal,
+                            color: Color(0xFF263b5e),
+                          )),
                         ),
                       ),
-                      Text(
-                        "\$${product.price}",
-                        style: const TextStyle(
-                          fontSize: 14,
-                          color: Colors.grey,
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      FittedBox(
+                        child: Text(
+                          "\$${product.price}",
+                          style: const TextStyle(
+                            fontSize: 14,
+                            color: Colors.grey,
+                          ),
                         ),
                       )
                     ],
@@ -126,33 +149,53 @@ class BasketProductCard extends StatelessWidget {
     return GestureDetector(
       onTap: () => context.go('/product/$id'),
       child: Card(
+        color: Colors.white,
+        elevation: 0,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Row(
             children: <Widget>[
-              SizedBox(
-                height: 100,
+              ClipRRect(
+                borderRadius: BorderRadius.circular(10),
                 child: Image.network(
+                  fit: BoxFit.cover,
+                  height: 100,
+                  width: 100,
                   product.productImg,
                 ),
               ),
+              Spacer(),
+              CategoryTag(product.categoryId),
+              Spacer(),
               Expanded(
                 child: Align(
                   alignment: Alignment.topRight,
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      Text(
-                        product.productName,
-                        style: const TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
+                      FittedBox(
+                        child: Text(
+                          product.productName,
+                          style: GoogleFonts.varela(
+                              textStyle: const TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w700,
+                            fontStyle: FontStyle.normal,
+                            color: Color(0xFF263b5e),
+                          )),
                         ),
                       ),
-                      Text(
-                        "\$${product.price}",
-                        style: const TextStyle(
-                          fontSize: 14,
-                          color: Colors.grey,
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      FittedBox(
+                        child: Text(
+                          "\$${product.price}",
+                          style: const TextStyle(
+                            fontSize: 14,
+                            color: Colors.grey,
+                          ),
                         ),
                       )
                     ],
@@ -175,4 +218,50 @@ class BasketProductCard extends StatelessWidget {
       ),
     );
   }
+}
+
+Widget CategoryTag(int categoryId) {
+  var textcolor = Colors.black;
+  var color = Color(0xFFFFFFFF).withOpacity(0.6);
+  var cat = 'None';
+  switch (categoryId) {
+    case 1:
+      cat = 'Stocks';
+      color = Color(0xffffdfba).withOpacity(0.6);
+      break;
+    case 2:
+      cat = 'FX';
+      color = Color(0xffffffba).withOpacity(0.6);
+
+      break;
+    case 3:
+      cat = 'Fixed Income';
+      color = Color(0xffbaffc9).withOpacity(0.6);
+
+      break;
+    case 4:
+      cat = 'Indexes';
+      color = Color(0xffbae1ff).withOpacity(0.6);
+
+      break;
+  }
+  return Container(
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(5),
+      color: color,
+    ),
+    child: Padding(
+      padding: const EdgeInsets.all(5.0),
+      child: Text(
+        cat,
+        style: GoogleFonts.varela(
+            textStyle: const TextStyle(
+          fontSize: 13,
+          fontWeight: FontWeight.w500,
+          fontStyle: FontStyle.normal,
+          color: Color(0xFF263b5e),
+        )),
+      ),
+    ),
+  );
 }
