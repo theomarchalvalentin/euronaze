@@ -97,6 +97,8 @@ class _LibraryPageState extends State<LibraryPage> {
   Widget build(BuildContext context) {
     _buildDropdownItems();
     return Scaffold(
+      backgroundColor: Colors.grey.shade100,
+
       appBar: CustomAppBar(),
       //bottomSheet: const SizedBox(height: 120, child: CustomFooter()),
       body: SingleChildScrollView(

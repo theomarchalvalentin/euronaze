@@ -1,14 +1,24 @@
+import 'package:blurrycontainer/blurrycontainer.dart';
+import 'package:fl_chart/fl_chart.dart';
 import 'package:footer/footer.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:flutter/material.dart';
+import 'package:interactive_chart/interactive_chart.dart';
+import 'package:mrx_charts/mrx_charts.dart';
+import 'package:projet_dac/src/pages/login.dart';
 
 import 'package:projet_dac/src/widgets/homepage/charthome.dart';
+import 'package:projet_dac/src/widgets/mockdata.dart';
 import 'package:projet_dac/src/widgets/theappbar.dart';
 
 import '../api/api.dart';
 import '../api/product_model.dart';
 import 'package:flutter_lorem/flutter_lorem.dart';
+
+import '../widgets/custom_footer.dart';
+import 'chart.dart';
 
 class ProductScreenDetails extends StatefulWidget {
   static const routeName = '/product';
@@ -65,171 +75,191 @@ class _ProductScreenDetailsState extends State<ProductScreenDetails> {
   Widget build(BuildContext context) {
     //Product product = ModalRoute.of(context)!.settings.arguments as Product;
     return Scaffold(
-      extendBodyBehindAppBar: true,
+      backgroundColor: Colors.grey.shade100,
       drawerScrimColor: const Color((0xff038C81)),
       appBar: CustomAppBar(),
-      body: ListView(
-        children: <Widget>[
-          SizedBox(
-            height: 300,
-            child: Image.network(
-              product.productImg,
-              fit: BoxFit.scaleDown,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(15.0),
-            child: Container(
-              decoration: const BoxDecoration(
-                color: Colors.white54,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(25),
-                  topRight: Radius.circular(25),
-                ),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          product.productName,
-                          style: const TextStyle(
-                            fontSize: 30,
-                            fontWeight: FontWeight.bold,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Center(
+              heightFactor: 1.2,
+              child: BlurryContainer(
+                blur: 5,
+                elevation: 0,
+                color: Colors.white,
+                borderRadius: const BorderRadius.all(Radius.circular(20)),
+                child: SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.75,
+                    height: MediaQuery.of(context).size.height * 0.75,
+                    child: Container(
+                        child: SizedBox(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        // crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(10.0),
+                            child: Image.network(
+                                width: MediaQuery.of(context).size.width * 0.3,
+                                height: MediaQuery.of(context).size.width * 0.3,
+                                product.productImg,
+                                fit: BoxFit.cover),
                           ),
-                        ),
-                        const SizedBox(height: 10),
-                        Text(
-                          "\$${product.price}",
-                          style: const TextStyle(
-                            fontSize: 20,
-                            color: Colors.grey,
-                          ),
-                        ),
-                        const SizedBox(height: 30),
-                        const Divider(
-                          color: Color(0xFF263b5e),
-                        ),
-                        const SizedBox(height: 80),
-                        Row(
-                          children: [
-                            Flexible(
-                              child: Text(product.productDescription,
-                                  style: GoogleFonts.varela(
-                                      textStyle: const TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w200,
-                                    fontStyle: FontStyle.normal,
-                                    color: Color(0xFF263b5e),
-                                  ))),
-                            ),
-                            const SizedBox(width: 100),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Center(
-                                child: Container(
-                                    decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(10)),
-                                    width:
-                                        MediaQuery.of(context).size.width / 3,
-                                    child: Container(
+                          Padding(
+                            padding: const EdgeInsets.only(top: 90.0),
+                            child: Column(
+                              children: [
+                                Column(
+                                  children: [
+                                    Text(
+                                      '${product.productName}\n',
+                                      style: const TextStyle(
+                                        fontSize: 40,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    Container(
                                       decoration: BoxDecoration(
                                           borderRadius:
-                                              BorderRadius.circular(20),
-                                          color: Colors.grey.shade100),
+                                              BorderRadius.circular(10),
+                                          color: Colors.grey.shade200),
                                       child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Column(
-                                          children: [
-                                            Align(
-                                              alignment: Alignment.topCenter,
-                                              child: Text("Aperçu des données:",
-                                                  style: GoogleFonts.varela(
-                                                      textStyle:
-                                                          const TextStyle(
-                                                    fontSize: 15,
-                                                    fontWeight: FontWeight.w200,
-                                                    fontStyle: FontStyle.normal,
-                                                    color: Color(0xFF263b5e),
-                                                  ))),
+                                        padding: const EdgeInsets.all(10.0),
+                                        child: Expanded(
+                                          child: FittedBox(
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceEvenly,
+                                              children: [
+                                                SizedBox(
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                      0.15,
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    children: [
+                                                      const FittedBox(
+                                                        child: Text(
+                                                          "Current price: ",
+                                                          style: TextStyle(
+                                                            fontSize: 20,
+                                                            color: Colors.grey,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      SizedBox(
+                                                        height: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .height *
+                                                            0.005,
+                                                      ),
+                                                      FittedBox(
+                                                        child: Text(
+                                                          "\$${product.price}",
+                                                          style:
+                                                              const TextStyle(
+                                                            fontSize: 20,
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            color: Colors.black,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                FittedBox(
+                                                  fit: BoxFit.scaleDown,
+                                                  child: TextButton(
+                                                    onPressed: () {},
+                                                    child: Container(
+                                                      decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(10),
+                                                        color: Colors.black,
+                                                      ),
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              20),
+                                                      child: const Text(
+                                                        'Buy now',
+                                                        style: TextStyle(
+                                                            color: Colors.white,
+                                                            fontSize: 20.0),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
                                             ),
-                                            const LineChartSample2(),
-                                          ],
+                                          ),
                                         ),
                                       ),
-                                    )),
-                              ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.05,
+                                ),
+                                Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(20),
+                                        color: Colors.black),
+                                    child: const Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Padding(
+                                        padding: EdgeInsets.all(8.0),
+                                        child: Text('Details',
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 15.0)),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.04,
+                                ),
+                                FittedBox(
+                                    child: SizedBox(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.25,
+                                  child: Text(lorem(paragraphs: 1, words: 40),
+                                      style: const TextStyle(
+                                          color: Colors.black, fontSize: 15.0)),
+                                )),
+                                SizedBox(
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.04,
+                                ),
+                                SizedBox(
+                                    width:
+                                        MediaQuery.of(context).size.width * 0.3,
+                                    height: MediaQuery.of(context).size.height *
+                                        0.2,
+                                    child: LinePage()),
+                              ],
                             ),
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 30,
-                        ),
-                        BuyButton(widget.isOwned, widget.isInBasket),
-                      ],
-                    ),
-                  ),
-                ],
+                          )
+                        ],
+                      ),
+                    ))),
               ),
             ),
-          ),
-          Footer(
-              backgroundColor: const Color(0xffd9eff0),
-              padding: const EdgeInsets.all(20.0),
-              child: Column(
-                children: [
-                  Text(
-                    'Projet développement d\'applications communicantes',
-                    style: GoogleFonts.varela(
-                        textStyle: const TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w200,
-                      fontStyle: FontStyle.normal,
-                      color: Color(0xFF263b5e),
-                    )),
-                    textAlign: TextAlign.center,
-                  ),
-                  Text(
-                    'ENSIMAG 3A IF I2MF',
-                    style: GoogleFonts.varela(
-                        textStyle: const TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w200,
-                      fontStyle: FontStyle.normal,
-                      color: Color(0xFF263b5e),
-                    )),
-                    textAlign: TextAlign.center,
-                  ),
-                  Text(
-                    'Promotion 2023',
-                    style: GoogleFonts.varela(
-                        textStyle: const TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w200,
-                      fontStyle: FontStyle.normal,
-                      color: Color(0xFF263b5e),
-                    )),
-                    textAlign: TextAlign.center,
-                  ),
-                  Text(
-                    'Tous droits réservés',
-                    style: GoogleFonts.varela(
-                        textStyle: const TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w200,
-                      fontStyle: FontStyle.normal,
-                      color: Color(0xFF263b5e),
-                    )),
-                    textAlign: TextAlign.center,
-                  )
-                ],
-              )),
-        ],
+            const CustomFooter(),
+          ],
+        ),
       ),
     );
   }

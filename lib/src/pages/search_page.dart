@@ -36,7 +36,7 @@ class _SearchPageState extends State<SearchPage> {
   void _filterProducts(String query) {
     setState(() {
       _filteredProducts = products.where((product) {
-        if (selectedCategory == '0') {
+        if (selectedCategory == 0) {
           return product.productName
               .toLowerCase()
               .contains(query.toLowerCase());
@@ -50,12 +50,12 @@ class _SearchPageState extends State<SearchPage> {
     });
   }
 
-  List<DropdownMenuItem<String>> _dropdownItems = [];
+  List<DropdownMenuItem<int>> _dropdownItems = [];
 
   void _buildDropdownItems() {
     _dropdownItems = [
       const DropdownMenuItem(
-        value: '0',
+        value: 0,
         child: Text('All'),
       ),
     ];
@@ -71,6 +71,8 @@ class _SearchPageState extends State<SearchPage> {
   Widget build(BuildContext context) {
     _buildDropdownItems();
     return Scaffold(
+      backgroundColor: Colors.grey.shade100,
+
       appBar: CustomAppBar(),
       //bottomSheet: const SizedBox(height: 120, child: CustomFooter()),
       body: SingleChildScrollView(
