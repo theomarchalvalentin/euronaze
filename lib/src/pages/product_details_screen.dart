@@ -79,6 +79,7 @@ class _ProductScreenDetailsState extends State<ProductScreenDetails> {
       drawerScrimColor: const Color((0xff038C81)),
       appBar: CustomAppBar(),
       body: SingleChildScrollView(
+        clipBehavior: Clip.antiAlias,
         child: Column(
           children: [
             Center(
@@ -222,18 +223,21 @@ class _ProductScreenDetailsState extends State<ProductScreenDetails> {
                                 height:
                                     MediaQuery.of(context).size.height * 0.04,
                               ),
-                              FittedBox(
-                                  child: SizedBox(
+                              SizedBox(
+                                height:
+                                    MediaQuery.of(context).size.height * 0.1,
                                 width: MediaQuery.of(context).size.width * 0.25,
                                 child: Text(lorem(paragraphs: 1, words: 40),
                                     style: const TextStyle(
                                         color: Colors.black, fontSize: 15.0)),
-                              )),
+                              ),
                               SizedBox(
                                 height:
                                     MediaQuery.of(context).size.height * 0.04,
                               ),
-                              SizedBox(
+                              Container(
+                                  decoration: BoxDecoration(),
+                                  clipBehavior: Clip.antiAlias,
                                   width:
                                       MediaQuery.of(context).size.width * 0.3,
                                   height:
