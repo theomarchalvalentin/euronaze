@@ -90,7 +90,7 @@ class _ProductScreenDetailsState extends State<ProductScreenDetails> {
                 borderRadius: const BorderRadius.all(Radius.circular(20)),
                 child: SizedBox(
                     width: MediaQuery.of(context).size.width * 0.75,
-                    height: MediaQuery.of(context).size.height * 0.75,
+                    height: 700,
                     child: Container(
                         child: SizedBox(
                       child: Row(
@@ -108,7 +108,7 @@ class _ProductScreenDetailsState extends State<ProductScreenDetails> {
                           Column(
                             children: [
                               SizedBox(
-                                height: 90,
+                                height: 70,
                               ),
                               Column(
                                 children: [
