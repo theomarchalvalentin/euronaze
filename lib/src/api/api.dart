@@ -3,9 +3,7 @@ import 'package:projet_dac/src/api/user_model.dart';
 import 'package:projet_dac/src/api/product_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
-import 'package:file_picker/file_picker.dart';
 
-import 'dart:io';
 import 'dart:typed_data';
 
 class NoTokenExeption implements Exception {}
@@ -274,17 +272,23 @@ class Api {
   }
 
   static Future<void> putProduct(
+      //gestion du nul
       int productId,
       String productName,
       String productDescription,
       int categoryId,
       String productImg,
       double price,
-      {String? file}) async {
+      {Uint8List? file}) async {
+    String fileUpload;
     final prefs = await SharedPreferences.getInstance();
-
     String? token = prefs.getString("token");
     if (token != null) {
+      if (file != null) {
+        fileUpload = base64.encode(file);
+      } else {
+        fileUpload = '';
+      }
       final response = await put(
           Uri.parse('http://localhost:8080/api/service/produits/$productId'),
           headers: <String, String>{"Authorization": "Bearer $token"},
@@ -295,7 +299,7 @@ class Api {
             'category': categoryId,
             'image': productImg,
             'prix': price,
-            'data': file
+            'data': fileUpload
           }));
 
       if (response.statusCode == 200) {
@@ -315,11 +319,11 @@ class Api {
       int categoryId,
       String productImg,
       double price,
-      String file) async {
+      Uint8List file) async {
     final prefs = await SharedPreferences.getInstance();
-
     String? token = prefs.getString("token");
     if (token != null) {
+      String fileUpload = base64.encode(file);
       final response = await post(
           Uri.parse(
               'http://localhost:8080/api/service/produits/upload/$productId'),
@@ -331,7 +335,7 @@ class Api {
             'category': categoryId,
             'image': productImg,
             'prix': price,
-            'data': file
+            'data': fileUpload
           }));
 
       if (response.statusCode == 200) {

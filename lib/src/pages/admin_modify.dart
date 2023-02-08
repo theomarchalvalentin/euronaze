@@ -5,8 +5,6 @@ import '../api/category_model.dart';
 import '../widgets/theadminappbar.dart';
 
 import 'package:file_picker/file_picker.dart';
-import 'dart:convert';
-import 'dart:io';
 import 'dart:typed_data';
 
 //cas ou plusieurs modifs
@@ -21,7 +19,7 @@ class AdminModify extends StatefulWidget {
 
 class _AdminModifyState extends State<AdminModify> {
   final _formKey = GlobalKey<FormState>();
-  String fileName = "Current";
+  String? fileName;
 
   TextEditingController nameController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
@@ -32,7 +30,7 @@ class _AdminModifyState extends State<AdminModify> {
 
   Product? product;
 
-  String? fileUpload;
+  Uint8List? fileUpload;
 
   @override
   void initState() {
@@ -49,7 +47,7 @@ class _AdminModifyState extends State<AdminModify> {
         imageController.text = product!.productImg;
         priceController.text = product!.price.toStringAsPrecision(2);
         selectedCategory = product!.categoryId;
-        //fileName = "Current";
+        fileName = "Current";
 
         // lock = false;
       });
@@ -225,6 +223,7 @@ class _AdminModifyState extends State<AdminModify> {
                                   imageController.text,
                                   double.parse(priceController.text),
                                   file: fileUpload);
+                              await _getProduct();
                               if (context.mounted) {
                                 // mouai
                                 ScaffoldMessenger.of(context).showSnackBar(
@@ -280,8 +279,7 @@ class _AdminModifyState extends State<AdminModify> {
         .pickFiles(allowedExtensions: ["csv"], type: FileType.custom);
 
     if (result != null) {
-      Uint8List file = result.files.single.bytes!;
-      fileUpload = base64.encode(file);
+      fileUpload = result.files.single.bytes!;
       fileName = result.files.single.name;
     }
     setState(() {});

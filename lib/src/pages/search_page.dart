@@ -207,7 +207,7 @@ class _SearchPageState extends State<SearchPage> {
                                         items: _dropdownItems,
                                         onChanged: (value) {
                                           setState(() {
-                                            selectedCategory = value! as int;
+                                            selectedCategory = value!;
                                             _filterProducts(
                                                 _searchController.text);
                                           });

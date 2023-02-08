@@ -53,12 +53,12 @@ class _LinePageState extends State<LinePage> {
             frequency: frequency,
             max: to.millisecondsSinceEpoch.toDouble(),
             min: from.millisecondsSinceEpoch.toDouble(),
-            textStyle: TextStyle(
+            textStyle: const TextStyle(
               color: Colors.black,
               fontSize: 10.0,
             ),
           ),
-          y: ChartAxisSettingsAxis(
+          y: const ChartAxisSettingsAxis(
             frequency: 100.0,
             max: 400.0,
             min: 0.0,

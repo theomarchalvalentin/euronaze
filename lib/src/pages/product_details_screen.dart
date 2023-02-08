@@ -1,15 +1,6 @@
 import 'package:blurrycontainer/blurrycontainer.dart';
-import 'package:fl_chart/fl_chart.dart';
-import 'package:footer/footer.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'package:flutter/material.dart';
-import 'package:interactive_chart/interactive_chart.dart';
-import 'package:mrx_charts/mrx_charts.dart';
-import 'package:projet_dac/src/pages/login.dart';
 
-import 'package:projet_dac/src/widgets/homepage/charthome.dart';
 import 'package:projet_dac/src/widgets/theappbar.dart';
 
 import '../api/api.dart';
@@ -17,7 +8,6 @@ import '../api/product_model.dart';
 import 'package:flutter_lorem/flutter_lorem.dart';
 
 import '../widgets/custom_footer.dart';
-import '../widgets/product_card.dart';
 import 'chart.dart';
 
 class ProductScreenDetails extends StatefulWidget {
@@ -91,8 +81,7 @@ class _ProductScreenDetailsState extends State<ProductScreenDetails> {
                 child: SizedBox(
                     width: MediaQuery.of(context).size.width * 0.75,
                     height: 700,
-                    child: Container(
-                        child: SizedBox(
+                    child: SizedBox(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         // crossAxisAlignment: CrossAxisAlignment.center,
@@ -107,7 +96,7 @@ class _ProductScreenDetailsState extends State<ProductScreenDetails> {
                           ),
                           Column(
                             children: [
-                              SizedBox(
+                              const SizedBox(
                                 height: 70,
                               ),
                               Column(
@@ -145,7 +134,7 @@ class _ProductScreenDetailsState extends State<ProductScreenDetails> {
                                                 mainAxisAlignment:
                                                     MainAxisAlignment.start,
                                                 children: [
-                                                  Text(
+                                                  const Text(
                                                     "Current price: ",
                                                     style: TextStyle(
                                                       fontSize: 20,
@@ -238,12 +227,12 @@ class _ProductScreenDetailsState extends State<ProductScreenDetails> {
                                       MediaQuery.of(context).size.width * 0.3,
                                   height:
                                       MediaQuery.of(context).size.height * 0.2,
-                                  child: LinePage()),
+                                  child: const LinePage()),
                             ],
                           )
                         ],
                       ),
-                    ))),
+                    )),
               ),
             ),
             const CustomFooter(),
