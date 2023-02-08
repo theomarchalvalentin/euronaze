@@ -4,14 +4,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:projet_dac/src/widgets/custom_footer.dart';
 import 'package:projet_dac/src/widgets/homepage/homepage_carousel.dart';
-import 'package:projet_dac/src/widgets/homepage/charthome.dart';
 import 'package:projet_dac/src/models/datamodel.dart';
-import 'package:projet_dac/src/widgets/searchbar.dart';
 
-import '../widgets/homepage/greeting_text.dart';
-import '../widgets/homepage/home_search_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:projet_dac/src/widgets/homepage/featured_headings.dart';
 
 import 'package:projet_dac/src/widgets/theappbar.dart';
 
@@ -73,7 +68,7 @@ class _HomePage2State extends State<HomePage2> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Container(
+                            SizedBox(
                               width: screenSize.width * 0.2,
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
@@ -114,7 +109,7 @@ class _HomePage2State extends State<HomePage2> {
                                       ),
                                     ),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 30,
                                   ),
                                   Align(
@@ -131,9 +126,9 @@ class _HomePage2State extends State<HomePage2> {
                                         ),
                                         padding: const EdgeInsets.symmetric(
                                             vertical: 10, horizontal: 10),
-                                        child: FittedBox(
+                                        child: const FittedBox(
                                           fit: BoxFit.scaleDown,
-                                          child: const Text(
+                                          child: Text(
                                             '  🚀 Découvrir nos produits  ',
                                             style: TextStyle(
                                                 color: Colors.white,
@@ -146,10 +141,10 @@ class _HomePage2State extends State<HomePage2> {
                                 ],
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 50,
                             ),
-                            Container(
+                            SizedBox(
                               height: screenSize.height * 0.4,
                               child: Lottie.asset('assets/images/lottie.json',
                                   fit: BoxFit.scaleDown),
@@ -187,7 +182,7 @@ class _HomePage2State extends State<HomePage2> {
                 ),
               ],
             ),
-            CustomFooter(),
+            const CustomFooter(),
           ],
         ),
       ),

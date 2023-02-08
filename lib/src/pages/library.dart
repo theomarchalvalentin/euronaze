@@ -217,7 +217,7 @@ class _LibraryPageState extends State<LibraryPage> {
                                         items: _dropdownItems,
                                         onChanged: (value) {
                                           setState(() {
-                                            selectedCategory = value! as int;
+                                            selectedCategory = value!;
                                             _filterProducts(
                                                 _searchController.text);
                                           });

@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:projet_dac/src/pages/product_details_screen.dart';
 import 'package:projet_dac/src/models/datamodel.dart';
 import 'package:widget_slider/widget_slider.dart';
 

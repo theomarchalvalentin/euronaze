@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:projet_dac/src/api/api.dart';
 import 'package:projet_dac/src/api/user_model.dart';
 import '../widgets/theappbar.dart';
@@ -132,6 +133,8 @@ class _UserPageState extends State<UserPage> {
                           child: Form(
                             key: _formKey,
                             child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: <Widget>[
                                 const Align(
                                   alignment: Alignment.centerLeft,
@@ -197,48 +200,76 @@ class _UserPageState extends State<UserPage> {
                                 const SizedBox(
                                   height: 15,
                                 ),
-                                ElevatedButton(
-                                  onPressed: () async {
-                                    if (_formKey.currentState!.validate() &&
-                                        _hasChanged()) {
-                                      //String? result; result= await if necessary
-                                      try {
-                                        await Api.modifyUserInfo(
-                                            firstNameController.text,
-                                            lastNameController.text,
-                                            emailController.text,
-                                            passwordController.text);
-                                        if (context.mounted) {
-                                          _getData(); // mouai
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(
-                                            const SnackBar(
-                                                content:
-                                                    Text('Successfully Saved')),
-                                          );
-                                        }
-                                      } on NoTokenExeption {
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(
-                                          const SnackBar(
-                                              content: Text(
-                                                  'No Token found, please log again')),
-                                        );
-                                      } catch (e) {
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(
-                                          const SnackBar(
-                                              content: Text(
-                                                  'Unabled to Saved, please make sure your informations are correct and try again')),
-                                        );
-                                      }
-                                    }
-                                  },
-                                  style: ElevatedButton.styleFrom(
-                                      textStyle: const TextStyle(fontSize: 20),
-                                      backgroundColor: const Color.fromARGB(
-                                          255, 0, 119, 107)),
-                                  child: const Text('Save'),
+                                FittedBox(
+                                  fit: BoxFit.scaleDown,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      ElevatedButton(
+                                        onPressed: () async {
+                                          if (_formKey.currentState!
+                                                  .validate() &&
+                                              _hasChanged()) {
+                                            //String? result; result= await if necessary
+                                            try {
+                                              await Api.modifyUserInfo(
+                                                  firstNameController.text,
+                                                  lastNameController.text,
+                                                  emailController.text,
+                                                  passwordController.text);
+                                              if (context.mounted) {
+                                                _getData(); // mouai
+                                                ScaffoldMessenger.of(context)
+                                                    .showSnackBar(
+                                                  const SnackBar(
+                                                      content: Text(
+                                                          'Successfully Saved')),
+                                                );
+                                              }
+                                            } on NoTokenExeption {
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(
+                                                const SnackBar(
+                                                    content: Text(
+                                                        'No Token found, please log again')),
+                                              );
+                                            } catch (e) {
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(
+                                                const SnackBar(
+                                                    content: Text(
+                                                        'Unabled to Saved, please make sure your informations are correct and try again')),
+                                              );
+                                            }
+                                          }
+                                        },
+                                        style: ElevatedButton.styleFrom(
+                                            textStyle:
+                                                const TextStyle(fontSize: 20),
+                                            backgroundColor:
+                                                const Color.fromARGB(
+                                                    255, 0, 119, 107)),
+                                        child: const Text('Save Account'),
+                                      ),
+                                      const SizedBox(
+                                        width: 20,
+                                      ),
+                                      ElevatedButton(
+                                        onPressed: () {
+                                          showAlertDialog(context);
+                                        },
+                                        style: ElevatedButton.styleFrom(
+                                            textStyle:
+                                                const TextStyle(fontSize: 20),
+                                            backgroundColor:
+                                                const Color.fromARGB(
+                                                    255, 235, 1, 1)),
+                                        child: const Text('Delete Account'),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ],
                             ),
@@ -272,4 +303,55 @@ class _UserPageState extends State<UserPage> {
           ),
         ));
   }
+}
+
+showAlertDialog(BuildContext context) {
+  // set up the buttons
+  Widget cancelButton = ElevatedButton(
+    child: const Text("Cancel"),
+    onPressed: () {
+      Navigator.pop(context);
+    },
+  );
+  Widget continueButton = ElevatedButton(
+    style: ElevatedButton.styleFrom(
+        backgroundColor: const Color.fromARGB(255, 235, 1, 1)),
+    onPressed: () async {
+      Navigator.pop(context);
+      try {
+        await Api.deleteUserInfo();
+        if (context.mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('Account Successfully deleted')));
+        }
+        await Api.logout();
+        if (context.mounted) context.go("/");
+      } on NoTokenExeption {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('No Token found, please log again')),
+        );
+      } catch (e) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Unabled to Delete')),
+        );
+      }
+    },
+    child: const Text("Delete"),
+  );
+  // set up the AlertDialog
+  AlertDialog alert = AlertDialog(
+    title: const Text("Delete Account"),
+    content: const Text("Are you sure to delete your account?"),
+    actions: [
+      cancelButton,
+      continueButton,
+    ],
+  );
+  // show the dialog
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
 }

@@ -6,7 +6,6 @@ import 'package:projet_dac/src/pages/admin_search.dart';
 import 'package:projet_dac/src/pages/library.dart';
 import 'package:projet_dac/src/pages/user.dart';
 //import 'package:projet_dac/src/widgets/searchbar.dart';
-import 'package:projet_dac/src/pages/home_page.dart';
 import 'src/pages/home_page2.dart';
 import 'src/pages/product_details_screen.dart';
 import 'package:projet_dac/src/pages/login.dart';
