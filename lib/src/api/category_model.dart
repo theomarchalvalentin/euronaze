@@ -1,24 +1,24 @@
 const List<Map> listCategories = [
   {
-    'categoryId': '1',
+    'categoryId': 1,
     'categoryName': 'Stocks',
     'categoryDescription': stocksCategoryDescription,
     'categoryImg': stocksImgPath
   },
   {
-    'categoryId': '2',
+    'categoryId': 2,
     'categoryName': 'FX',
     'categoryDescription': fxCategoryDescription,
     'categoryImg': fxImgPath
   },
   {
-    'categoryId': '3',
+    'categoryId': 3,
     'categoryName': 'Fixed Income',
     'categoryDescription': fixedIncomeCategoryDescription,
     'categoryImg': fixedIncomeImgPath
   },
   {
-    'categoryId': '4',
+    'categoryId': 4,
     'categoryName': 'Indexes',
     'categoryDescription': indexesCategoryDescription,
     'categoryImg': indexesImgPath
