@@ -26,7 +26,7 @@ class LibraryPage extends StatefulWidget {
 class _LibraryPageState extends State<LibraryPage> {
   final TextEditingController _searchController = TextEditingController();
   List<Product> _filteredProducts = [];
-  late List<Product> products;
+  List<Product> products = [];
   int selectedCategory = 0;
 
   @override
