@@ -312,24 +312,16 @@ class Api {
     }
   }
 
-  static Future<void> postProduct(
-      int productId,
-      String productName,
-      String productDescription,
-      int categoryId,
-      String productImg,
-      double price,
-      Uint8List file) async {
+  static Future<void> postProduct(String productName, String productDescription,
+      int categoryId, String productImg, double price, Uint8List file) async {
     final prefs = await SharedPreferences.getInstance();
     String? token = prefs.getString("token");
     if (token != null) {
       String fileUpload = base64.encode(file);
       final response = await post(
-          Uri.parse(
-              'http://localhost:8080/api/service/produits/upload/$productId'),
+          Uri.parse('http://localhost:8080/api/service/produits/upload/'),
           headers: <String, String>{"Authorization": "Bearer $token"},
           body: jsonEncode(<String, dynamic>{
-            'id': productId,
             'nom': productName,
             'description': productDescription,
             'category': categoryId,
