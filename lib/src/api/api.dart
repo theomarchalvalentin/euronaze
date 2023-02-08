@@ -6,6 +6,8 @@ import 'dart:convert';
 
 import 'dart:typed_data';
 
+import 'dart:html';
+
 class NoTokenExeption implements Exception {}
 
 class BadAuth implements Exception {}
@@ -406,5 +408,10 @@ class Api {
     } else {
       throw NoTokenExeption();
     }
+  }
+
+  static void downloadFile(int id) {
+    String url = "http://localhost:8080/api/service/produits/download/$id";
+    window.open(url, 'Download');
   }
 }

@@ -128,7 +128,9 @@ class OwnedProductCard extends StatelessWidget {
               ),
               const SizedBox(width: 40),
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  Api.downloadFile(product.productId);
+                },
                 icon: const Icon(Icons.download_outlined),
               ),
             ],
