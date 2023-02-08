@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:projet_dac/src/models/datamodel.dart';
 import 'package:go_router/go_router.dart';
+
+import '../api/product_model.dart';
 
 class ProductCard extends StatelessWidget {
   final Product product;

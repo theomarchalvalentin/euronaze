@@ -5,6 +5,7 @@ import 'package:projet_dac/src/widgets/theappbar.dart';
 import 'package:projet_dac/src/widgets/product_card.dart';
 
 import '../api/api.dart';
+import '../api/category_model.dart';
 import '../api/product_model.dart';
 
 List<String> listCat = listCategories
@@ -30,7 +31,7 @@ class _LibraryPageState extends State<LibraryPage> {
   @override
   void initState() {
     super.initState();
-    _filteredProducts = _getLibrary();
+    _getLibrary();
   }
 
   _getLibrary() async {
@@ -38,6 +39,7 @@ class _LibraryPageState extends State<LibraryPage> {
       var results = await Api.getLibrary();
       setState(() {
         // lock = false;
+        products = results;
         _filteredProducts = results;
       });
     } on NoTokenExeption {
@@ -52,8 +54,7 @@ class _LibraryPageState extends State<LibraryPage> {
         // lock = false;
       });
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-            content: Text('Unable to fetch User Info please try again')),
+        const SnackBar(content: Text('Unable to fetch Library')),
       );
     }
   }

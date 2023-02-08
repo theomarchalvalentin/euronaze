@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:projet_dac/src/models/datamodel.dart';
 import 'package:projet_dac/src/widgets/custom_footer.dart';
 import 'package:projet_dac/src/widgets/theappbar.dart';
 import 'package:projet_dac/src/widgets/product_card.dart';
+
+import '../api/category_model.dart';
+import '../api/product_model.dart';
 
 List<String> listCat = listCategories
     .map((category) => category['categoryName'].toString())
@@ -22,7 +24,7 @@ class SearchPage extends StatefulWidget {
 class _SearchPageState extends State<SearchPage> {
   final TextEditingController _searchController = TextEditingController();
   List<Product> _filteredProducts = [];
-  final List<Product> products = dummyProducts;
+  final List<Product> products = <Product>[];
   String selectedCategory = '0';
 
   @override
