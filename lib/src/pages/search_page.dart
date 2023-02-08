@@ -50,26 +50,39 @@ class _SearchPageState extends State<SearchPage> {
     });
   }
 
-  List<DropdownMenuItem<String>> _dropdownItems = [];
+  // List<DropdownMenuItem<String>> _dropdownItems = [];
 
-  void _buildDropdownItems() {
-    _dropdownItems = [
-      const DropdownMenuItem(
-        value: '0',
-        child: Text('All'),
-      ),
-    ];
-    _dropdownItems.addAll(listCategories.map((category) {
-      return DropdownMenuItem(
-        value: category['categoryId'],
-        child: Text(category['categoryName']),
-      );
-    }));
-  }
+  // void _buildDropdownItems() {
+  //   _dropdownItems = [
+  //     const DropdownMenuItem(
+  //       value: '0',
+  //       child: Text('All'),
+  //     ),
+  //   ];
+  //   _dropdownItems.addAll(listCategories.map((category) {
+  //     return DropdownMenuItem(
+  //       value: category['categoryId'],
+  //       child: Text(category['categoryName']),
+  //     );
+  //   }));
+  // }
+
+  final List<DropdownMenuItem<int>> _dropdownItems = [
+        const DropdownMenuItem(
+          value: 0,
+          child: Text('All'),
+        ),
+      ] +
+      listCategories.map((category) {
+        return DropdownMenuItem<int>(
+          value: category['categoryId'],
+          child: Text(category['categoryName']),
+        );
+      }).toList();
 
   @override
   Widget build(BuildContext context) {
-    _buildDropdownItems();
+    // _buildDropdownItems();
     return Scaffold(
       appBar: CustomAppBar(),
       //bottomSheet: const SizedBox(height: 120, child: CustomFooter()),

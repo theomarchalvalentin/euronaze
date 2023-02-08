@@ -25,7 +25,7 @@ class LibraryPage extends StatefulWidget {
 class _LibraryPageState extends State<LibraryPage> {
   final TextEditingController _searchController = TextEditingController();
   List<Product> _filteredProducts = [];
-  late List<Product> products;
+  List<Product> products = [];
   int selectedCategory = 0;
 
   @override
@@ -76,26 +76,39 @@ class _LibraryPageState extends State<LibraryPage> {
     });
   }
 
-  List<DropdownMenuItem<int>> _dropdownItems = [];
+  // List<DropdownMenuItem<int>> _dropdownItems = [];
 
-  void _buildDropdownItems() {
-    _dropdownItems = [
-      const DropdownMenuItem(
-        value: 0,
-        child: Text('All'),
-      ),
-    ];
-    _dropdownItems.addAll(listCategories.map((category) {
-      return DropdownMenuItem(
-        value: category['categoryId'],
-        child: Text(category['categoryName']),
-      );
-    }));
-  }
+  // void _buildDropdownItems() {
+  //   _dropdownItems = [
+  //     const DropdownMenuItem(
+  //       value: 0,
+  //       child: Text('All'),
+  //     ),
+  //   ];
+  //   _dropdownItems.addAll(listCategories.map((category) {
+  //     return DropdownMenuItem(
+  //       value: category['categoryId'],
+  //       child: Text(category['categoryName']),
+  //     );
+  //   }));
+  // }
+
+  final List<DropdownMenuItem<int>> _dropdownItems = [
+        const DropdownMenuItem(
+          value: 0,
+          child: Text('All'),
+        ),
+      ] +
+      listCategories.map((category) {
+        return DropdownMenuItem<int>(
+          value: category['categoryId'],
+          child: Text(category['categoryName']),
+        );
+      }).toList();
 
   @override
   Widget build(BuildContext context) {
-    _buildDropdownItems();
+    // _buildDropdownItems();
     return Scaffold(
       appBar: CustomAppBar(),
       //bottomSheet: const SizedBox(height: 120, child: CustomFooter()),

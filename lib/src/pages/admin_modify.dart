@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:projet_dac/src/models/datamodel.dart';
+import '../api/api.dart';
+import '../api/category_model.dart';
 import '../widgets/theadminappbar.dart';
 
 //cas ou plusieurs modifs
 
 class AdminModify extends StatefulWidget {
-  static const routeName = '/admin_add';
   const AdminModify({super.key, required this.productId});
-  final String productId;
+  final int productId;
 
   @override
   State<StatefulWidget> createState() => _AdminModifyState();
@@ -22,18 +22,52 @@ class _AdminModifyState extends State<AdminModify> {
   TextEditingController imageController = TextEditingController();
   TextEditingController priceController = TextEditingController();
 
-  List<Category> list = dummyCategories;
+  int? selectedCategory;
 
-  Category? selected;
+  @override
+  void initState() {
+    super.initState();
+    _getProduct();
+  }
+
+  _getProduct() async {
+    try {
+      var product = await Api.getProduct(widget.productId);
+      setState(() {
+        nameController.text = product.productName;
+        descriptionController.text = product.productDescription;
+        imageController.text = product.productImg;
+        priceController.text = product.price.toStringAsPrecision(2);
+        selectedCategory = product.categoryId;
+        fileName = "Current";
+
+        // lock = false;
+      });
+    } on NoTokenExeption {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('No token found, please log again')),
+      );
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Unable to fetch Product')),
+      );
+    }
+  }
+
+  final List<DropdownMenuItem<int>> _dropdownItems =
+      listCategories.map((category) {
+    return DropdownMenuItem<int>(
+      value: category['categoryId'],
+      child: Text(category['categoryName']),
+    );
+  }).toList();
 
   @override
   Widget build(BuildContext context) {
-    Product product = dummyProducts[int.parse(widget.productId)];
     // ignore: unused_local_variable
     double width = MediaQuery.of(context).size.width;
     // ignore: unused_local_variable
     double height = MediaQuery.of(context).size.height - 80;
-
     return Scaffold(
         appBar: AdminAppBar(),
         body: SingleChildScrollView(
@@ -104,30 +138,15 @@ class _AdminModifyState extends State<AdminModify> {
                     ),
                     Align(
                       alignment: Alignment.topLeft,
-                      child: DropdownButton<Category>(
-                        value: selected,
-                        icon: const Icon(Icons.arrow_downward),
-                        elevation: 16,
+                      child: DropdownButton(
                         hint: const Text("Choose a category"),
-
-                        //style: const TextStyle(color: Color.fromARGB(255, 3, 140, 129)),
-                        underline: Container(
-                          height: 1,
-                          color: const Color.fromARGB(255, 156, 156, 156),
-                        ),
-                        onChanged: (Category? value) {
-                          // This is called when the user selects an item.
+                        value: selectedCategory,
+                        items: _dropdownItems,
+                        onChanged: (value) {
                           setState(() {
-                            selected = value!;
+                            selectedCategory = value;
                           });
                         },
-                        items: list
-                            .map<DropdownMenuItem<Category>>((Category value) {
-                          return DropdownMenuItem<Category>(
-                            value: value,
-                            child: Text(value.categoryName),
-                          );
-                        }).toList(),
                       ),
                     ),
                     TextFormField(

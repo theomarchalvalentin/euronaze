@@ -79,6 +79,6 @@ final _router = GoRouter(
     GoRoute(
         path: '/modifyproduct/:productId',
         builder: (context, state) =>
-            AdminModify(productId: state.params['productId']!)),
+            AdminModify(productId: int.parse(state.params['productId']!))),
   ],
 );
