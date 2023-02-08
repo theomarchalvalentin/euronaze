@@ -3,17 +3,55 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:projet_dac/src/pages/product_details_screen.dart';
-import 'package:projet_dac/src/models/datamodel.dart';
 import 'package:widget_slider/widget_slider.dart';
 
-class CarouselSlider extends StatelessWidget {
+import '../../api/api.dart';
+import '../../api/category_model.dart';
+import '../../api/product_model.dart';
+
+class CarouselSlider extends StatefulWidget {
   CarouselSlider({
-    Key? key,
-    required this.products,
-  }) : super(key: key);
-  final List<Product> products;
+    super.key,
+  });
+
+  @override
+  State<CarouselSlider> createState() => _CarouselSliderState();
+}
+
+class _CarouselSliderState extends State<CarouselSlider> {
   final controller =
       SliderController(duration: const Duration(milliseconds: 600));
+  late List<Product> products;
+
+  @override
+  void initState() {
+    super.initState();
+    _getLibrary();
+  }
+
+  _getLibrary() async {
+    try {
+      var results = await Api.getLibrary();
+      setState(() {
+        // lock = false;
+        products = results;
+      });
+    } on NoTokenExeption {
+      setState(() {
+        // lock = false;
+      });
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('No token found, please log again')),
+      );
+    } catch (e) {
+      setState(() {
+        // lock = false;
+      });
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Unable to fetch Library')),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -184,6 +184,30 @@ class Api {
     }
   }
 
+  static Future<List<Product>> getTrending() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    String? token = prefs.getString("token");
+    if (token != null) {
+      final response = await get(
+        Uri.parse('http://localhost:8080/api/trending'),
+        headers: <String, String>{"Authorization": "Bearer $token"},
+      );
+
+      if (response.statusCode == 200) {
+        Iterable l = json.decode(response.body);
+
+        List<Product> result =
+            List<Product>.from(l.map((model) => Product.fromJson(model)));
+        return result;
+      } else {
+        throw Exception('fail');
+      }
+    } else {
+      throw NoTokenExeption();
+    }
+  }
+
   static Future<List<Product>> getBasket() async {
     final prefs = await SharedPreferences.getInstance();
 
