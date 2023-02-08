@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:projet_dac/src/models/datamodel.dart';
 import 'package:projet_dac/src/widgets/custom_footer.dart';
 import 'package:projet_dac/src/widgets/theappbar.dart';
 import 'package:projet_dac/src/widgets/product_card.dart';
+
+import '../api/api.dart';
+import '../api/product_model.dart';
 
 List<String> listCat = listCategories
     .map((category) => category['categoryName'].toString())
@@ -22,13 +24,39 @@ class LibraryPage extends StatefulWidget {
 class _LibraryPageState extends State<LibraryPage> {
   final TextEditingController _searchController = TextEditingController();
   List<Product> _filteredProducts = [];
-  final List<Product> products = dummyProducts;
+  List<Product>? products;
   String selectedCategory = '0';
 
   @override
   void initState() {
     super.initState();
     _filteredProducts = products;
+    _getLibrary();
+  }
+
+  _getLibrary() async {
+    try {
+      var results = await Api.getLibrary();
+      setState(() {
+        // lock = false;
+        _filteredProducts = results;
+      });
+    } on NoTokenExeption {
+      setState(() {
+        // lock = false;
+      });
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('No token found, please log again')),
+      );
+    } catch (e) {
+      setState(() {
+        // lock = false;
+      });
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+            content: Text('Unable to fetch User Info please try again')),
+      );
+    }
   }
 
   void _filterProducts(String query) {
