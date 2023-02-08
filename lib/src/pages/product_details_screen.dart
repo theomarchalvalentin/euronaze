@@ -1,16 +1,19 @@
 import 'package:footer/footer.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:projet_dac/src/models/datamodel.dart';
 
 import 'package:flutter/material.dart';
 
 import 'package:projet_dac/src/widgets/homepage/charthome.dart';
 import 'package:projet_dac/src/widgets/theappbar.dart';
 
+import '../api/api.dart';
+import '../api/product_model.dart';
+
 class ProductScreenDetails extends StatefulWidget {
   static const routeName = '/product';
   const ProductScreenDetails({super.key, required this.productId});
-  final String productId;
+  final int productId;
+
   final bool isOwned = false;
   final bool isInBasket = false;
 
@@ -19,10 +22,41 @@ class ProductScreenDetails extends StatefulWidget {
 }
 
 class _ProductScreenDetailsState extends State<ProductScreenDetails> {
+  late Product product;
+
+  @override
+  void initState() {
+    super.initState();
+    _getProduct();
+  }
+
+  _getProduct() async {
+    try {
+      var result = await Api.getProduct(widget.productId);
+      setState(() {
+        // lock = false;
+        product = result;
+      });
+    } on NoTokenExeption {
+      setState(() {
+        // lock = false;
+      });
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('No token found, please log again')),
+      );
+    } catch (e) {
+      setState(() {
+        // lock = false;
+      });
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Unable to fetch Library')),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     //Product product = ModalRoute.of(context)!.settings.arguments as Product;
-    Product product = dummyProducts[int.parse(widget.productId)];
     return Scaffold(
       extendBodyBehindAppBar: true,
       drawerScrimColor: const Color((0xff038C81)),

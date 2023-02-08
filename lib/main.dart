@@ -67,8 +67,8 @@ final _router = GoRouter(
     //
     GoRoute(
         path: '/product/:productId',
-        builder: (context, state) =>
-            ProductScreenDetails(productId: state.params['productId']!)),
+        builder: (context, state) => ProductScreenDetails(
+            productId: int.parse(state.params['productId']!))),
     GoRoute(
       path: '/searchtomodify',
       builder: (context, state) => const AdminSearch(),
