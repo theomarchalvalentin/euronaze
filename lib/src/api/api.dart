@@ -207,4 +207,24 @@ class Api {
       throw NoTokenExeption();
     }
   }
+
+  static Future<Product> getProduct(int id) async {
+    final prefs = await SharedPreferences.getInstance();
+
+    String? token = prefs.getString("token");
+    if (token != null) {
+      final response = await get(
+        Uri.parse('http://localhost:8080/api/produit/$id'),
+        headers: <String, String>{"Authorization": "Bearer $token"},
+      );
+
+      if (response.statusCode == 200) {
+        return Product.fromJson(jsonDecode(response.body));
+      } else {
+        throw Exception('fail');
+      }
+    } else {
+      throw NoTokenExeption();
+    }
+  }
 }
