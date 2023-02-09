@@ -154,7 +154,7 @@ class Api {
     String? token = prefs.getString("token");
     if (token != null) {
       final response = await get(
-        Uri.parse('http://localhost:8080/api/library'),
+        Uri.parse('http://localhost:8080/api/service/library'), //change
         headers: <String, String>{"Authorization": "Bearer $token"},
       );
 
@@ -263,11 +263,11 @@ class Api {
   }
 
   static Future<void> checkCart() async {
-    final prefs = await SharedPreferences.getInstance();
+    final prefs = await SharedPreferences.getInstance(); //change
 
     String? token = prefs.getString("token");
     if (token != null) {
-      final response = await post(
+      final response = await put(
         Uri.parse('http://localhost:8080/api/user/cart/check'),
         headers: <String, String>{"Authorization": "Bearer $token"},
       );
@@ -283,11 +283,11 @@ class Api {
   }
 
   static Future<void> deleteCart(int productId) async {
-    final prefs = await SharedPreferences.getInstance();
+    final prefs = await SharedPreferences.getInstance(); //change
 
     String? token = prefs.getString("token");
     if (token != null) {
-      final response = await delete(
+      final response = await put(
         Uri.parse('http://localhost:8080/api/user/cart/Delete/$productId'),
         headers: <String, String>{"Authorization": "Bearer $token"},
       );
@@ -303,11 +303,11 @@ class Api {
   }
 
   static Future<void> deleteAllCart() async {
-    final prefs = await SharedPreferences.getInstance();
+    final prefs = await SharedPreferences.getInstance(); //change
 
     String? token = prefs.getString("token");
     if (token != null) {
-      final response = await delete(
+      final response = await put(
         Uri.parse('http://localhost:8080/api/user/cart/DeleteAll'),
         headers: <String, String>{"Authorization": "Bearer $token"},
       );
@@ -422,7 +422,7 @@ class Api {
           headers: <String, String>{"Authorization": "Bearer $token"},
           body: jsonEncode(<String, dynamic>{
             'id': categoryId,
-            'lookingWord': lookingWord,
+            'stri': lookingWord,
           }));
 
       if (response.statusCode == 200) {
