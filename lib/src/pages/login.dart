@@ -138,7 +138,8 @@ class _LoginPageState extends State<LoginPage> {
                         } else if (result == "ADMIN") {
                           if (context.mounted) {
                             ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text('Login success')),
+                              const SnackBar(
+                                  content: Text('Login Admin success')),
                             );
                             context.go('/searchtomodify');
                           }
