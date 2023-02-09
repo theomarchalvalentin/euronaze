@@ -5,7 +5,6 @@ import 'package:projet_dac/src/pages/cart_page.dart';
 import 'package:projet_dac/src/pages/admin/admin_search.dart';
 import 'package:projet_dac/src/pages/library.dart';
 import 'package:projet_dac/src/pages/user.dart';
-import 'package:projet_dac/theme.dart';
 import 'src/pages/home_page.dart';
 import 'src/pages/product_details_screen.dart';
 import 'package:projet_dac/src/pages/login.dart';
@@ -24,7 +23,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       title: 'Euronaze',
-      theme: myTheme,
       debugShowCheckedModeBanner: false,
       routerConfig: _router,
     );
