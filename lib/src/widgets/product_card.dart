@@ -220,6 +220,84 @@ class BasketProductCard extends StatelessWidget {
   }
 }
 
+class SearchProductCard extends StatelessWidget {
+  final Product product;
+
+  const SearchProductCard({super.key, required this.product});
+
+  @override
+  Widget build(BuildContext context) {
+    int id = product.productId;
+    return GestureDetector(
+      onTap: () => context.go('/product/$id'),
+      child: Card(
+        color: Colors.white,
+        elevation: 0,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            children: <Widget>[
+              ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Image.network(
+                  fit: BoxFit.cover,
+                  height: 100,
+                  width: 100,
+                  product.productImg,
+                ),
+              ),
+              const Spacer(),
+              CategoryTag(product.categoryId),
+              const Spacer(),
+              Expanded(
+                child: Align(
+                  alignment: Alignment.topRight,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      FittedBox(
+                        child: Text(
+                          product.productName,
+                          style: GoogleFonts.varela(
+                              textStyle: const TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w700,
+                            fontStyle: FontStyle.normal,
+                            color: Color(0xFF263b5e),
+                          )),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      FittedBox(
+                        child: Text(
+                          "\$${product.price}",
+                          style: const TextStyle(
+                            fontSize: 14,
+                            color: Colors.grey,
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(
+                width: 30,
+              ),
+              const SizedBox(
+                width: 10,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 Widget CategoryTag(int categoryId) {
   var color = const Color(0xFFFFFFFF).withOpacity(0.6);
   var cat = 'None';
