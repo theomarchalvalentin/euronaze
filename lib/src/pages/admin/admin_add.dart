@@ -28,7 +28,8 @@ class _AdminAddState extends State<AdminAdd> {
 
   // Product? product;
 
-  Uint8List? fileUpload;
+  //Uint8List? fileUpload;
+  PlatformFile? fileUpload;
 
   @override
   void initState() {
@@ -200,9 +201,11 @@ class _AdminAddState extends State<AdminAdd> {
                         onPressed: () async {
                           if (_formKey.currentState!.validate()) {
                             //String? result; result= await if necessary
-                            if (fileUpload != null) {
+                            if (fileUpload != null
+                                //&& fileUpload!.readStream != null
+                                ) {
                               try {
-                                await Api.postProduct(
+                                await Api.postProductMultipart(
                                     nameController.text,
                                     descriptionController.text,
                                     selectedCategory!,
@@ -258,7 +261,8 @@ class _AdminAddState extends State<AdminAdd> {
         .pickFiles(allowedExtensions: ["csv"], type: FileType.custom);
 
     if (result != null) {
-      fileUpload = result.files.single.bytes!;
+      //fileUpload = result.files.single.bytes!;
+      fileUpload = result.files.first;
       fileName = result.files.single.name;
     }
     setState(() {});

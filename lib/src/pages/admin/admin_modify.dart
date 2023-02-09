@@ -30,7 +30,8 @@ class _AdminModifyState extends State<AdminModify> {
 
   Product? product;
 
-  Uint8List? fileUpload;
+  //Uint8List? fileUpload;
+  PlatformFile? fileUpload;
 
   @override
   void initState() {
@@ -217,7 +218,7 @@ class _AdminModifyState extends State<AdminModify> {
                               _hasChanged()) {
                             //String? result; result= await if necessary
                             try {
-                              await Api.putProduct(
+                              await Api.putProductMultimap(
                                   product!.productId,
                                   nameController.text,
                                   descriptionController.text,
@@ -281,7 +282,7 @@ class _AdminModifyState extends State<AdminModify> {
         .pickFiles(allowedExtensions: ["csv"], type: FileType.custom);
 
     if (result != null) {
-      fileUpload = result.files.single.bytes!;
+      fileUpload = result.files.single;
       fileName = result.files.single.name;
     }
     setState(() {});

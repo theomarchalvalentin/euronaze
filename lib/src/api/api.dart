@@ -1,8 +1,13 @@
+import 'dart:io';
+
+import 'package:file_picker/file_picker.dart';
 import 'package:http/http.dart';
 import 'package:projet_dac/src/models/user_model.dart';
 import 'package:projet_dac/src/models/product_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
+import 'package:mime/mime.dart';
+import 'package:http_parser/http_parser.dart';
 
 import 'dart:typed_data';
 
@@ -458,6 +463,81 @@ class Api {
         Iterable l = json.decode(response.body);
 
         return List<double>.from(l.map((model) => model["prix"]));
+      } else {
+        throw Exception('fail');
+      }
+    } else {
+      throw NoTokenExeption();
+    }
+  }
+
+  static Future<void> postProductMultipart(
+      String productName,
+      String productDescription,
+      int categoryId,
+      String productImg,
+      double price,
+      PlatformFile file) async {
+    final prefs = await SharedPreferences.getInstance();
+    String? token = prefs.getString("token");
+    if (token != null) {
+      var request = MultipartRequest('POST',
+          Uri.parse('http://localhost:8080/api/service/produits/upload/'));
+      request.headers.addAll({'Authorization': 'Bearer $token'});
+
+      request.fields['nom'] = productName;
+      request.fields['description'] = productDescription;
+      request.fields['category'] = categoryId.toStringAsPrecision(2);
+      request.fields['image'] = productImg;
+      request.fields['prix'] = price.toString();
+
+      final multipartFile =
+          MultipartFile.fromBytes('data', file.bytes!, filename: file.name);
+      request.files.add(multipartFile);
+
+      final httpClient = Client();
+      final response = await httpClient.send(request);
+
+      if (response.statusCode == 200) {
+        return;
+      } else {
+        throw Exception('fail');
+      }
+    } else {
+      throw NoTokenExeption();
+    }
+  }
+
+  static Future<void> putProductMultimap(
+      //gestion du nul
+      int productId,
+      String productName,
+      String productDescription,
+      int categoryId,
+      String productImg,
+      double price,
+      {PlatformFile? file}) async {
+    final prefs = await SharedPreferences.getInstance();
+    String? token = prefs.getString("token");
+    if (token != null) {
+      var request = MultipartRequest('PUT',
+          Uri.parse('http://localhost:8080/api/service/produits/$productId'));
+      request.headers.addAll({'Authorization': 'Bearer $token'});
+      request.fields['nom'] = productName;
+      request.fields['description'] = productDescription;
+      request.fields['category'] = categoryId.toStringAsPrecision(2);
+      request.fields['image'] = productImg;
+      request.fields['prix'] = price.toString();
+      if (file != null) {
+        final multipartFile =
+            MultipartFile.fromBytes('data', file.bytes!, filename: file.name);
+        request.files.add(multipartFile);
+      }
+      final httpClient = Client();
+      final response = await httpClient.send(request);
+
+      if (response.statusCode == 200) {
+        return;
       } else {
         throw Exception('fail');
       }

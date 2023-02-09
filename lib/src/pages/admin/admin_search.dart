@@ -8,6 +8,7 @@ import 'package:projet_dac/src/widgets/product_card.dart';
 import '../../api/api.dart';
 import '../../models/category_model.dart';
 import '../../models/product_model.dart';
+import '../../widgets/appbars/admin_appbar.dart';
 
 List<String> listCat = listCategories
     .map((category) => category['categoryName'].toString())
@@ -74,7 +75,7 @@ class _AdminSearchState extends State<AdminSearch> {
     return Scaffold(
       backgroundColor: Colors.grey.shade100,
 
-      appBar: CustomAppBar(),
+      appBar: AdminAppBar(),
       //bottomSheet: const SizedBox(height: 120, child: CustomFooter()),
       body: SingleChildScrollView(
         physics: const AlwaysScrollableScrollPhysics(),
