@@ -246,7 +246,7 @@ class Api {
 
     String? token = prefs.getString("token");
     if (token != null) {
-      final response = await post(
+      final response = await put(
         Uri.parse('http://localhost:8080/api/user/cart/add/$productId'),
         headers: <String, String>{"Authorization": "Bearer $token"},
       );
@@ -268,7 +268,7 @@ class Api {
 
     String? token = prefs.getString("token");
     if (token != null) {
-      final response = await put(
+      final response = await post(
         Uri.parse('http://localhost:8080/api/user/cart/check'),
         headers: <String, String>{"Authorization": "Bearer $token"},
       );
