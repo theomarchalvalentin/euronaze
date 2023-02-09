@@ -30,11 +30,12 @@ class _ProductScreenDetailsState extends State<ProductScreenDetails> {
       0,
       "assets/images/productnotfound.png",
       0);
-
+  late List<double> data = [1.0, 2.0];
   @override
   void initState() {
     super.initState();
     _getProduct();
+    _getData();
   }
 
   _getProduct() async {
@@ -55,6 +56,24 @@ class _ProductScreenDetailsState extends State<ProductScreenDetails> {
       setState(() {
         // lock = false;
       });
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Unable to fetch Product')),
+      );
+    }
+  }
+
+  _getData() async {
+    try {
+      List<double> result = await Api.getData(widget.productId);
+      setState(() {
+        // lock = false;
+        data = result;
+      });
+    } on NoTokenExeption {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('No token found, please log again')),
+      );
+    } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Unable to fetch Product')),
       );
@@ -199,11 +218,12 @@ class _ProductScreenDetailsState extends State<ProductScreenDetails> {
                             height: MediaQuery.of(context).size.height * 0.04,
                           ),
                           Container(
-                              decoration: BoxDecoration(),
-                              clipBehavior: Clip.antiAlias,
-                              width: MediaQuery.of(context).size.width * 0.3,
-                              height: MediaQuery.of(context).size.height * 0.2,
-                              child: const LinePage())
+                            decoration: BoxDecoration(),
+                            clipBehavior: Clip.antiAlias,
+                            width: MediaQuery.of(context).size.width * 0.3,
+                            height: MediaQuery.of(context).size.height * 0.2,
+                            child: LinePage(data: data),
+                          )
                         ],
                       )
                     ],

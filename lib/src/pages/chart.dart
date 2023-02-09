@@ -7,7 +7,8 @@ import 'package:mrx_charts/mrx_charts.dart';
 import '../widgets/homepage/home_search_bar.dart';
 
 class LinePage extends StatefulWidget {
-  const LinePage({Key? key}) : super(key: key);
+  final List<double> data;
+  const LinePage({Key? key, required this.data}) : super(key: key);
 
   @override
   State<LinePage> createState() => _LinePageState();
@@ -36,8 +37,7 @@ class _LinePageState extends State<LinePage> {
   List<ChartLayer> layers() {
     final from = DateTime(2021, 4);
     final to = DateTime(2021, 8);
-    final frequency =
-        (to.millisecondsSinceEpoch - from.millisecondsSinceEpoch) / 3.0;
+    final frequency = 1;
     return [
       ChartHighlightLayer(
         shape: () => ChartHighlightLineShape<ChartLineDataItem>(
@@ -50,34 +50,35 @@ class _LinePageState extends State<LinePage> {
       ChartAxisLayer(
         settings: ChartAxisSettings(
           x: ChartAxisSettingsAxis(
-            frequency: frequency,
-            max: to.millisecondsSinceEpoch.toDouble(),
-            min: from.millisecondsSinceEpoch.toDouble(),
+            frequency: 1,
+            max: widget.data.length.toDouble() - 1,
+            min: 0,
             textStyle: const TextStyle(
               color: Colors.black,
               fontSize: 10.0,
             ),
           ),
-          y: const ChartAxisSettingsAxis(
-            frequency: 100.0,
-            max: 400.0,
-            min: 0.0,
+          y: ChartAxisSettingsAxis(
+            frequency:
+                (widget.data.reduce(max) - widget.data.reduce(min)).abs() / 2,
+            max: widget.data.reduce(max),
+            min: widget.data.reduce(min),
             textStyle: TextStyle(
               color: Colors.black,
               fontSize: 10.0,
             ),
           ),
         ),
-        labelX: (value) => DateFormat('MMM')
-            .format(DateTime.fromMillisecondsSinceEpoch(value.toInt())),
+        labelX: (value) =>
+            "d-" + (widget.data.length - value).toInt().toString(),
         labelY: (value) => value.toInt().toString(),
       ),
       ChartLineLayer(
         items: List.generate(
-          4,
+          widget.data.length,
           (index) => ChartLineDataItem(
-            x: (index * frequency) + from.millisecondsSinceEpoch,
-            value: Random().nextInt(380) + 20,
+            x: index.toDouble(),
+            value: widget.data[index],
           ),
         ),
         settings: const ChartLineSettings(
