@@ -198,12 +198,12 @@ class _ProductScreenDetailsState extends State<ProductScreenDetails> {
                           SizedBox(
                             height: MediaQuery.of(context).size.height * 0.04,
                           ),
-                          Container(
-                              decoration: BoxDecoration(),
-                              clipBehavior: Clip.antiAlias,
-                              width: MediaQuery.of(context).size.width * 0.3,
-                              height: MediaQuery.of(context).size.height * 0.2,
-                              child: const LinePage())
+                          // Container(
+                          //     decoration: BoxDecoration(),
+                          //     clipBehavior: Clip.antiAlias,
+                          //     width: MediaQuery.of(context).size.width * 0.3,
+                          //     height: MediaQuery.of(context).size.height * 0.2,
+                          //     child: const LinePage())
                         ],
                       )
                     ],
