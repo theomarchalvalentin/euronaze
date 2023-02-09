@@ -208,12 +208,12 @@ class _ProductScreenDetailsState extends State<ProductScreenDetails> {
                           SizedBox(
                             height: MediaQuery.of(context).size.height * 0.03,
                           ),
-                          SingleChildScrollView(
-                            physics: AlwaysScrollableScrollPhysics(),
-                            scrollDirection: Axis.horizontal,
-                            child: SizedBox(
-                              height: MediaQuery.of(context).size.height * 0.1,
-                              width: MediaQuery.of(context).size.width * 0.25,
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.1,
+                            width: MediaQuery.of(context).size.width * 0.25,
+                            child: SingleChildScrollView(
+                              scrollDirection: Axis.vertical,
+                              physics: AlwaysScrollableScrollPhysics(),
                               child: Text(lorem(paragraphs: 1, words: 40),
                                   style: const TextStyle(
                                       color: Colors.black, fontSize: 15.0)),
