@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lottie/lottie.dart';
 import 'package:projet_dac/src/widgets/custom_footer.dart';
 import 'package:projet_dac/src/widgets/appbars/app_bar.dart';
 import 'package:projet_dac/src/widgets/product_card.dart';
@@ -80,53 +81,68 @@ class _SearchPageState extends State<SearchPage> {
         scrollDirection: Axis.vertical,
         child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(40.0, 40.0, 40.0, 0),
-              child: Column(
-                children: <Widget>[
-                  SizedBox(
+            Column(
+              children: <Widget>[
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 50, horizontal: 50),
+                  child: SizedBox(
                     height: MediaQuery.of(context).size.height - 80,
                     child: Row(
                       children: [
                         Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Align(
-                              alignment: Alignment.topLeft,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  RichText(
-                                    textAlign: TextAlign.start,
-                                    text: TextSpan(
-                                      text: 'Search ',
-                                      style: GoogleFonts.varela(
-                                          textStyle: const TextStyle(
-                                        fontSize: 35,
-                                        fontWeight: FontWeight.w600,
-                                        fontStyle: FontStyle.normal,
-                                        color: Color(0xFF263b5e),
-                                      )),
-                                      children: [
-                                        TextSpan(
-                                          text: 'for products: ',
-                                          style: GoogleFonts.varela(
-                                              textStyle: const TextStyle(
-                                            fontSize: 30,
-                                            fontWeight: FontWeight.w500,
-                                            fontStyle: FontStyle.normal,
-                                            color: Color(0xFF263b5e),
-                                          )),
-                                        ),
-                                      ],
+                            Column(
+                              children: [
+                                Column(
+                                  children: [
+                                    Container(
+                                      constraints:
+                                          BoxConstraints(maxHeight: 100),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        children: [
+                                          Lottie.asset(
+                                              'assets/images/rocket.json'),
+                                          RichText(
+                                            textAlign: TextAlign.start,
+                                            text: TextSpan(
+                                              text: ' Search ',
+                                              style: GoogleFonts.varela(
+                                                  textStyle: const TextStyle(
+                                                fontSize: 35,
+                                                fontWeight: FontWeight.w600,
+                                                fontStyle: FontStyle.normal,
+                                                color: Color(0xFF263b5e),
+                                              )),
+                                              children: [
+                                                TextSpan(
+                                                  text: 'for products: ',
+                                                  style: GoogleFonts.varela(
+                                                      textStyle:
+                                                          const TextStyle(
+                                                    fontSize: 30,
+                                                    fontWeight: FontWeight.w500,
+                                                    fontStyle: FontStyle.normal,
+                                                    color: Color(0xFF263b5e),
+                                                  )),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                  const Divider(
-                                    color: Colors.black,
-                                  ),
-                                  const SizedBox(height: 30),
-                                ],
-                              ),
+                                  ],
+                                ),
+                                const Divider(
+                                  color: Colors.black,
+                                ),
+                                const SizedBox(height: 30),
+                              ],
                             ),
                             Card(
                               shape: RoundedRectangleBorder(
@@ -138,7 +154,7 @@ class _SearchPageState extends State<SearchPage> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      'Rechercher par nom:',
+                                      'Search by name:',
                                       style: GoogleFonts.varela(
                                           textStyle: const TextStyle(
                                         fontSize: 20,
@@ -168,7 +184,7 @@ class _SearchPageState extends State<SearchPage> {
                                             fillColor: null,
                                             hoverColor: null,
                                             prefixIconColor: null,
-                                            hintText: 'Rechercher',
+                                            hintText: 'Search',
                                             prefixIcon: Icon(Icons.search),
                                           ),
                                           onChanged: (value) {
@@ -215,37 +231,76 @@ class _SearchPageState extends State<SearchPage> {
                         SizedBox(
                           width: MediaQuery.of(context).size.width * 0.04,
                         ),
-                        Flexible(
-                          child: SingleChildScrollView(
-                            child: Padding(
-                              padding: const EdgeInsets.only(right: 10.0),
-                              child: Align(
-                                alignment: Alignment.topLeft,
-                                child: ListView.builder(
-                                  physics:
-                                      const AlwaysScrollableScrollPhysics(),
-                                  scrollDirection: Axis.vertical,
-                                  shrinkWrap: true,
-                                  itemCount: _filteredProducts.length,
-                                  itemBuilder: (context, index) {
-                                    return SearchProductCard(
-                                        product: _filteredProducts[index]);
-                                  },
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
+                        SearchResults(filteredProducts: _filteredProducts),
                       ],
                     ),
-                  )
-                ],
-              ),
+                  ),
+                )
+              ],
             ),
             const CustomFooter(),
           ],
         ),
       ),
     );
+  }
+}
+
+class SearchResults extends StatelessWidget {
+  const SearchResults({
+    super.key,
+    required List<Product> filteredProducts,
+  }) : _filteredProducts = filteredProducts;
+
+  final List<Product> _filteredProducts;
+
+  @override
+  Widget build(BuildContext context) {
+    return _filteredProducts.isNotEmpty
+        ? Flexible(
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.only(right: 10.0),
+                child: Align(
+                  alignment: Alignment.topLeft,
+                  child: ListView.builder(
+                    physics: const AlwaysScrollableScrollPhysics(),
+                    scrollDirection: Axis.vertical,
+                    shrinkWrap: true,
+                    itemCount: _filteredProducts.length,
+                    itemBuilder: (context, index) {
+                      return SearchProductCard(
+                          product: _filteredProducts[index]);
+                    },
+                  ),
+                ),
+              ),
+            ),
+          )
+        : Flexible(
+            child: SingleChildScrollView(
+              child: Align(
+                alignment: Alignment.center,
+                child: Column(
+                  children: [
+                    Icon(
+                      Icons.search,
+                      color: Color(0xFF263b5e).withOpacity(0.6),
+                    ),
+                    Text(
+                      'Begin typing\nto see results...',
+                      style: GoogleFonts.varela(
+                          textStyle: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w500,
+                        fontStyle: FontStyle.normal,
+                        color: Color(0xFF263b5e).withOpacity(0.6),
+                      )),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          );
   }
 }

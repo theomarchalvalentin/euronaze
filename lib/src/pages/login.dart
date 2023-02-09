@@ -76,7 +76,11 @@ class _LoginPageState extends State<LoginPage> {
               ),
               TextFormField(
                 controller: emailController,
-                decoration: const InputDecoration(labelText: 'Email'),
+                decoration: const InputDecoration(
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black),
+                    ),
+                    labelText: 'Email'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter some text';
@@ -108,7 +112,12 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               TextFormField(
                 controller: passwordController,
-                decoration: const InputDecoration(labelText: 'Password'),
+                decoration: const InputDecoration(
+                  labelText: 'Password',
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black),
+                  ),
+                ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter some text';
