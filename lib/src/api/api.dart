@@ -178,7 +178,7 @@ class Api {
     String? token = prefs.getString("token");
     if (token != null) {
       final response = await get(
-        Uri.parse('http://localhost:8080/api/trending'),
+        Uri.parse('http://localhost:8080/api/service/trending'),
         headers: <String, String>{"Authorization": "Bearer $token"},
       );
 
