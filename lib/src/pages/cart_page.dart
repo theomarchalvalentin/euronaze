@@ -242,13 +242,15 @@ class _CartPageState extends State<CartPage> {
                                                 : () async {
                                                     try {
                                                       await Api.checkCart();
-                                                      ScaffoldMessenger.of(
-                                                              context)
-                                                          .showSnackBar(
-                                                        const SnackBar(
-                                                            content: Text(
-                                                                'Transaction Successful')),
-                                                      );
+                                                      if (context.mounted) {
+                                                        ScaffoldMessenger.of(
+                                                                context)
+                                                            .showSnackBar(
+                                                          const SnackBar(
+                                                              content: Text(
+                                                                  'Transaction Successful')),
+                                                        );
+                                                      }
                                                     } catch (e) {
                                                       ScaffoldMessenger.of(
                                                               context)
