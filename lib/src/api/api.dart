@@ -438,4 +438,26 @@ class Api {
     String url = "http://localhost:8080/api/service/produits/download/$id";
     window.open(url, 'Download');
   }
+
+  static Future<List<double>> getData(int id) async {
+    final prefs = await SharedPreferences.getInstance();
+
+    String? token = prefs.getString("token");
+    if (token != null) {
+      final response = await get(
+        Uri.parse('http://localhost:8080/api/service/produits/data/$id'),
+        headers: <String, String>{"Authorization": "Bearer $token"},
+      );
+
+      if (response.statusCode == 200) {
+        Iterable l = json.decode(response.body);
+
+        return List<double>.from(l.map((model) => model["prix"]));
+      } else {
+        throw Exception('fail');
+      }
+    } else {
+      throw NoTokenExeption();
+    }
+  }
 }

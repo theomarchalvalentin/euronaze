@@ -21,12 +21,14 @@ class CarouselSlider extends StatefulWidget {
 class _CarouselSliderState extends State<CarouselSlider> {
   final controller =
       SliderController(duration: const Duration(milliseconds: 600));
-  List<Product> products = [];
+  List<Product> products = [
+    Product(0, 'productName', 'productDescription', 0, 'productImg', 0),
+  ];
 
   @override
   void initState() {
-    super.initState();
     _getTrending();
+    super.initState();
   }
 
   _getTrending() async {
@@ -61,7 +63,7 @@ class _CarouselSliderState extends State<CarouselSlider> {
       controller: controller,
       infiniteScroll: true,
       pageSnapping: true,
-      itemCount: listCategories.length,
+      itemCount: products.length,
       itemBuilder: (context, index, activeIndex) {
         return CupertinoButton(
           onPressed: () async => {
