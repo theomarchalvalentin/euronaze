@@ -30,7 +30,7 @@ class _ProductScreenDetailsState extends State<ProductScreenDetails> {
       0,
       "assets/images/productnotfound.png",
       0);
-  late List<double> data = [1.0, 2.0];
+  late List<double> data = [0.0, 0.0];
   @override
   void initState() {
     super.initState();
