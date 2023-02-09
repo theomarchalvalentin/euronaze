@@ -21,12 +21,14 @@ class CarouselSlider extends StatefulWidget {
 class _CarouselSliderState extends State<CarouselSlider> {
   final controller =
       SliderController(duration: const Duration(milliseconds: 600));
-  List<Product> products = [];
+  List<Product> products = [
+    Product(0, 'productName', 'productDescription', 0, 'productImg', 0)
+  ];
 
   @override
   void initState() {
-    super.initState();
     _getTrending();
+    super.initState();
   }
 
   _getTrending() async {
