@@ -217,7 +217,7 @@ class _AdminAddState extends State<AdminAdd> {
                                   // mouai
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     const SnackBar(
-                                        content: Text('Successfully Modified')),
+                                        content: Text('Successfully Added')),
                                   );
                                 }
                               } on NoTokenExeption {
