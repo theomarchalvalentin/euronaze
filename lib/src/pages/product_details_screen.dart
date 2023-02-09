@@ -175,7 +175,7 @@ class _ProductScreenDetailsState extends State<ProductScreenDetails> {
             SizedBox(
               height: 30,
             ),
-            // const CustomFooter(),
+            const CustomFooter(),
           ],
         ),
       ),
