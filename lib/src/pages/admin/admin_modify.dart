@@ -1,24 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:projet_dac/src/api/product_model.dart';
-import '../api/api.dart';
-import '../api/category_model.dart';
-import '../widgets/theadminappbar.dart';
+import 'package:projet_dac/src/models/product_model.dart';
+import '../../api/api.dart';
+import '../../models/category_model.dart';
+import '../../widgets/appbars/admin_appbar.dart';
 
 import 'package:file_picker/file_picker.dart';
 import 'dart:typed_data';
 
 //cas ou plusieurs modifs
 
-class AdminAdd extends StatefulWidget {
-  const AdminAdd({super.key});
+class AdminModify extends StatefulWidget {
+  const AdminModify({super.key, required this.productId});
+  final int productId;
 
   @override
-  State<StatefulWidget> createState() => _AdminAddState();
+  State<StatefulWidget> createState() => _AdminModifyState();
 }
 
-class _AdminAddState extends State<AdminAdd> {
+class _AdminModifyState extends State<AdminModify> {
   final _formKey = GlobalKey<FormState>();
-  String fileName = "None";
+  String? fileName;
 
   TextEditingController nameController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
@@ -27,25 +28,38 @@ class _AdminAddState extends State<AdminAdd> {
 
   int? selectedCategory;
 
-  // Product? product;
+  Product? product;
 
   Uint8List? fileUpload;
 
   @override
   void initState() {
     super.initState();
+    _getProduct();
   }
 
-  _reset() {
-    setState(() {
-      nameController.text = "";
-      descriptionController.text = "";
-      imageController.text = "";
-      priceController.text = "";
-      selectedCategory = null;
-      fileName = "None";
-      fileUpload = null;
-    });
+  _getProduct() async {
+    try {
+      product = await Api.getProduct(widget.productId);
+      setState(() {
+        nameController.text = product!.productName;
+        descriptionController.text = product!.productDescription;
+        imageController.text = product!.productImg;
+        priceController.text = product!.price.toStringAsPrecision(2);
+        selectedCategory = product!.categoryId;
+        fileName = "Current";
+
+        // lock = false;
+      });
+    } on NoTokenExeption {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('No token found, please log again')),
+      );
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Unable to fetch Product')),
+      );
+    }
   }
 
   final List<DropdownMenuItem<int>> _dropdownItems =
@@ -91,7 +105,7 @@ class _AdminAddState extends State<AdminAdd> {
                   child: Column(
                     children: <Widget>[
                       const Text(
-                        "Add a product :",
+                        "Modify a product :",
                         style: TextStyle(
                           color: Color.fromARGB(255, 70, 70, 71),
                           fontWeight: FontWeight.bold,
@@ -199,43 +213,37 @@ class _AdminAddState extends State<AdminAdd> {
                       ),
                       ElevatedButton(
                         onPressed: () async {
-                          if (_formKey.currentState!.validate()) {
+                          if (_formKey.currentState!.validate() &&
+                              _hasChanged()) {
                             //String? result; result= await if necessary
-                            if (fileUpload != null) {
-                              try {
-                                await Api.postProduct(
-                                    nameController.text,
-                                    descriptionController.text,
-                                    selectedCategory!,
-                                    imageController.text,
-                                    double.parse(priceController.text),
-                                    fileUpload!);
-                                _reset();
-                                if (context.mounted) {
-                                  // mouai
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                        content: Text('Successfully Modified')),
-                                  );
-                                }
-                              } on NoTokenExeption {
+                            try {
+                              await Api.putProduct(
+                                  product!.productId,
+                                  nameController.text,
+                                  descriptionController.text,
+                                  selectedCategory!,
+                                  imageController.text,
+                                  double.parse(priceController.text),
+                                  file: fileUpload);
+                              await _getProduct();
+                              if (context.mounted) {
+                                // mouai
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   const SnackBar(
-                                      content: Text(
-                                          'No Token found, please log again')),
-                                );
-                              } catch (e) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                      content: Text(
-                                          'Unabled to Modify, please make sure informations are correct and try again')),
+                                      content: Text('Successfully Modified')),
                                 );
                               }
-                            } else {
+                            } on NoTokenExeption {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(
                                     content: Text(
-                                        'Invalid .csv, please select a valid .csv and try again')),
+                                        'No Token found, please log again')),
+                              );
+                            } catch (e) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                    content: Text(
+                                        'Unabled to Modify, please make sure informations are correct and try again')),
                               );
                             }
                           }
@@ -252,6 +260,20 @@ class _AdminAddState extends State<AdminAdd> {
             ),
           ),
         ));
+  }
+
+  bool _hasChanged() {
+    bool result = nameController.text != product!.productName ||
+        descriptionController.text != product!.productDescription ||
+        selectedCategory != product!.categoryId ||
+        fileName != "Current" ||
+        priceController.text != product!.price.toStringAsPrecision(2);
+    if (!result) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('You have not changed informations')),
+      );
+    }
+    return result;
   }
 
   Future<void> _selectFile() async {

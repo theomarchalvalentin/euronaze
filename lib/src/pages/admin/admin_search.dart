@@ -2,13 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:projet_dac/src/widgets/custom_footer.dart';
-import 'package:projet_dac/src/widgets/theadminappbar.dart';
-import 'package:projet_dac/src/widgets/theappbar.dart';
+import 'package:projet_dac/src/widgets/appbars/app_bar.dart';
 import 'package:projet_dac/src/widgets/product_card.dart';
 
-import '../api/api.dart';
-import '../api/category_model.dart';
-import '../api/product_model.dart';
+import '../../api/api.dart';
+import '../../models/category_model.dart';
+import '../../models/product_model.dart';
 
 List<String> listCat = listCategories
     .map((category) => category['categoryName'].toString())
@@ -75,7 +74,7 @@ class _AdminSearchState extends State<AdminSearch> {
     return Scaffold(
       backgroundColor: Colors.grey.shade100,
 
-      appBar: AdminAppBar(),
+      appBar: CustomAppBar(),
       //bottomSheet: const SizedBox(height: 120, child: CustomFooter()),
       body: SingleChildScrollView(
         physics: const AlwaysScrollableScrollPhysics(),
@@ -101,7 +100,7 @@ class _AdminSearchState extends State<AdminSearch> {
                                   RichText(
                                     textAlign: TextAlign.start,
                                     text: TextSpan(
-                                      text: 'Recherche ',
+                                      text: 'Search ',
                                       style: GoogleFonts.varela(
                                           textStyle: const TextStyle(
                                         fontSize: 35,
@@ -111,7 +110,7 @@ class _AdminSearchState extends State<AdminSearch> {
                                       )),
                                       children: [
                                         TextSpan(
-                                          text: 'de produits: ',
+                                          text: 'for products: ',
                                           style: GoogleFonts.varela(
                                               textStyle: const TextStyle(
                                             fontSize: 30,
@@ -185,7 +184,7 @@ class _AdminSearchState extends State<AdminSearch> {
                                     ),
                                     const SizedBox(height: 50),
                                     Text(
-                                      'Filtrer par catégorie: ',
+                                      'Filter by category',
                                       style: GoogleFonts.varela(
                                           textStyle: const TextStyle(
                                         fontSize: 20,

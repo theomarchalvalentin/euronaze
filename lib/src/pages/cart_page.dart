@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:projet_dac/src/widgets/custom_footer.dart';
-import 'package:projet_dac/src/widgets/theappbar.dart';
+import 'package:projet_dac/src/widgets/appbars/app_bar.dart';
 import 'package:projet_dac/src/widgets/product_card.dart';
 
 import '../api/api.dart';
-import '../api/category_model.dart';
-import '../api/product_model.dart';
+import '../models/category_model.dart';
+import '../models/product_model.dart';
 
 double listViewTotal(List<Product> products) {
   double total = 0.0;
@@ -118,26 +118,14 @@ class _CartPageState extends State<CartPage> {
                                 children: [
                                   RichText(
                                     text: TextSpan(
-                                      text: 'Théo, ',
+                                      text: 'Your basket\ncurrently contains: ',
                                       style: GoogleFonts.varela(
                                           textStyle: const TextStyle(
-                                        fontSize: 35,
-                                        fontWeight: FontWeight.w600,
+                                        fontSize: 30,
+                                        fontWeight: FontWeight.w500,
                                         fontStyle: FontStyle.normal,
                                         color: Color(0xFF263b5e),
                                       )),
-                                      children: [
-                                        TextSpan(
-                                          text: 'voici votre panier: ',
-                                          style: GoogleFonts.varela(
-                                              textStyle: const TextStyle(
-                                            fontSize: 30,
-                                            fontWeight: FontWeight.w500,
-                                            fontStyle: FontStyle.normal,
-                                            color: Color(0xFF263b5e),
-                                          )),
-                                        ),
-                                      ],
                                     ),
                                   ),
                                   const Divider(
@@ -159,7 +147,7 @@ class _CartPageState extends State<CartPage> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      'Rechercher par nom dans le panier: ',
+                                      'Search by name in basket:',
                                       style: GoogleFonts.varela(
                                           textStyle: const TextStyle(
                                         fontSize: 20,
@@ -198,7 +186,7 @@ class _CartPageState extends State<CartPage> {
                                     ),
                                     const SizedBox(height: 50),
                                     Text(
-                                      'Filtrer par catégorie: ',
+                                      'Filter by category',
                                       style: GoogleFonts.varela(
                                           textStyle: const TextStyle(
                                         fontSize: 20,
@@ -283,7 +271,7 @@ class _CartPageState extends State<CartPage> {
                                                       vertical: 5,
                                                       horizontal: 10),
                                               child: const Text(
-                                                '🛒 Valider le panier',
+                                                '🛒 Checkout',
                                                 style: TextStyle(
                                                     color: Colors.black,
                                                     fontSize: 20.0),

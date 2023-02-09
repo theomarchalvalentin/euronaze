@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:mrx_charts/mrx_charts.dart';
 
-import '../widgets/homepage/home_search_bar.dart';
+import '../homepage/home_search_bar.dart';
 
 class LinePage extends StatefulWidget {
   final List<double> data;

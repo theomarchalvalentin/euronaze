@@ -1,6 +1,6 @@
 import 'package:http/http.dart';
-import 'package:projet_dac/src/api/user_model.dart';
-import 'package:projet_dac/src/api/product_model.dart';
+import 'package:projet_dac/src/models/user_model.dart';
+import 'package:projet_dac/src/models/product_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 

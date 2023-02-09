@@ -6,8 +6,8 @@ import 'package:projet_dac/src/pages/product_details_screen.dart';
 import 'package:widget_slider/widget_slider.dart';
 
 import '../../api/api.dart';
-import '../../api/category_model.dart';
-import '../../api/product_model.dart';
+import '../../models/category_model.dart';
+import '../../models/product_model.dart';
 
 class CarouselSlider extends StatefulWidget {
   CarouselSlider({
