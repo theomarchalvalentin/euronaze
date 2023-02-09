@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:projet_dac/src/widgets/custom_footer.dart';
+import 'package:projet_dac/src/widgets/theadminappbar.dart';
 import 'package:projet_dac/src/widgets/theappbar.dart';
 import 'package:projet_dac/src/widgets/product_card.dart';
 
@@ -74,7 +75,7 @@ class _AdminSearchState extends State<AdminSearch> {
     return Scaffold(
       backgroundColor: Colors.grey.shade100,
 
-      appBar: CustomAppBar(),
+      appBar: AdminAppBar(),
       //bottomSheet: const SizedBox(height: 120, child: CustomFooter()),
       body: SingleChildScrollView(
         physics: const AlwaysScrollableScrollPhysics(),
