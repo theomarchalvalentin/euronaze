@@ -91,7 +91,7 @@ class _AdminAddState extends State<AdminAdd> {
                   child: Column(
                     children: <Widget>[
                       const Text(
-                        "Modify a product :",
+                        "Add a product :",
                         style: TextStyle(
                           color: Color.fromARGB(255, 70, 70, 71),
                           fontWeight: FontWeight.bold,
