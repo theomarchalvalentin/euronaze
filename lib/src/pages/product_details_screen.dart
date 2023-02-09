@@ -29,13 +29,15 @@ class _ProductScreenDetailsState extends State<ProductScreenDetails> {
       0,
       "assets/images/productnotfound.png",
       0);
-  late List<double> data = [0.0, 0.0];
+  late List<double> data = [0.1, 0.0];
   @override
   void initState() {
     super.initState();
     _getProduct();
     _getData();
   }
+
+  List<Product> cart = [];
 
   _getProduct() async {
     try {
@@ -74,7 +76,7 @@ class _ProductScreenDetailsState extends State<ProductScreenDetails> {
       );
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Unable to fetch Product')),
+        const SnackBar(content: Text('Unable to fetch Data')),
       );
     }
   }
@@ -165,7 +167,31 @@ class _ProductScreenDetailsState extends State<ProductScreenDetails> {
                                     ),
                                   ),
                                   TextButton(
-                                    onPressed: () {},
+                                    onPressed: () async {
+                                      try {
+                                        await Api.addCart(product.productId);
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          const SnackBar(
+                                              content: Text(
+                                                  'Successfully added to Cart')),
+                                        );
+                                      } on AlreadyInCart {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          const SnackBar(
+                                              content: Text(
+                                                  'Product already in cart')),
+                                        );
+                                      } catch (e) {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          const SnackBar(
+                                              content: Text(
+                                                  'Unable to add to cart')),
+                                        );
+                                      }
+                                    },
                                     child: Container(
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(10),
