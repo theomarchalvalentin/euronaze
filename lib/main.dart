@@ -44,10 +44,6 @@ final _router = GoRouter(
       builder: (context, state) => const HomePage2(),
     ),
     GoRoute(
-      path: '/home2',
-      builder: (context, state) => const HomePage2(),
-    ),
-    GoRoute(
       path: '/user',
       builder: (context, state) => const UserPage(),
     ),
