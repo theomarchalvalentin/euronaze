@@ -170,12 +170,14 @@ class _ProductScreenDetailsState extends State<ProductScreenDetails> {
                                     onPressed: () async {
                                       try {
                                         await Api.addCart(product.productId);
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(
-                                          const SnackBar(
-                                              content: Text(
-                                                  'Successfully added to Cart')),
-                                        );
+                                        if (context.mounted) {
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            const SnackBar(
+                                                content: Text(
+                                                    'Successfully added to Cart')),
+                                          );
+                                        }
                                       } on AlreadyInCart {
                                         ScaffoldMessenger.of(context)
                                             .showSnackBar(

@@ -1,13 +1,9 @@
-import 'dart:io';
-
 import 'package:file_picker/file_picker.dart';
 import 'package:http/http.dart';
 import 'package:projet_dac/src/models/user_model.dart';
 import 'package:projet_dac/src/models/product_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
-import 'package:mime/mime.dart';
-import 'package:http_parser/http_parser.dart';
 
 import 'dart:typed_data';
 

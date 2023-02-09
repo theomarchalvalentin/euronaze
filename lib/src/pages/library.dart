@@ -316,7 +316,7 @@ class SearchLibrary extends StatelessWidget {
                   children: [
                     Icon(
                       Icons.warning_amber_rounded,
-                      color: Color(0xFF263b5e).withOpacity(0.6),
+                      color: const Color(0xFF263b5e).withOpacity(0.6),
                     ),
                     Text(
                       'Your library is empty...',
@@ -325,7 +325,7 @@ class SearchLibrary extends StatelessWidget {
                         fontSize: 15,
                         fontWeight: FontWeight.w500,
                         fontStyle: FontStyle.normal,
-                        color: Color(0xFF263b5e).withOpacity(0.6),
+                        color: const Color(0xFF263b5e).withOpacity(0.6),
                       )),
                     ),
                   ],

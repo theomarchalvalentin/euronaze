@@ -100,7 +100,7 @@ class _SearchPageState extends State<SearchPage> {
                                   children: [
                                     Container(
                                       constraints:
-                                          BoxConstraints(maxHeight: 100),
+                                          const BoxConstraints(maxHeight: 100),
                                       child: Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceEvenly,
@@ -285,7 +285,7 @@ class SearchResults extends StatelessWidget {
                   children: [
                     Icon(
                       Icons.search,
-                      color: Color(0xFF263b5e).withOpacity(0.6),
+                      color: const Color(0xFF263b5e).withOpacity(0.6),
                     ),
                     Text(
                       'Begin typing\nto see results...',
@@ -294,7 +294,7 @@ class SearchResults extends StatelessWidget {
                         fontSize: 15,
                         fontWeight: FontWeight.w500,
                         fontStyle: FontStyle.normal,
-                        color: Color(0xFF263b5e).withOpacity(0.6),
+                        color: const Color(0xFF263b5e).withOpacity(0.6),
                       )),
                     ),
                   ],

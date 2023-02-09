@@ -116,7 +116,7 @@ class _CartPageState extends State<CartPage> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceAround,
                                 children: [
-                                  Container(
+                                  SizedBox(
                                     height: MediaQuery.of(context).size.height *
                                         0.25,
                                     child: Align(
@@ -279,11 +279,13 @@ class _CartPageState extends State<CartPage> {
                                                                       try {
                                                                         await Api
                                                                             .checkCart();
-                                                                        ScaffoldMessenger.of(context)
-                                                                            .showSnackBar(
-                                                                          const SnackBar(
-                                                                              content: Text('Transaction Successful')),
-                                                                        );
+                                                                        if (context
+                                                                            .mounted) {
+                                                                          ScaffoldMessenger.of(context)
+                                                                              .showSnackBar(
+                                                                            const SnackBar(content: Text('Transaction Successful')),
+                                                                          );
+                                                                        }
                                                                       } catch (e) {
                                                                         ScaffoldMessenger.of(context)
                                                                             .showSnackBar(
@@ -314,10 +316,11 @@ class _CartPageState extends State<CartPage> {
                                                                     vertical: 5,
                                                                     horizontal:
                                                                         10),
-                                                            child: FittedBox(
+                                                            child:
+                                                                const FittedBox(
                                                               fit: BoxFit
                                                                   .fitWidth,
-                                                              child: const Text(
+                                                              child: Text(
                                                                 '🛒 Checkout',
                                                                 style: TextStyle(
                                                                     color: Colors
@@ -328,7 +331,7 @@ class _CartPageState extends State<CartPage> {
                                                             ),
                                                           ),
                                                         ),
-                                                        SizedBox(
+                                                        const SizedBox(
                                                           height: 15,
                                                         ),
                                                         TextButton(
@@ -382,7 +385,8 @@ class _CartPageState extends State<CartPage> {
                                                                     vertical: 5,
                                                                     horizontal:
                                                                         30),
-                                                            child: FittedBox(
+                                                            child:
+                                                                const FittedBox(
                                                               fit: BoxFit
                                                                   .fitWidth,
                                                               child: Text(
@@ -435,7 +439,7 @@ class _CartPageState extends State<CartPage> {
                                         children: [
                                           Icon(
                                             Icons.shopping_cart_outlined,
-                                            color: Color(0xFF263b5e)
+                                            color: const Color(0xFF263b5e)
                                                 .withOpacity(0.6),
                                           ),
                                           Text(
@@ -445,7 +449,7 @@ class _CartPageState extends State<CartPage> {
                                               fontSize: 15,
                                               fontWeight: FontWeight.w500,
                                               fontStyle: FontStyle.normal,
-                                              color: Color(0xFF263b5e)
+                                              color: const Color(0xFF263b5e)
                                                   .withOpacity(0.6),
                                             )),
                                           ),
@@ -464,7 +468,7 @@ class _CartPageState extends State<CartPage> {
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.05,
             ),
-            CustomFooter(),
+            const CustomFooter(),
           ],
         ),
       ),

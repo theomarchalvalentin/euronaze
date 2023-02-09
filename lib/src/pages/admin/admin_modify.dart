@@ -5,7 +5,6 @@ import '../../models/category_model.dart';
 import '../../widgets/appbars/admin_appbar.dart';
 
 import 'package:file_picker/file_picker.dart';
-import 'dart:typed_data';
 
 //cas ou plusieurs modifs
 

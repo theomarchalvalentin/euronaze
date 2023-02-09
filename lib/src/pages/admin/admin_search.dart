@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:projet_dac/src/widgets/custom_footer.dart';
-import 'package:projet_dac/src/widgets/appbars/app_bar.dart';
 import 'package:projet_dac/src/widgets/product_card.dart';
 
 import '../../api/api.dart';

@@ -97,39 +97,37 @@ class _UserPageState extends State<UserPage> {
                       width: width,
                       height: height * 0.98,
                     ),
-                    Container(
-                      child: Column(
-                        children: [
-                          Align(
-                            alignment: Alignment.topRight,
-                            child: FittedBox(
-                              fit: BoxFit.scaleDown,
+                    Column(
+                      children: [
+                        Align(
+                          alignment: Alignment.topRight,
+                          child: FittedBox(
+                            fit: BoxFit.scaleDown,
+                            child: Padding(
+                              padding: EdgeInsets.only(
+                                  top: width * 0.05, left: width * 0.05),
                               child: Padding(
-                                padding: EdgeInsets.only(
-                                    top: width * 0.05, left: width * 0.05),
-                                child: Padding(
-                                  padding: EdgeInsets.only(right: width * 0.05),
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(20),
-                                        color: Colors.black.withOpacity(0.6),
-                                        backgroundBlendMode: BlendMode.darken),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(20.0),
-                                      child: FittedBox(
-                                        clipBehavior: Clip.antiAlias,
-                                        child: Text(
-                                          "Your informations are safe, \n here",
-                                          style: GoogleFonts.varela(
-                                              textStyle: const TextStyle(
-                                            fontSize: 42,
-                                            fontWeight: FontWeight.bold,
-                                            fontStyle: FontStyle.normal,
-                                            color: Color.fromARGB(
-                                                255, 255, 255, 255),
-                                          )),
-                                          textAlign: TextAlign.left,
-                                        ),
+                                padding: EdgeInsets.only(right: width * 0.05),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(20),
+                                      color: Colors.black.withOpacity(0.6),
+                                      backgroundBlendMode: BlendMode.darken),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(20.0),
+                                    child: FittedBox(
+                                      clipBehavior: Clip.antiAlias,
+                                      child: Text(
+                                        "Your informations are safe, \n here",
+                                        style: GoogleFonts.varela(
+                                            textStyle: const TextStyle(
+                                          fontSize: 42,
+                                          fontWeight: FontWeight.bold,
+                                          fontStyle: FontStyle.normal,
+                                          color: Color.fromARGB(
+                                              255, 255, 255, 255),
+                                        )),
+                                        textAlign: TextAlign.left,
                                       ),
                                     ),
                                   ),
@@ -137,262 +135,259 @@ class _UserPageState extends State<UserPage> {
                               ),
                             ),
                           ),
-                          SizedBox(
-                            height: height * 0.2,
-                          ),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              SizedBox(
-                                  //height: 400,
-                                  child: BlurryContainer(
-                                borderRadius: BorderRadius.zero,
-                                color: Colors.transparent,
-                                blur: 10,
-                                child: Column(
-                                  children: [
-                                    SizedBox(height: height * 0.025),
-                                    Row(
-                                      children: [
-                                        SizedBox(width: width * 0.05),
-                                        Padding(
+                        ),
+                        SizedBox(
+                          height: height * 0.2,
+                        ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            SizedBox(
+                                //height: 400,
+                                child: BlurryContainer(
+                              borderRadius: BorderRadius.zero,
+                              color: Colors.transparent,
+                              blur: 10,
+                              child: Column(
+                                children: [
+                                  SizedBox(height: height * 0.025),
+                                  Row(
+                                    children: [
+                                      SizedBox(width: width * 0.05),
+                                      Padding(
+                                        padding: const EdgeInsets.all(16.0),
+                                        child: Container(
+                                          width: width * 0.3,
                                           padding: const EdgeInsets.all(16.0),
-                                          child: Container(
-                                            width: width * 0.3,
-                                            padding: const EdgeInsets.all(16.0),
-                                            decoration: const BoxDecoration(
-                                                color: Color.fromARGB(
-                                                    255, 217, 239, 240),
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(20))),
-                                            child: Form(
-                                              key: _formKey,
-                                              child: Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.center,
-                                                children: <Widget>[
-                                                  const Align(
-                                                    alignment:
-                                                        Alignment.centerLeft,
-                                                    child: Text(
-                                                      "Please, make sure your infomation are up to date :",
-                                                      style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          fontSize: 24,
-                                                          color: Color.fromARGB(
-                                                              255,
-                                                              0,
-                                                              119,
-                                                              107)),
-                                                    ),
+                                          decoration: const BoxDecoration(
+                                              color: Color.fromARGB(
+                                                  255, 217, 239, 240),
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(20))),
+                                          child: Form(
+                                            key: _formKey,
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              children: <Widget>[
+                                                const Align(
+                                                  alignment:
+                                                      Alignment.centerLeft,
+                                                  child: Text(
+                                                    "Please, make sure your infomation are up to date :",
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontSize: 24,
+                                                        color: Color.fromARGB(
+                                                            255, 0, 119, 107)),
                                                   ),
-                                                  const SizedBox(height: 20),
-                                                  TextFormField(
-                                                    enabled: false,
-                                                    controller: emailController,
-                                                    decoration:
-                                                        const InputDecoration(
-                                                            labelText: 'Email'),
-                                                    validator: (value) {
-                                                      if (value == null ||
-                                                          value.isEmpty) {
-                                                        return 'Please enter some text';
-                                                      }
-                                                      return null;
-                                                    },
-                                                  ),
-                                                  TextFormField(
-                                                    enabled: lock,
-                                                    controller:
-                                                        firstNameController,
-                                                    decoration:
-                                                        const InputDecoration(
-                                                            labelText:
-                                                                'First Name'),
-                                                    validator: (value) {
-                                                      if (value == null ||
-                                                          value.isEmpty) {
-                                                        return 'Please enter some text';
-                                                      }
-                                                      return null;
-                                                    },
-                                                  ),
-                                                  TextFormField(
-                                                    enabled: lock,
-                                                    controller:
-                                                        lastNameController,
-                                                    decoration:
-                                                        const InputDecoration(
-                                                            labelText:
-                                                                'Last Name'),
-                                                    validator: (value) {
-                                                      if (value == null ||
-                                                          value.isEmpty) {
-                                                        return 'Please enter some text';
-                                                      }
-                                                      return null;
-                                                    },
-                                                  ),
-                                                  TextFormField(
-                                                    enabled: lock,
-                                                    controller:
-                                                        passwordController,
-                                                    decoration:
-                                                        const InputDecoration(
-                                                            labelText:
-                                                                'Password'),
-                                                    obscureText: true,
-                                                    validator: (value) {
-                                                      if (value == null ||
-                                                          value.isEmpty) {
-                                                        return 'Please enter some text';
-                                                      }
-                                                      return null;
-                                                    },
-                                                  ),
-                                                  const SizedBox(
-                                                    height: 15,
-                                                  ),
-                                                  FittedBox(
-                                                    fit: BoxFit.scaleDown,
-                                                    child: Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .center,
-                                                      children: [
-                                                        ElevatedButton(
-                                                          onPressed: () async {
-                                                            if (_formKey
-                                                                    .currentState!
-                                                                    .validate() &&
-                                                                _hasChanged()) {
-                                                              //String? result; result= await if necessary
-                                                              try {
-                                                                await Api.modifyUserInfo(
-                                                                    firstNameController
-                                                                        .text,
-                                                                    lastNameController
-                                                                        .text,
-                                                                    emailController
-                                                                        .text,
-                                                                    passwordController
-                                                                        .text);
-                                                                if (context
-                                                                    .mounted) {
-                                                                  _getData(); // mouai
-                                                                  ScaffoldMessenger.of(
-                                                                          context)
-                                                                      .showSnackBar(
-                                                                    const SnackBar(
-                                                                        content:
-                                                                            Text('Successfully Saved')),
-                                                                  );
-                                                                }
-                                                              } on NoTokenExeption {
+                                                ),
+                                                const SizedBox(height: 20),
+                                                TextFormField(
+                                                  enabled: false,
+                                                  controller: emailController,
+                                                  decoration:
+                                                      const InputDecoration(
+                                                          labelText: 'Email'),
+                                                  validator: (value) {
+                                                    if (value == null ||
+                                                        value.isEmpty) {
+                                                      return 'Please enter some text';
+                                                    }
+                                                    return null;
+                                                  },
+                                                ),
+                                                TextFormField(
+                                                  enabled: lock,
+                                                  controller:
+                                                      firstNameController,
+                                                  decoration:
+                                                      const InputDecoration(
+                                                          labelText:
+                                                              'First Name'),
+                                                  validator: (value) {
+                                                    if (value == null ||
+                                                        value.isEmpty) {
+                                                      return 'Please enter some text';
+                                                    }
+                                                    return null;
+                                                  },
+                                                ),
+                                                TextFormField(
+                                                  enabled: lock,
+                                                  controller:
+                                                      lastNameController,
+                                                  decoration:
+                                                      const InputDecoration(
+                                                          labelText:
+                                                              'Last Name'),
+                                                  validator: (value) {
+                                                    if (value == null ||
+                                                        value.isEmpty) {
+                                                      return 'Please enter some text';
+                                                    }
+                                                    return null;
+                                                  },
+                                                ),
+                                                TextFormField(
+                                                  enabled: lock,
+                                                  controller:
+                                                      passwordController,
+                                                  decoration:
+                                                      const InputDecoration(
+                                                          labelText:
+                                                              'Password'),
+                                                  obscureText: true,
+                                                  validator: (value) {
+                                                    if (value == null ||
+                                                        value.isEmpty) {
+                                                      return 'Please enter some text';
+                                                    }
+                                                    return null;
+                                                  },
+                                                ),
+                                                const SizedBox(
+                                                  height: 15,
+                                                ),
+                                                FittedBox(
+                                                  fit: BoxFit.scaleDown,
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      ElevatedButton(
+                                                        onPressed: () async {
+                                                          if (_formKey
+                                                                  .currentState!
+                                                                  .validate() &&
+                                                              _hasChanged()) {
+                                                            //String? result; result= await if necessary
+                                                            try {
+                                                              await Api.modifyUserInfo(
+                                                                  firstNameController
+                                                                      .text,
+                                                                  lastNameController
+                                                                      .text,
+                                                                  emailController
+                                                                      .text,
+                                                                  passwordController
+                                                                      .text);
+                                                              if (context
+                                                                  .mounted) {
+                                                                _getData(); // mouai
                                                                 ScaffoldMessenger.of(
                                                                         context)
                                                                     .showSnackBar(
                                                                   const SnackBar(
                                                                       content: Text(
-                                                                          'No Token found, please log again')),
-                                                                );
-                                                              } catch (e) {
-                                                                ScaffoldMessenger.of(
-                                                                        context)
-                                                                    .showSnackBar(
-                                                                  const SnackBar(
-                                                                      content: Text(
-                                                                          'Unabled to Saved, please make sure your informations are correct and try again')),
+                                                                          'Successfully Saved')),
                                                                 );
                                                               }
+                                                            } on NoTokenExeption {
+                                                              ScaffoldMessenger
+                                                                      .of(context)
+                                                                  .showSnackBar(
+                                                                const SnackBar(
+                                                                    content: Text(
+                                                                        'No Token found, please log again')),
+                                                              );
+                                                            } catch (e) {
+                                                              ScaffoldMessenger
+                                                                      .of(context)
+                                                                  .showSnackBar(
+                                                                const SnackBar(
+                                                                    content: Text(
+                                                                        'Unabled to Saved, please make sure your informations are correct and try again')),
+                                                              );
                                                             }
-                                                          },
-                                                          style: ElevatedButton.styleFrom(
-                                                              textStyle:
-                                                                  const TextStyle(
-                                                                      fontSize:
-                                                                          20),
-                                                              backgroundColor:
-                                                                  const Color
-                                                                          .fromARGB(
-                                                                      255,
-                                                                      0,
-                                                                      119,
-                                                                      107)),
-                                                          child: const Text(
-                                                              'Save Account'),
-                                                        ),
-                                                        const SizedBox(
-                                                          width: 20,
-                                                        ),
-                                                        ElevatedButton(
-                                                          onPressed: () {
-                                                            showAlertDialog(
-                                                                context);
-                                                          },
-                                                          style: ElevatedButton.styleFrom(
-                                                              textStyle:
-                                                                  const TextStyle(
-                                                                      fontSize:
-                                                                          20),
-                                                              backgroundColor:
-                                                                  const Color
-                                                                          .fromARGB(
-                                                                      255,
-                                                                      235,
-                                                                      1,
-                                                                      1)),
-                                                          child: const Text(
-                                                              'Delete Account'),
-                                                        ),
-                                                      ],
-                                                    ),
+                                                          }
+                                                        },
+                                                        style: ElevatedButton.styleFrom(
+                                                            textStyle:
+                                                                const TextStyle(
+                                                                    fontSize:
+                                                                        20),
+                                                            backgroundColor:
+                                                                const Color
+                                                                        .fromARGB(
+                                                                    255,
+                                                                    0,
+                                                                    119,
+                                                                    107)),
+                                                        child: const Text(
+                                                            'Save Account'),
+                                                      ),
+                                                      const SizedBox(
+                                                        width: 20,
+                                                      ),
+                                                      ElevatedButton(
+                                                        onPressed: () {
+                                                          showAlertDialog(
+                                                              context);
+                                                        },
+                                                        style: ElevatedButton.styleFrom(
+                                                            textStyle:
+                                                                const TextStyle(
+                                                                    fontSize:
+                                                                        20),
+                                                            backgroundColor:
+                                                                const Color
+                                                                        .fromARGB(
+                                                                    255,
+                                                                    235,
+                                                                    1,
+                                                                    1)),
+                                                        child: const Text(
+                                                            'Delete Account'),
+                                                      ),
+                                                    ],
                                                   ),
-                                                ],
-                                              ),
+                                                ),
+                                              ],
                                             ),
                                           ),
                                         ),
-                                        SizedBox(width: 0.10 * width),
-                                        SizedBox(
-                                          width: width * 0.45,
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(1.0),
-                                            child: FittedBox(
-                                              child: Text(
-                                                '"We value your privacy at the highest level,\nthus you can modify your informations at all time. \nPlease make sure they are correct"',
-                                                style: GoogleFonts.varela(
-                                                    textStyle: const TextStyle(
-                                                  fontSize: 38,
-                                                  fontWeight: FontWeight.bold,
-                                                  fontStyle: FontStyle.normal,
-                                                  color: Color.fromARGB(
-                                                      255, 255, 255, 255),
-                                                )),
-                                                textAlign: TextAlign.left,
-                                              ),
+                                      ),
+                                      SizedBox(width: 0.10 * width),
+                                      SizedBox(
+                                        width: width * 0.45,
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(1.0),
+                                          child: FittedBox(
+                                            child: Text(
+                                              '"We value your privacy at the highest level,\nthus you can modify your informations at all time. \nPlease make sure they are correct"',
+                                              style: GoogleFonts.varela(
+                                                  textStyle: const TextStyle(
+                                                fontSize: 38,
+                                                fontWeight: FontWeight.bold,
+                                                fontStyle: FontStyle.normal,
+                                                color: Color.fromARGB(
+                                                    255, 255, 255, 255),
+                                              )),
+                                              textAlign: TextAlign.left,
                                             ),
                                           ),
                                         ),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: height * 0.05,
-                                    ),
-                                  ],
-                                ),
-                              )),
-                              const CustomFooter(),
-                            ],
-                          ),
-                        ],
-                      ),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: height * 0.05,
+                                  ),
+                                ],
+                              ),
+                            )),
+                            const CustomFooter(),
+                          ],
+                        ),
+                      ],
                     ),
                   ],
                 ),
