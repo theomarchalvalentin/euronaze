@@ -87,23 +87,6 @@ class _CartPageState extends State<CartPage> {
         );
       }).toList();
 
-  // List<DropdownMenuItem<int>> _dropdownItems = [];
-
-  // void _buildDropdownItems() {
-  //   _dropdownItems = [
-  //     const DropdownMenuItem(
-  //       value: 0,
-  //       child: Text('All'),
-  //     ),
-  //   ];
-  //   _dropdownItems.addAll(listCategories.map((category) {
-  //     return DropdownMenuItem(
-  //       value: category['categoryId'],
-  //       child: Text(category['categoryName']),
-  //     );
-  //   }));
-  // }
-
   @override
   Widget build(BuildContext context) {
     //_buildDropdownItems();
@@ -327,13 +310,15 @@ class _CartPageState extends State<CartPage> {
                                               : () async {
                                                   try {
                                                     await Api.deleteAllCart();
-                                                    ScaffoldMessenger.of(
-                                                            context)
-                                                        .showSnackBar(
-                                                      const SnackBar(
-                                                          content: Text(
-                                                              'Deletion Successful')),
-                                                    );
+                                                    if (context.mounted) {
+                                                      ScaffoldMessenger.of(
+                                                              context)
+                                                          .showSnackBar(
+                                                        const SnackBar(
+                                                            content: Text(
+                                                                'Deletion Successful')),
+                                                      );
+                                                    }
                                                   } catch (e) {
                                                     ScaffoldMessenger.of(
                                                             context)
@@ -479,11 +464,13 @@ class BasketProductCard extends StatelessWidget {
                 onPressed: () async {
                   try {
                     await Api.deleteCart(product.productId);
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                          content:
-                              Text('Deletion of the product is a Success')),
-                    );
+                    if (context.mounted) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                            content:
+                                Text('Deletion of the product is a Success')),
+                      );
+                    }
                   } catch (e) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(

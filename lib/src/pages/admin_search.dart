@@ -263,7 +263,7 @@ class AdminProductCard extends StatelessWidget {
   Widget build(BuildContext context) {
     int id = product.productId;
     return GestureDetector(
-      onTap: () => () => context.go('/modifyproduct/$id'),
+      onTap: () => context.go('/modifyproduct/$id'),
       child: Card(
         color: Colors.white,
         elevation: 0,
@@ -321,8 +321,20 @@ class AdminProductCard extends StatelessWidget {
               ),
               const SizedBox(width: 40),
               IconButton(
-                onPressed: () {
-                  Api.downloadFile(product.productId);
+                onPressed: () async {
+                  try {
+                    await Api.deleteProduct(product.productId);
+                    if (context.mounted) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Deletion Success')),
+                      );
+                    }
+                  } catch (e) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Deletion Error')),
+                    );
+                  }
+                  callback(); //await
                 },
                 icon: const Icon(Icons.delete_forever_outlined),
               ),
