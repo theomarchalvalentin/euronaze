@@ -371,7 +371,7 @@ class Api {
     if (token != null) {
       String fileUpload = base64.encode(file);
       final response = await post(
-          Uri.parse('http://localhost:8080/api/service/produits/upload/'),
+          Uri.parse('http://localhost:8080/api/service/produits/upload'),
           headers: <String, String>{"Authorization": "Bearer $token"},
           body: jsonEncode(<String, dynamic>{
             'nom': productName,
@@ -440,9 +440,30 @@ class Api {
     }
   }
 
-  static void downloadFile(int id) {
-    String url = "http://localhost:8080/api/service/produits/download/$id";
-    window.open(url, 'Download');
+  static void downloadFile(int id) async {
+    final prefs = await SharedPreferences.getInstance();
+
+    String? token = prefs.getString("token");
+    var url =
+        Uri.parse("http://localhost:8080/api/service/produits/download/$id");
+
+    Response res = await get(url,
+        headers: <String, String>{"Authorization": "Bearer $token"});
+
+    if (res.statusCode == 200) {
+      final blob = Blob([res.bodyBytes]);
+      final url = Url.createObjectUrlFromBlob(blob);
+      final anchor = document.createElement('a') as AnchorElement
+        ..href = url
+        ..style.display = 'none'
+        ..download = "Data_$id.csv";
+      document.body!.children.add(anchor);
+
+      anchor.click();
+
+      document.body!.children.remove(anchor);
+      Url.revokeObjectUrl(url);
+    }
   }
 
   static Future<List<double>> getData(int id) async {
