@@ -228,7 +228,7 @@ class _SearchPageState extends State<SearchPage> {
                                   shrinkWrap: true,
                                   itemCount: _filteredProducts.length,
                                   itemBuilder: (context, index) {
-                                    return ProductCard(
+                                    return SearchProductCard(
                                         product: _filteredProducts[index]);
                                   },
                                 ),
