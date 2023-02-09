@@ -420,7 +420,10 @@ class Api {
     if (token != null) {
       final response = await post(
           Uri.parse('http://localhost:8080/api/service/produits/filtred'),
-          headers: <String, String>{"Authorization": "Bearer $token"},
+          headers: <String, String>{
+            "Authorization": "Bearer $token",
+            "Content-Type": "application/json"
+          },
           body: jsonEncode(<String, dynamic>{
             'id': categoryId,
             'stri': lookingWord,
