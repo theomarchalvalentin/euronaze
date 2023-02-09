@@ -188,21 +188,15 @@ class _HomePageState extends State<HomePage> {
               FeaturedHeading(
                   headingText: '🔥 Ce mois-ci, les investisseurs préfèrent : ',
                   screenSize: screenSize),
-              CarouselSlider(
-                products: dummyProducts,
-              ),
+              CarouselSlider(),
               FeaturedHeading(
                   headingText: '🧸 C\'est le moment d\'acheter :',
                   screenSize: screenSize),
-              CarouselSlider(
-                products: dummyProducts,
-              ),
+              CarouselSlider(),
               FeaturedHeading(
                   headingText: '😍 Ces catégories sont populaires :',
                   screenSize: screenSize),
-              CarouselSlider(
-                products: dummyProducts,
-              ),
+              CarouselSlider(),
               const SizedBox(height: 30),
               const CustomFooter(),
             ],
