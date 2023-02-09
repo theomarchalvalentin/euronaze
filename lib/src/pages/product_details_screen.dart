@@ -106,66 +106,65 @@ class _ProductScreenDetailsState extends State<ProductScreenDetails> {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          Container(
-                            width: 300,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: Colors.grey.shade200),
-                            child: Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  SizedBox(
-                                    width: MediaQuery.of(context).size.width *
-                                        0.15,
-                                    child: Column(
-                                      children: [
-                                        const Text(
-                                          "Current price: ",
-                                          style: TextStyle(
-                                            fontSize: 20,
-                                            color: Colors.grey,
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .height *
-                                              0.005,
-                                        ),
-                                        Text(
-                                          "\$${product.price}",
-                                          style: const TextStyle(
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.black,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  TextButton(
-                                    onPressed: () {},
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(10),
-                                        color: Colors.black,
-                                      ),
-                                      padding: const EdgeInsets.all(20),
-                                      child: const Text(
-                                        'Buy now',
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 20.0),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
+                          // Container(
+                          //   decoration: BoxDecoration(
+                          //       borderRadius: BorderRadius.circular(10),
+                          //       color: Colors.grey.shade200),
+                          //   child: Padding(
+                          //     padding: const EdgeInsets.all(10.0),
+                          //     child: Row(
+                          //       mainAxisAlignment:
+                          //           MainAxisAlignment.spaceEvenly,
+                          //       children: [
+                          //         SizedBox(
+                          //           width: MediaQuery.of(context).size.width *
+                          //               0.15,
+                          //           child: Column(
+                          //             children: [
+                          //               const Text(
+                          //                 "Current price: ",
+                          //                 style: TextStyle(
+                          //                   fontSize: 20,
+                          //                   color: Colors.grey,
+                          //                 ),
+                          //               ),
+                          //               SizedBox(
+                          //                 height: MediaQuery.of(context)
+                          //                         .size
+                          //                         .height *
+                          //                     0.005,
+                          //               ),
+                          //               Text(
+                          //                 "\$${product.price}",
+                          //                 style: const TextStyle(
+                          //                   fontSize: 20,
+                          //                   fontWeight: FontWeight.bold,
+                          //                   color: Colors.black,
+                          //                 ),
+                          //               ),
+                          //             ],
+                          //           ),
+                          //         ),
+                          //         TextButton(
+                          //           onPressed: () {},
+                          //           child: Container(
+                          //             decoration: BoxDecoration(
+                          //               borderRadius: BorderRadius.circular(10),
+                          //               color: Colors.black,
+                          //             ),
+                          //             padding: const EdgeInsets.all(20),
+                          //             child: const Text(
+                          //               'Buy now',
+                          //               style: TextStyle(
+                          //                   color: Colors.white,
+                          //                   fontSize: 20.0),
+                          //             ),
+                          //           ),
+                          //         ),
+                          //       ],
+                          //     ),
+                          //   ),
+                          // ),
                           SizedBox(
                             height: MediaQuery.of(context).size.height * 0.04,
                           ),
