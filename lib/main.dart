@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:projet_dac/src/pages/admin_modify.dart';
-import 'package:projet_dac/src/pages/CartPage.dart';
-import 'package:projet_dac/src/pages/admin_search.dart';
+import 'package:projet_dac/src/pages/admin/admin_modify.dart';
+import 'package:projet_dac/src/pages/cart_page.dart';
+import 'package:projet_dac/src/pages/admin/admin_search.dart';
 import 'package:projet_dac/src/pages/library.dart';
 import 'package:projet_dac/src/pages/user.dart';
-//import 'package:projet_dac/src/widgets/searchbar.dart';
-import 'src/pages/home_page2.dart';
+import 'src/pages/home_page.dart';
 import 'src/pages/product_details_screen.dart';
 import 'package:projet_dac/src/pages/login.dart';
 
-import 'package:projet_dac/src/pages/admin_add.dart';
+import 'package:projet_dac/src/pages/admin/admin_add.dart';
 import 'package:projet_dac/src/pages/search_page.dart';
 
 void main() {
@@ -41,7 +40,7 @@ final _router = GoRouter(
     ),
     GoRoute(
       path: '/home',
-      builder: (context, state) => const HomePage2(),
+      builder: (context, state) => const HomePage(),
     ),
     GoRoute(
       path: '/user',

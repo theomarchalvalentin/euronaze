@@ -4,28 +4,20 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:projet_dac/src/widgets/custom_footer.dart';
 import 'package:projet_dac/src/widgets/homepage/homepage_carousel.dart';
-import 'package:projet_dac/src/models/datamodel.dart';
 
 import 'package:flutter/material.dart';
 
-import 'package:projet_dac/src/widgets/theappbar.dart';
-
-const List list = [
-  "Flutter",
-  "React",
-  "Ionic",
-  "Xamarin",
-];
+import 'package:projet_dac/src/widgets/appbars/app_bar.dart';
 
 /// The Widget that configures your application.
-class HomePage2 extends StatefulWidget {
-  const HomePage2({super.key});
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
   static const routeName = '/home';
   @override
-  State<StatefulWidget> createState() => _HomePage2State();
+  State<StatefulWidget> createState() => _HomePageState();
 }
 
-class _HomePage2State extends State<HomePage2> {
+class _HomePageState extends State<HomePage> {
   final ScrollController _scrollController = ScrollController();
 
   _scrollListener() {
@@ -129,7 +121,7 @@ class _HomePage2State extends State<HomePage2> {
                                         child: const FittedBox(
                                           fit: BoxFit.scaleDown,
                                           child: Text(
-                                            '  🚀 Découvrir nos produits  ',
+                                            '  🚀 Get started  ',
                                             style: TextStyle(
                                                 color: Colors.white,
                                                 fontSize: 20.0),

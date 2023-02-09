@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:projet_dac/src/api/api.dart';
-import 'package:projet_dac/src/api/user_model.dart';
-import '../widgets/theappbar.dart';
+import 'package:projet_dac/src/models/user_model.dart';
+import '../widgets/appbars/app_bar.dart';
 
 import 'package:projet_dac/src/widgets/custom_footer.dart';
 

@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../api/api.dart';
-import '../api/product_model.dart';
+import '../models/product_model.dart';
 
 class ProductCard extends StatelessWidget {
   final Product product;

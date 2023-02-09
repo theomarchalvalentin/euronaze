@@ -1,14 +1,14 @@
 import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:flutter/material.dart';
 
-import 'package:projet_dac/src/widgets/theappbar.dart';
+import 'package:projet_dac/src/widgets/appbars/app_bar.dart';
 
 import '../api/api.dart';
-import '../api/product_model.dart';
+import '../models/product_model.dart';
 import 'package:flutter_lorem/flutter_lorem.dart';
 
 import '../widgets/custom_footer.dart';
-import 'chart.dart';
+import '../widgets/product_page/product_chart.dart';
 
 class ProductScreenDetails extends StatefulWidget {
   static const routeName = '/product';

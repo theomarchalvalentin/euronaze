@@ -19,7 +19,7 @@ const List<Map> listCategories = [
   },
   {
     'categoryId': 4,
-    'categoryName': 'Indexes',
+    'categoryName': 'Indexs',
     'categoryDescription': indexesCategoryDescription,
     'categoryImg': indexesImgPath
   },
