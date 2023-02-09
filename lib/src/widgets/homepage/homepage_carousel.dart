@@ -26,12 +26,12 @@ class _CarouselSliderState extends State<CarouselSlider> {
   @override
   void initState() {
     super.initState();
-    _getLibrary();
+    _getTrending();
   }
 
-  _getLibrary() async {
+  _getTrending() async {
     try {
-      var results = await Api.getLibrary();
+      var results = await Api.getTrending();
       setState(() {
         // lock = false;
         products = results;
