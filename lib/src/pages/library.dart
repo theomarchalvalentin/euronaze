@@ -152,7 +152,7 @@ class _LibraryPageState extends State<LibraryPage> {
                                       SizedBox(
                                         width:
                                             MediaQuery.of(context).size.width *
-                                                0.04,
+                                                0.02,
                                       ),
                                       Align(
                                         alignment: Alignment.topRight,
@@ -262,27 +262,7 @@ class _LibraryPageState extends State<LibraryPage> {
                         SizedBox(
                           width: MediaQuery.of(context).size.width * 0.04,
                         ),
-                        Flexible(
-                          child: SingleChildScrollView(
-                            child: Padding(
-                              padding: const EdgeInsets.only(right: 10.0),
-                              child: Align(
-                                alignment: Alignment.topLeft,
-                                child: ListView.builder(
-                                  physics:
-                                      const AlwaysScrollableScrollPhysics(),
-                                  scrollDirection: Axis.vertical,
-                                  shrinkWrap: true,
-                                  itemCount: _filteredProducts.length,
-                                  itemBuilder: (context, index) {
-                                    return OwnedProductCard(
-                                        product: _filteredProducts[index]);
-                                  },
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
+                        SearchLibrary(filteredProducts: _filteredProducts),
                       ],
                     ),
                   )
@@ -294,5 +274,64 @@ class _LibraryPageState extends State<LibraryPage> {
         ),
       ),
     );
+  }
+}
+
+class SearchLibrary extends StatelessWidget {
+  const SearchLibrary({
+    super.key,
+    required List<Product> filteredProducts,
+  }) : _filteredProducts = filteredProducts;
+
+  final List<Product> _filteredProducts;
+
+  @override
+  Widget build(BuildContext context) {
+    return _filteredProducts.isNotEmpty
+        ? Flexible(
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.only(right: 10.0),
+                child: Align(
+                  alignment: Alignment.topLeft,
+                  child: ListView.builder(
+                    physics: const AlwaysScrollableScrollPhysics(),
+                    scrollDirection: Axis.vertical,
+                    shrinkWrap: true,
+                    itemCount: _filteredProducts.length,
+                    itemBuilder: (context, index) {
+                      return OwnedProductCard(
+                          product: _filteredProducts[index]);
+                    },
+                  ),
+                ),
+              ),
+            ),
+          )
+        : Flexible(
+            child: SingleChildScrollView(
+              child: Align(
+                alignment: Alignment.center,
+                child: Column(
+                  children: [
+                    Icon(
+                      Icons.warning_amber_rounded,
+                      color: Color(0xFF263b5e).withOpacity(0.6),
+                    ),
+                    Text(
+                      'Your library is empty...',
+                      style: GoogleFonts.varela(
+                          textStyle: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w500,
+                        fontStyle: FontStyle.normal,
+                        color: Color(0xFF263b5e).withOpacity(0.6),
+                      )),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          );
   }
 }
