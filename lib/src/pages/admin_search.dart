@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:projet_dac/src/models/datamodel.dart';
 import 'package:projet_dac/src/widgets/custom_footer.dart';
-import 'package:projet_dac/src/widgets/theadminappbar.dart';
+import 'package:projet_dac/src/widgets/theappbar.dart';
+import 'package:projet_dac/src/widgets/product_card.dart';
 
-import '../widgets/admin_product_card.dart';
+import '../api/api.dart';
+import '../api/category_model.dart';
+import '../api/product_model.dart';
 
 List<String> listCat = listCategories
     .map((category) => category['categoryName'].toString())
@@ -23,55 +26,56 @@ class AdminSearch extends StatefulWidget {
 class _AdminSearchState extends State<AdminSearch> {
   final TextEditingController _searchController = TextEditingController();
   List<Product> _filteredProducts = [];
-  final List<Product> products = dummyProducts;
-  String selectedCategory = '0';
+  int selectedCategory = 0;
+  String characters = '';
 
   @override
   void initState() {
     super.initState();
-    _filteredProducts = products;
   }
 
-  void _filterProducts(String query) {
-    setState(() {
-      _filteredProducts = products.where((product) {
-        if (selectedCategory == '0') {
-          return product.productName
-              .toLowerCase()
-              .contains(query.toLowerCase());
-        } else {
-          return product.productName
-                  .toLowerCase()
-                  .contains(query.toLowerCase()) &&
-              product.categoryId == selectedCategory;
-        }
-      }).toList();
-    });
-  }
-
-  List<DropdownMenuItem<String>> _dropdownItems = [];
-
-  void _buildDropdownItems() {
-    _dropdownItems = [
-      const DropdownMenuItem(
-        value: '0',
-        child: Text('All'),
-      ),
-    ];
-    _dropdownItems.addAll(listCategories.map((category) {
-      return DropdownMenuItem(
-        value: category['categoryId'],
-        child: Text(category['categoryName']),
+  Future<void> _search() async {
+    try {
+      if (characters.length > 1 || selectedCategory != 0) {
+        var results = await Api.searchProduct(selectedCategory, characters);
+        setState(() {
+          _filteredProducts = results;
+        });
+      } else {
+        _filteredProducts = [];
+      }
+    } on NoTokenExeption {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('No token found, please log again')),
       );
-    }));
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Unable to search')),
+      );
+    }
   }
+
+  final List<DropdownMenuItem<int>> _dropdownItems = [
+        const DropdownMenuItem(
+          value: 0,
+          child: Text('All'),
+        ),
+      ] +
+      listCategories.map((category) {
+        return DropdownMenuItem<int>(
+          value: category['categoryId'],
+          child: Text(category['categoryName']),
+        );
+      }).toList();
 
   @override
   Widget build(BuildContext context) {
-    _buildDropdownItems();
+    // _buildDropdownItems();
     return Scaffold(
-      appBar: AdminAppBar(),
-      //bottomSheet: SizedBox(height: 120, child: const CustomFooter()),
+      backgroundColor: Colors.grey.shade100,
+
+      appBar: CustomAppBar(),
+      //bottomSheet: const SizedBox(height: 120, child: CustomFooter()),
       body: SingleChildScrollView(
         physics: const AlwaysScrollableScrollPhysics(),
         scrollDirection: Axis.vertical,
@@ -96,7 +100,7 @@ class _AdminSearchState extends State<AdminSearch> {
                                   RichText(
                                     textAlign: TextAlign.start,
                                     text: TextSpan(
-                                      text: 'Modification ',
+                                      text: 'Recherche ',
                                       style: GoogleFonts.varela(
                                           textStyle: const TextStyle(
                                         fontSize: 35,
@@ -106,7 +110,7 @@ class _AdminSearchState extends State<AdminSearch> {
                                       )),
                                       children: [
                                         TextSpan(
-                                          text: 'des produits: ',
+                                          text: 'de produits: ',
                                           style: GoogleFonts.varela(
                                               textStyle: const TextStyle(
                                             fontSize: 30,
@@ -168,7 +172,13 @@ class _AdminSearchState extends State<AdminSearch> {
                                             hintText: 'Rechercher',
                                             prefixIcon: Icon(Icons.search),
                                           ),
-                                          onChanged: _filterProducts,
+                                          onChanged: (value) {
+                                            setState(() {
+                                              characters =
+                                                  _searchController.text;
+                                            });
+                                            _search();
+                                          },
                                         ),
                                       ),
                                     ),
@@ -192,9 +202,8 @@ class _AdminSearchState extends State<AdminSearch> {
                                         onChanged: (value) {
                                           setState(() {
                                             selectedCategory = value!;
-                                            _filterProducts(
-                                                _searchController.text);
                                           });
+                                          _search();
                                         },
                                       ),
                                     ),
@@ -221,7 +230,8 @@ class _AdminSearchState extends State<AdminSearch> {
                                   itemCount: _filteredProducts.length,
                                   itemBuilder: (context, index) {
                                     return AdminProductCard(
-                                        product: _filteredProducts[index]);
+                                        product: _filteredProducts[index],
+                                        callback: _search);
                                   },
                                 ),
                               ),
@@ -236,6 +246,88 @@ class _AdminSearchState extends State<AdminSearch> {
             ),
             const CustomFooter(),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class AdminProductCard extends StatelessWidget {
+  final Product product;
+  final Future<void> Function() callback;
+
+  const AdminProductCard(
+      {super.key, required this.product, required this.callback});
+
+  @override
+  Widget build(BuildContext context) {
+    int id = product.productId;
+    return GestureDetector(
+      onTap: () => () => context.go('/modifyproduct/$id'),
+      child: Card(
+        color: Colors.white,
+        elevation: 0,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            children: <Widget>[
+              ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Image.network(
+                  fit: BoxFit.cover,
+                  height: 100,
+                  width: 100,
+                  product.productImg,
+                ),
+              ),
+              const Spacer(),
+              CategoryTag(product.categoryId),
+              const Spacer(),
+              Expanded(
+                child: Align(
+                  alignment: Alignment.topRight,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      FittedBox(
+                        child: Text(
+                          product.productName,
+                          style: GoogleFonts.varela(
+                              textStyle: const TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w700,
+                            fontStyle: FontStyle.normal,
+                            color: Color(0xFF263b5e),
+                          )),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      FittedBox(
+                        child: Text(
+                          "\$${product.price}",
+                          style: const TextStyle(
+                            fontSize: 14,
+                            color: Colors.grey,
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(width: 40),
+              IconButton(
+                onPressed: () {
+                  Api.downloadFile(product.productId);
+                },
+                icon: const Icon(Icons.delete_forever_outlined),
+              ),
+            ],
+          ),
         ),
       ),
     );

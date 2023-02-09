@@ -4,6 +4,7 @@ import 'package:projet_dac/src/widgets/custom_footer.dart';
 import 'package:projet_dac/src/widgets/theappbar.dart';
 import 'package:projet_dac/src/widgets/product_card.dart';
 
+import '../api/api.dart';
 import '../api/category_model.dart';
 import '../api/product_model.dart';
 
@@ -24,48 +25,34 @@ class SearchPage extends StatefulWidget {
 class _SearchPageState extends State<SearchPage> {
   final TextEditingController _searchController = TextEditingController();
   List<Product> _filteredProducts = [];
-  final List<Product> products = <Product>[];
   int selectedCategory = 0;
+  String characters = '';
 
   @override
   void initState() {
     super.initState();
-    _filteredProducts = products;
   }
 
-  void _filterProducts(String query) {
-    setState(() {
-      _filteredProducts = products.where((product) {
-        if (selectedCategory == 0) {
-          return product.productName
-              .toLowerCase()
-              .contains(query.toLowerCase());
-        } else {
-          return product.productName
-                  .toLowerCase()
-                  .contains(query.toLowerCase()) &&
-              product.categoryId == selectedCategory;
-        }
-      }).toList();
-    });
+  Future<void> _search() async {
+    try {
+      if (characters.length > 1 || selectedCategory != 0) {
+        var results = await Api.searchProduct(selectedCategory, characters);
+        setState(() {
+          _filteredProducts = results;
+        });
+      } else {
+        _filteredProducts = [];
+      }
+    } on NoTokenExeption {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('No token found, please log again')),
+      );
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Unable to search')),
+      );
+    }
   }
-
-  // List<DropdownMenuItem<String>> _dropdownItems = [];
-
-  // void _buildDropdownItems() {
-  //   _dropdownItems = [
-  //     const DropdownMenuItem(
-  //       value: '0',
-  //       child: Text('All'),
-  //     ),
-  //   ];
-  //   _dropdownItems.addAll(listCategories.map((category) {
-  //     return DropdownMenuItem(
-  //       value: category['categoryId'],
-  //       child: Text(category['categoryName']),
-  //     );
-  //   }));
-  // }
 
   final List<DropdownMenuItem<int>> _dropdownItems = [
         const DropdownMenuItem(
@@ -184,7 +171,13 @@ class _SearchPageState extends State<SearchPage> {
                                             hintText: 'Rechercher',
                                             prefixIcon: Icon(Icons.search),
                                           ),
-                                          onChanged: _filterProducts,
+                                          onChanged: (value) {
+                                            setState(() {
+                                              characters =
+                                                  _searchController.text;
+                                            });
+                                            _search();
+                                          },
                                         ),
                                       ),
                                     ),
@@ -208,9 +201,8 @@ class _SearchPageState extends State<SearchPage> {
                                         onChanged: (value) {
                                           setState(() {
                                             selectedCategory = value!;
-                                            _filterProducts(
-                                                _searchController.text);
                                           });
+                                          _search();
                                         },
                                       ),
                                     ),
