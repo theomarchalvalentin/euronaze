@@ -499,7 +499,7 @@ class Api {
     String? token = prefs.getString("token");
     if (token != null) {
       var request = MultipartRequest('POST',
-          Uri.parse('http://localhost:8080/api/service/produits/upload/'));
+          Uri.parse('http://localhost:8080/api/service/produits/upload'));
       request.headers.addAll({'Authorization': 'Bearer $token'});
 
       request.fields['nom'] = productName;
