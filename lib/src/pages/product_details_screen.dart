@@ -94,6 +94,7 @@ class _ProductScreenDetailsState extends State<ProductScreenDetails> {
             Center(
               heightFactor: 1.15,
               child: Container(
+                constraints: BoxConstraints(minHeight: 600),
                 width: MediaQuery.of(context).size.width * 0.75,
                 height: MediaQuery.of(context).size.height * 0.75,
                 decoration: BoxDecoration(
@@ -101,7 +102,7 @@ class _ProductScreenDetailsState extends State<ProductScreenDetails> {
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 60),
+                  padding: const EdgeInsets.symmetric(vertical: 30),
                   child: Expanded(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -210,15 +211,20 @@ class _ProductScreenDetailsState extends State<ProductScreenDetails> {
                             SizedBox(
                               height: MediaQuery.of(context).size.height * 0.03,
                             ),
-                            SizedBox(
-                              height: MediaQuery.of(context).size.height * 0.1,
-                              width: MediaQuery.of(context).size.width * 0.25,
-                              child: Text(lorem(paragraphs: 1, words: 40),
-                                  style: const TextStyle(
-                                      color: Colors.black, fontSize: 15.0)),
+                            SingleChildScrollView(
+                              physics: AlwaysScrollableScrollPhysics(),
+                              scrollDirection: Axis.horizontal,
+                              child: SizedBox(
+                                height:
+                                    MediaQuery.of(context).size.height * 0.1,
+                                width: MediaQuery.of(context).size.width * 0.25,
+                                child: Text(lorem(paragraphs: 1, words: 40),
+                                    style: const TextStyle(
+                                        color: Colors.black, fontSize: 15.0)),
+                              ),
                             ),
                             SizedBox(
-                              height: MediaQuery.of(context).size.height * 0.04,
+                              height: MediaQuery.of(context).size.height * 0.03,
                             ),
                             Container(
                               decoration: BoxDecoration(),
@@ -236,7 +242,7 @@ class _ProductScreenDetailsState extends State<ProductScreenDetails> {
               ),
             ),
             SizedBox(
-              height: 30,
+              height: 50,
             ),
             const CustomFooter(),
           ],
