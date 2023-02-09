@@ -381,7 +381,7 @@ class _CartPageState extends State<CartPage> {
                                                                         .symmetric(
                                                                     vertical: 5,
                                                                     horizontal:
-                                                                        10),
+                                                                        30),
                                                             child: FittedBox(
                                                               fit: BoxFit
                                                                   .fitWidth,
