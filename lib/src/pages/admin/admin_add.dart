@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:projet_dac/src/models/product_model.dart';
 import '../../api/api.dart';
 import '../../models/category_model.dart';
 import '../../widgets/appbars/admin_appbar.dart';

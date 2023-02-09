@@ -1,4 +1,3 @@
-import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:flutter/material.dart';
 
 import 'package:projet_dac/src/widgets/appbars/app_bar.dart';
@@ -94,7 +93,7 @@ class _ProductScreenDetailsState extends State<ProductScreenDetails> {
             Center(
               heightFactor: 1.15,
               child: Container(
-                constraints: BoxConstraints(minHeight: 600),
+                constraints: const BoxConstraints(minHeight: 600),
                 width: MediaQuery.of(context).size.width * 0.75,
                 height: MediaQuery.of(context).size.height * 0.75,
                 decoration: BoxDecoration(
@@ -213,7 +212,7 @@ class _ProductScreenDetailsState extends State<ProductScreenDetails> {
                             width: MediaQuery.of(context).size.width * 0.25,
                             child: SingleChildScrollView(
                               scrollDirection: Axis.vertical,
-                              physics: AlwaysScrollableScrollPhysics(),
+                              physics: const AlwaysScrollableScrollPhysics(),
                               child: Text(lorem(paragraphs: 1, words: 40),
                                   style: const TextStyle(
                                       color: Colors.black, fontSize: 15.0)),
@@ -223,7 +222,7 @@ class _ProductScreenDetailsState extends State<ProductScreenDetails> {
                             height: MediaQuery.of(context).size.height * 0.03,
                           ),
                           Container(
-                            decoration: BoxDecoration(),
+                            decoration: const BoxDecoration(),
                             clipBehavior: Clip.antiAlias,
                             width: MediaQuery.of(context).size.width * 0.3,
                             height: MediaQuery.of(context).size.height * 0.2,
@@ -236,7 +235,7 @@ class _ProductScreenDetailsState extends State<ProductScreenDetails> {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 50,
             ),
             const CustomFooter(),

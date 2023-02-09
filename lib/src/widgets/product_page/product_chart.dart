@@ -1,7 +1,6 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:mrx_charts/mrx_charts.dart';
 
 import '../homepage/home_search_bar.dart';
@@ -35,9 +34,6 @@ class _LinePageState extends State<LinePage> {
   }
 
   List<ChartLayer> layers() {
-    final from = DateTime(2021, 4);
-    final to = DateTime(2021, 8);
-    final frequency = 1;
     return [
       ChartHighlightLayer(
         shape: () => ChartHighlightLineShape<ChartLineDataItem>(
@@ -63,14 +59,13 @@ class _LinePageState extends State<LinePage> {
                 (widget.data.reduce(max) - widget.data.reduce(min)).abs() / 2,
             max: widget.data.reduce(max),
             min: widget.data.reduce(min),
-            textStyle: TextStyle(
+            textStyle: const TextStyle(
               color: Colors.black,
               fontSize: 10.0,
             ),
           ),
         ),
-        labelX: (value) =>
-            "d-" + (widget.data.length - value).toInt().toString(),
+        labelX: (value) => "d-${(widget.data.length - value).toInt()}",
         labelY: (value) => value.toInt().toString(),
       ),
       ChartLineLayer(

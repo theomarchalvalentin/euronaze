@@ -2,15 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:projet_dac/src/pages/product_details_screen.dart';
 import 'package:widget_slider/widget_slider.dart';
 
 import '../../api/api.dart';
-import '../../models/category_model.dart';
 import '../../models/product_model.dart';
 
 class CarouselSlider extends StatefulWidget {
-  CarouselSlider({
+  const CarouselSlider({
     super.key,
   });
 
@@ -22,7 +20,7 @@ class _CarouselSliderState extends State<CarouselSlider> {
   final controller =
       SliderController(duration: const Duration(milliseconds: 600));
   List<Product> products = [
-    Product(0, 'productName', 'productDescription', 0, 'productImg', 0),
+    const Product(0, 'productName', 'productDescription', 0, 'productImg', 0),
   ];
 
   @override
