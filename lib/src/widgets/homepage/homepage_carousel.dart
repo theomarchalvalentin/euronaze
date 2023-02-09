@@ -48,7 +48,7 @@ class _CarouselSliderState extends State<CarouselSlider> {
         // lock = false;
       });
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Unable to fetch Library')),
+        const SnackBar(content: Text('Unable to fetch Trending')),
       );
     }
   }
