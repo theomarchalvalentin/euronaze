@@ -282,7 +282,7 @@ class AdminProductCard extends StatelessWidget {
                 ),
               ),
               const Spacer(),
-              CategoryTag(product.categoryId),
+              categoryTag(product.categoryId),
               const Spacer(),
               Expanded(
                 child: Align(

@@ -89,7 +89,7 @@ class OwnedProductCard extends StatelessWidget {
                 ),
               ),
               const Spacer(),
-              CategoryTag(product.categoryId),
+              categoryTag(product.categoryId),
               const Spacer(),
               Expanded(
                 child: Align(
@@ -169,7 +169,7 @@ class BasketProductCard extends StatelessWidget {
                 ),
               ),
               const Spacer(),
-              CategoryTag(product.categoryId),
+              categoryTag(product.categoryId),
               const Spacer(),
               Expanded(
                 child: Align(
@@ -251,7 +251,7 @@ class SearchProductCard extends StatelessWidget {
                 ),
               ),
               const Spacer(),
-              CategoryTag(product.categoryId),
+              categoryTag(product.categoryId),
               const Spacer(),
               Expanded(
                 child: Align(
@@ -301,7 +301,7 @@ class SearchProductCard extends StatelessWidget {
   }
 }
 
-Widget CategoryTag(int categoryId) {
+Widget categoryTag(int categoryId) {
   var color = const Color(0xFFFFFFFF).withOpacity(0.6);
   var cat = 'None';
   switch (categoryId) {
