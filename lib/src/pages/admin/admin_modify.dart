@@ -265,6 +265,7 @@ class _AdminModifyState extends State<AdminModify> {
   bool _hasChanged() {
     bool result = nameController.text != product!.productName ||
         descriptionController.text != product!.productDescription ||
+        imageController.text != product!.productImg ||
         selectedCategory != product!.categoryId ||
         fileName != "Current" ||
         priceController.text != product!.price.toStringAsFixed(2);
