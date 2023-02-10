@@ -507,9 +507,9 @@ class Api {
 
       request.fields['nom'] = productName;
       request.fields['description'] = productDescription;
-      request.fields['category'] = categoryId.toStringAsPrecision(2);
+      request.fields['category'] = categoryId.toString();
       request.fields['image'] = productImg;
-      request.fields['prix'] = price.toString();
+      request.fields['prix'] = price.toStringAsFixed(2);
 
       final multipartFile =
           MultipartFile.fromBytes('data', file.bytes!, filename: file.name);
@@ -545,9 +545,9 @@ class Api {
       request.headers.addAll({'Authorization': 'Bearer $token'});
       request.fields['nom'] = productName;
       request.fields['description'] = productDescription;
-      request.fields['category'] = categoryId.toStringAsPrecision(2);
+      request.fields['category'] = categoryId.toString();
       request.fields['image'] = productImg;
-      request.fields['prix'] = price.toString();
+      request.fields['prix'] = price.toStringAsFixed(2);
       if (file != null) {
         final multipartFile =
             MultipartFile.fromBytes('data', file.bytes!, filename: file.name);

@@ -25,7 +25,7 @@ class _ProductScreenDetailsState extends State<ProductScreenDetails> {
   late Product product = Product(
       0,
       "productName",
-      lorem(paragraphs: 4, words: 200),
+      lorem(paragraphs: 1, words: 35),
       0,
       "assets/images/productnotfound.png",
       0);
@@ -248,7 +248,7 @@ class _ProductScreenDetailsState extends State<ProductScreenDetails> {
                             child: SingleChildScrollView(
                               scrollDirection: Axis.vertical,
                               physics: const AlwaysScrollableScrollPhysics(),
-                              child: Text(lorem(paragraphs: 1, words: 40),
+                              child: Text(product.productDescription,
                                   style: const TextStyle(
                                       color: Colors.black, fontSize: 15.0)),
                             ),
