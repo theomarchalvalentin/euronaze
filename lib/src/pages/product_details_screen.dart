@@ -185,6 +185,13 @@ class _ProductScreenDetailsState extends State<ProductScreenDetails> {
                                               content: Text(
                                                   'Product already in cart')),
                                         );
+                                      } on NoTokenExeption {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          const SnackBar(
+                                              content: Text(
+                                                  'No Token found, please log again')),
+                                        );
                                       } catch (e) {
                                         ScaffoldMessenger.of(context)
                                             .showSnackBar(

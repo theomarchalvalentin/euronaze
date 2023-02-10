@@ -77,23 +77,6 @@ class _LibraryPageState extends State<LibraryPage> {
     });
   }
 
-  // List<DropdownMenuItem<int>> _dropdownItems = [];
-
-  // void _buildDropdownItems() {
-  //   _dropdownItems = [
-  //     const DropdownMenuItem(
-  //       value: 0,
-  //       child: Text('All'),
-  //     ),
-  //   ];
-  //   _dropdownItems.addAll(listCategories.map((category) {
-  //     return DropdownMenuItem(
-  //       value: category['categoryId'],
-  //       child: Text(category['categoryName']),
-  //     );
-  //   }));
-  // }
-
   final List<DropdownMenuItem<int>> _dropdownItems = [
         const DropdownMenuItem(
           value: 0,

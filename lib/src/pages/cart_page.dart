@@ -286,6 +286,12 @@ class _CartPageState extends State<CartPage> {
                                                                             const SnackBar(content: Text('Transaction Successful')),
                                                                           );
                                                                         }
+                                                                      } on NoTokenExeption {
+                                                                        ScaffoldMessenger.of(context)
+                                                                            .showSnackBar(
+                                                                          const SnackBar(
+                                                                              content: Text('No Token found, please log again')),
+                                                                        );
                                                                       } catch (e) {
                                                                         ScaffoldMessenger.of(context)
                                                                             .showSnackBar(
@@ -351,6 +357,12 @@ class _CartPageState extends State<CartPage> {
                                                                             const SnackBar(content: Text('Deletion Successful')),
                                                                           );
                                                                         }
+                                                                      } on NoTokenExeption {
+                                                                        ScaffoldMessenger.of(context)
+                                                                            .showSnackBar(
+                                                                          const SnackBar(
+                                                                              content: Text('No Token found, please log again')),
+                                                                        );
                                                                       } catch (e) {
                                                                         ScaffoldMessenger.of(context)
                                                                             .showSnackBar(
@@ -557,6 +569,11 @@ class BasketProductCard extends StatelessWidget {
                                 Text('Deletion of the product is a Success')),
                       );
                     }
+                  } on NoTokenExeption {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                          content: Text('No Token found, please log again')),
+                    );
                   } catch (e) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
