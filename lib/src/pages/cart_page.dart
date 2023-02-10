@@ -101,389 +101,381 @@ class _CartPageState extends State<CartPage> {
         scrollDirection: Axis.vertical,
         child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(40.0, 40.0, 40.0, 0),
-              child: Column(
-                children: <Widget>[
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.75,
-                    child: Row(
-                      children: [
-                        Column(
-                          children: [
-                            Expanded(
-                              child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  SizedBox(
-                                    height: MediaQuery.of(context).size.height *
-                                        0.25,
-                                    child: Align(
-                                      alignment: Alignment.center,
-                                      child: Lottie.asset(
-                                          'assets/images/basket.json',
-                                          fit: BoxFit.cover),
-                                    ),
-                                  ),
-                                  Card(
-                                    color: Colors.white,
-                                    elevation: 0,
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(20)),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(20.0),
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            'Search by name in basket:',
-                                            style: GoogleFonts.varela(
-                                                textStyle: const TextStyle(
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.w500,
-                                              fontStyle: FontStyle.normal,
-                                              color: Color(0xFF263b5e),
-                                            )),
-                                          ),
-                                          const SizedBox(height: 20),
-                                          Center(
-                                            child: Container(
-                                              decoration: BoxDecoration(
-                                                  border: Border.all(
-                                                    color: Colors.black,
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          20)),
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  0.33,
-                                              child: TextField(
-                                                controller: _searchController,
-                                                decoration:
-                                                    const InputDecoration(
-                                                  border: InputBorder.none,
-                                                  iconColor: null,
-                                                  focusColor: null,
-                                                  fillColor: null,
-                                                  hoverColor: null,
-                                                  prefixIconColor: null,
-                                                  hintText: 'Search',
-                                                  prefixIcon:
-                                                      Icon(Icons.search),
-                                                ),
-                                                onChanged: _filterProducts,
-                                              ),
-                                            ),
-                                          ),
-                                          const SizedBox(height: 50),
-                                          Text(
-                                            'Filter by category',
-                                            style: GoogleFonts.varela(
-                                                textStyle: const TextStyle(
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.w500,
-                                              fontStyle: FontStyle.normal,
-                                              color: Color(0xFF263b5e),
-                                            )),
-                                          ),
-                                          const SizedBox(height: 20),
-                                          Container(
-                                            margin:
-                                                const EdgeInsets.only(left: 16),
-                                            child: DropdownButton(
-                                              value: selectedCategory,
-                                              items: _dropdownItems,
-                                              onChanged: (value) {
-                                                setState(() {
-                                                  selectedCategory = value!;
-                                                  _filterProducts(
-                                                      _searchController.text);
-                                                });
-                                              },
-                                            ),
-                                          ),
-                                        ],
+            Container(
+              constraints: const BoxConstraints(minHeight: 610),
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(40.0, 40.0, 40.0, 40),
+                child: Column(
+                  children: <Widget>[
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.75,
+                      child: Row(
+                        children: [
+                          Column(
+                            children: [
+                              Expanded(
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    SizedBox(
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.25,
+                                      child: Align(
+                                        alignment: Alignment.center,
+                                        child: Lottie.asset(
+                                            'assets/images/basket.json',
+                                            fit: BoxFit.cover),
                                       ),
                                     ),
-                                  ),
-                                  Card(
+                                    Card(
                                       color: Colors.white,
                                       elevation: 0,
                                       shape: RoundedRectangleBorder(
                                           borderRadius:
                                               BorderRadius.circular(20)),
                                       child: Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              vertical: 20.0, horizontal: 20),
-                                          child: SizedBox(
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                0.2,
-                                            child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  RichText(
-                                                    text: TextSpan(
-                                                        text: 'Total : \n',
-                                                        style:
-                                                            GoogleFonts.varela(
-                                                                textStyle:
-                                                                    const TextStyle(
-                                                          fontSize: 20,
-                                                          fontWeight:
-                                                              FontWeight.w400,
-                                                          fontStyle:
-                                                              FontStyle.normal,
-                                                          color:
-                                                              Color(0xFF263b5e),
-                                                        )),
-                                                        children: [
-                                                          TextSpan(
-                                                            text:
-                                                                '${listViewTotal(products)}\$',
-                                                            style: GoogleFonts
-                                                                .varela(
-                                                                    textStyle:
-                                                                        const TextStyle(
-                                                              fontSize: 20,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w600,
-                                                              fontStyle:
-                                                                  FontStyle
-                                                                      .normal,
-                                                              color: Color(
-                                                                  0xFF263b5e),
-                                                            )),
-                                                          )
-                                                        ]),
-                                                  ),
-                                                  Center(
-                                                    child: Column(
-                                                      children: [
-                                                        TextButton(
-                                                          onPressed:
-                                                              products.isEmpty
-                                                                  ? null
-                                                                  : () async {
-                                                                      try {
-                                                                        await Api
-                                                                            .checkCart();
-                                                                        if (context
-                                                                            .mounted) {
-                                                                          ScaffoldMessenger.of(context)
-                                                                              .showSnackBar(
-                                                                            const SnackBar(content: Text('Transaction Successful')),
-                                                                          );
-                                                                        }
-                                                                      } on NoTokenExeption {
-                                                                        ScaffoldMessenger.of(context)
-                                                                            .showSnackBar(
-                                                                          const SnackBar(
-                                                                              content: Text('No Token found, please log again')),
-                                                                        );
-                                                                      } catch (e) {
-                                                                        ScaffoldMessenger.of(context)
-                                                                            .showSnackBar(
-                                                                          const SnackBar(
-                                                                              content: Text('Error during transaction')),
-                                                                        );
-                                                                      }
-                                                                      await _getBasket();
-                                                                    },
-                                                          child: Container(
-                                                            width: MediaQuery.of(
-                                                                        context)
-                                                                    .size
-                                                                    .width *
-                                                                0.1,
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          10),
-                                                              color: Colors.grey
-                                                                  .shade100,
-                                                            ),
-                                                            padding:
-                                                                const EdgeInsets
-                                                                        .symmetric(
-                                                                    vertical: 5,
-                                                                    horizontal:
-                                                                        10),
-                                                            child:
-                                                                const FittedBox(
-                                                              fit: BoxFit
-                                                                  .fitWidth,
-                                                              child: Text(
-                                                                '🛒 Checkout',
-                                                                style: TextStyle(
-                                                                    color: Colors
-                                                                        .black,
-                                                                    fontSize:
-                                                                        20.0),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                        const SizedBox(
-                                                          height: 15,
-                                                        ),
-                                                        TextButton(
-                                                          clipBehavior:
-                                                              Clip.antiAlias,
-                                                          onPressed:
-                                                              products.isEmpty
-                                                                  ? null
-                                                                  : () async {
-                                                                      try {
-                                                                        await Api
-                                                                            .deleteAllCart();
-                                                                        if (context
-                                                                            .mounted) {
-                                                                          ScaffoldMessenger.of(context)
-                                                                              .showSnackBar(
-                                                                            const SnackBar(content: Text('Deletion Successful')),
-                                                                          );
-                                                                        }
-                                                                      } on NoTokenExeption {
-                                                                        ScaffoldMessenger.of(context)
-                                                                            .showSnackBar(
-                                                                          const SnackBar(
-                                                                              content: Text('No Token found, please log again')),
-                                                                        );
-                                                                      } catch (e) {
-                                                                        ScaffoldMessenger.of(context)
-                                                                            .showSnackBar(
-                                                                          const SnackBar(
-                                                                              content: Text('Error during Deletion')),
-                                                                        );
-                                                                      }
-                                                                      await _getBasket();
-                                                                    },
-                                                          child: Container(
-                                                            width: MediaQuery.of(
-                                                                        context)
-                                                                    .size
-                                                                    .width *
-                                                                0.1,
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          10),
-                                                              color: const Color
-                                                                      .fromARGB(
-                                                                  255,
-                                                                  255,
-                                                                  32,
-                                                                  32),
-                                                            ),
-                                                            padding:
-                                                                const EdgeInsets
-                                                                        .symmetric(
-                                                                    vertical: 5,
-                                                                    horizontal:
-                                                                        30),
-                                                            child:
-                                                                const FittedBox(
-                                                              fit: BoxFit
-                                                                  .fitWidth,
-                                                              child: Text(
-                                                                '❌ Delete Cart',
-                                                                style: TextStyle(
-                                                                    color: Colors
-                                                                        .black,
-                                                                    fontSize:
-                                                                        20.0),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        )
-                                                      ],
+                                        padding: const EdgeInsets.all(20.0),
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              'Search by name in basket:',
+                                              style: GoogleFonts.varela(
+                                                  textStyle: const TextStyle(
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.w500,
+                                                fontStyle: FontStyle.normal,
+                                                color: Color(0xFF263b5e),
+                                              )),
+                                            ),
+                                            const SizedBox(height: 20),
+                                            Center(
+                                              child: Container(
+                                                decoration: BoxDecoration(
+                                                    border: Border.all(
+                                                      color: Colors.black,
                                                     ),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            20)),
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    0.33,
+                                                child: TextField(
+                                                  controller: _searchController,
+                                                  decoration:
+                                                      const InputDecoration(
+                                                    border: InputBorder.none,
+                                                    iconColor: null,
+                                                    focusColor: null,
+                                                    fillColor: null,
+                                                    hoverColor: null,
+                                                    prefixIconColor: null,
+                                                    hintText: 'Search',
+                                                    prefixIcon:
+                                                        Icon(Icons.search),
                                                   ),
-                                                ]),
-                                          ))),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.04,
-                        ),
-                        Flexible(
-                          child: SingleChildScrollView(
-                            child: Padding(
-                              padding: const EdgeInsets.only(right: 10.0),
-                              child: _filteredProducts.isNotEmpty
-                                  ? Align(
-                                      alignment: Alignment.topLeft,
-                                      child: ListView.builder(
-                                        physics:
-                                            const AlwaysScrollableScrollPhysics(),
-                                        scrollDirection: Axis.vertical,
-                                        shrinkWrap: true,
-                                        itemCount: _filteredProducts.length,
-                                        itemBuilder: (context, index) {
-                                          return BasketProductCard(
-                                              product: _filteredProducts[index],
-                                              callback: _getBasket);
-                                        },
-                                      ),
-                                    )
-                                  : Align(
-                                      alignment: Alignment.center,
-                                      child: Column(
-                                        children: [
-                                          Icon(
-                                            Icons.shopping_cart_outlined,
-                                            color: const Color(0xFF263b5e)
-                                                .withOpacity(0.6),
-                                          ),
-                                          Text(
-                                            'Your basket is empty...',
-                                            style: GoogleFonts.varela(
-                                                textStyle: TextStyle(
-                                              fontSize: 15,
-                                              fontWeight: FontWeight.w500,
-                                              fontStyle: FontStyle.normal,
-                                              color: const Color(0xFF263b5e)
-                                                  .withOpacity(0.6),
-                                            )),
-                                          ),
-                                        ],
+                                                  onChanged: _filterProducts,
+                                                ),
+                                              ),
+                                            ),
+                                            const SizedBox(height: 50),
+                                            Text(
+                                              'Filter by category',
+                                              style: GoogleFonts.varela(
+                                                  textStyle: const TextStyle(
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.w500,
+                                                fontStyle: FontStyle.normal,
+                                                color: Color(0xFF263b5e),
+                                              )),
+                                            ),
+                                            const SizedBox(height: 20),
+                                            Container(
+                                              margin: const EdgeInsets.only(
+                                                  left: 16),
+                                              child: DropdownButton(
+                                                value: selectedCategory,
+                                                items: _dropdownItems,
+                                                onChanged: (value) {
+                                                  setState(() {
+                                                    selectedCategory = value!;
+                                                    _filterProducts(
+                                                        _searchController.text);
+                                                  });
+                                                },
+                                              ),
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ),
+                                    Card(
+                                        color: Colors.white,
+                                        elevation: 0,
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(20)),
+                                        child: Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                vertical: 20.0, horizontal: 20),
+                                            child: SizedBox(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.2,
+                                              child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    RichText(
+                                                      text: TextSpan(
+                                                          text: 'Total : \n',
+                                                          style: GoogleFonts
+                                                              .varela(
+                                                                  textStyle:
+                                                                      const TextStyle(
+                                                            fontSize: 20,
+                                                            fontWeight:
+                                                                FontWeight.w400,
+                                                            fontStyle: FontStyle
+                                                                .normal,
+                                                            color: Color(
+                                                                0xFF263b5e),
+                                                          )),
+                                                          children: [
+                                                            TextSpan(
+                                                              text:
+                                                                  '${listViewTotal(products)}\$',
+                                                              style: GoogleFonts
+                                                                  .varela(
+                                                                      textStyle:
+                                                                          const TextStyle(
+                                                                fontSize: 20,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w600,
+                                                                fontStyle:
+                                                                    FontStyle
+                                                                        .normal,
+                                                                color: Color(
+                                                                    0xFF263b5e),
+                                                              )),
+                                                            )
+                                                          ]),
+                                                    ),
+                                                    Center(
+                                                      child: Column(
+                                                        children: [
+                                                          TextButton(
+                                                            onPressed:
+                                                                products.isEmpty
+                                                                    ? null
+                                                                    : () async {
+                                                                        try {
+                                                                          await Api
+                                                                              .checkCart();
+                                                                          if (context
+                                                                              .mounted) {
+                                                                            ScaffoldMessenger.of(context).showSnackBar(
+                                                                              const SnackBar(content: Text('Transaction Successful')),
+                                                                            );
+                                                                          }
+                                                                        } on NoTokenExeption {
+                                                                          ScaffoldMessenger.of(context)
+                                                                              .showSnackBar(
+                                                                            const SnackBar(content: Text('No Token found, please log again')),
+                                                                          );
+                                                                        } catch (e) {
+                                                                          ScaffoldMessenger.of(context)
+                                                                              .showSnackBar(
+                                                                            const SnackBar(content: Text('Error during transaction')),
+                                                                          );
+                                                                        }
+                                                                        await _getBasket();
+                                                                      },
+                                                            child: Container(
+                                                              width: MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width *
+                                                                  0.1,
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            10),
+                                                                color: Colors
+                                                                    .grey
+                                                                    .shade100,
+                                                              ),
+                                                              padding: const EdgeInsets
+                                                                      .symmetric(
+                                                                  vertical: 5,
+                                                                  horizontal:
+                                                                      10),
+                                                              child:
+                                                                  const FittedBox(
+                                                                fit: BoxFit
+                                                                    .fitWidth,
+                                                                child: Text(
+                                                                  '🛒 Checkout',
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .black,
+                                                                      fontSize:
+                                                                          20.0),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          const SizedBox(
+                                                            height: 15,
+                                                          ),
+                                                          TextButton(
+                                                            clipBehavior:
+                                                                Clip.antiAlias,
+                                                            onPressed:
+                                                                products.isEmpty
+                                                                    ? null
+                                                                    : () async {
+                                                                        try {
+                                                                          await Api
+                                                                              .deleteAllCart();
+                                                                          if (context
+                                                                              .mounted) {
+                                                                            ScaffoldMessenger.of(context).showSnackBar(
+                                                                              const SnackBar(content: Text('Deletion Successful')),
+                                                                            );
+                                                                          }
+                                                                        } on NoTokenExeption {
+                                                                          ScaffoldMessenger.of(context)
+                                                                              .showSnackBar(
+                                                                            const SnackBar(content: Text('No Token found, please log again')),
+                                                                          );
+                                                                        } catch (e) {
+                                                                          ScaffoldMessenger.of(context)
+                                                                              .showSnackBar(
+                                                                            const SnackBar(content: Text('Error during Deletion')),
+                                                                          );
+                                                                        }
+                                                                        await _getBasket();
+                                                                      },
+                                                            child: Container(
+                                                              width: MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width *
+                                                                  0.1,
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            10),
+                                                                color: const Color
+                                                                        .fromARGB(
+                                                                    255,
+                                                                    255,
+                                                                    32,
+                                                                    32),
+                                                              ),
+                                                              padding: const EdgeInsets
+                                                                      .symmetric(
+                                                                  vertical: 5,
+                                                                  horizontal:
+                                                                      30),
+                                                              child:
+                                                                  const FittedBox(
+                                                                fit: BoxFit
+                                                                    .fitWidth,
+                                                                child: Text(
+                                                                  '❌ Delete Cart',
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .black,
+                                                                      fontSize:
+                                                                          20.0),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          )
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ]),
+                                            ))),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.04,
+                          ),
+                          Flexible(
+                            child: SingleChildScrollView(
+                              child: Padding(
+                                padding: const EdgeInsets.only(right: 10.0),
+                                child: _filteredProducts.isNotEmpty
+                                    ? Align(
+                                        alignment: Alignment.topLeft,
+                                        child: ListView.builder(
+                                          physics:
+                                              const AlwaysScrollableScrollPhysics(),
+                                          scrollDirection: Axis.vertical,
+                                          shrinkWrap: true,
+                                          itemCount: _filteredProducts.length,
+                                          itemBuilder: (context, index) {
+                                            return BasketProductCard(
+                                                product:
+                                                    _filteredProducts[index],
+                                                callback: _getBasket);
+                                          },
+                                        ),
+                                      )
+                                    : Align(
+                                        alignment: Alignment.center,
+                                        child: Column(
+                                          children: [
+                                            Icon(
+                                              Icons.shopping_cart_outlined,
+                                              color: const Color(0xFF263b5e)
+                                                  .withOpacity(0.6),
+                                            ),
+                                            Text(
+                                              'Your basket is empty...',
+                                              style: GoogleFonts.varela(
+                                                  textStyle: TextStyle(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.w500,
+                                                fontStyle: FontStyle.normal,
+                                                color: const Color(0xFF263b5e)
+                                                    .withOpacity(0.6),
+                                              )),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                              ),
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                  )
-                ],
+                        ],
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.075,
-            ),
-            SizedBox(
-                height: 200,
-                width: MediaQuery.of(context).size.width,
-                child: const CustomFooter()),
+            const CustomFooter(),
           ],
         ),
       ),
