@@ -25,7 +25,7 @@ class _ProductScreenDetailsState extends State<ProductScreenDetails> {
   late Product product = Product(
       0,
       "productName",
-      lorem(paragraphs: 1, words: 50),
+      lorem(paragraphs: 1, words: 35),
       0,
       "assets/images/productnotfound.png",
       0);
