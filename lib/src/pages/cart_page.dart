@@ -478,7 +478,7 @@ class _CartPageState extends State<CartPage> {
               ),
             ),
             SizedBox(
-              height: MediaQuery.of(context).size.height * 0.05,
+              height: MediaQuery.of(context).size.height * 0.075,
             ),
             const CustomFooter(),
           ],

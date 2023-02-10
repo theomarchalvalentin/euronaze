@@ -66,7 +66,7 @@ class _LinePageState extends State<LinePage> {
           ),
         ),
         labelX: (value) => "d-${(widget.data.length - value).toInt()}",
-        labelY: (value) => value.toInt().toString(),
+        labelY: (value) => ((value * 100).round() / 100).toString(),
       ),
       ChartLineLayer(
         items: List.generate(
