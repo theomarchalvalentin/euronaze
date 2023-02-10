@@ -185,6 +185,13 @@ class _ProductScreenDetailsState extends State<ProductScreenDetails> {
                                               content: Text(
                                                   'Product already in cart')),
                                         );
+                                      } on AlreadyInLib {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          const SnackBar(
+                                              content: Text(
+                                                  'Product already in Library')),
+                                        );
                                       } on NoTokenExeption {
                                         ScaffoldMessenger.of(context)
                                             .showSnackBar(

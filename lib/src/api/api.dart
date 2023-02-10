@@ -18,6 +18,8 @@ class EmailExist implements Exception {}
 
 class AlreadyInCart implements Exception {}
 
+class AlreadyInLib implements Exception {}
+
 class Api {
   static Future<String> login(String email, String password) async {
     final response = await post(
@@ -255,6 +257,8 @@ class Api {
         return;
       } else if (response.statusCode == 400) {
         throw AlreadyInCart;
+      } else if (response.statusCode == 405) {
+        throw AlreadyInLib;
       } else {
         throw Exception('fail');
       }
