@@ -45,7 +45,7 @@ class _AdminModifyState extends State<AdminModify> {
         nameController.text = product!.productName;
         descriptionController.text = product!.productDescription;
         imageController.text = product!.productImg;
-        priceController.text = product!.price.toStringAsPrecision(2);
+        priceController.text = product!.price.toStringAsFixed(2);
         selectedCategory = product!.categoryId;
         fileName = "Current";
 
@@ -267,7 +267,7 @@ class _AdminModifyState extends State<AdminModify> {
         descriptionController.text != product!.productDescription ||
         selectedCategory != product!.categoryId ||
         fileName != "Current" ||
-        priceController.text != product!.price.toStringAsPrecision(2);
+        priceController.text != product!.price.toStringAsFixed(2);
     if (!result) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('You have not changed informations')),
