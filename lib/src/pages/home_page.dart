@@ -45,7 +45,7 @@ class _HomePageState extends State<HomePage> {
               children: [
                 SizedBox(
                   width: screenSize.width,
-                  height: screenSize.height + 30,
+                  height: screenSize.height + 60,
                   child: Image.asset(
                     'assets/images/background.jpg',
                     fit: BoxFit.cover,
